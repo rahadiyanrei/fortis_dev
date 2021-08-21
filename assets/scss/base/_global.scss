@@ -1,0 +1,112 @@
+// @import url('https://rsms.me/inter/inter.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px; /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent; /* color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white rounded; /* color of the scroll thumb */
+}
+
+button {
+  &:focus {
+    outline: none !important;
+  }
+}
+
+#__nuxt,
+#__layout {
+  height: 100vh;
+}
+
+html {
+  font-family: 'Poppins', sans-serif;
+  @apply overflow-hidden sm:overflow-auto;
+}
+
+body {
+  // display: grid;
+  // place-items: center;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  // background-color: $c-white;
+  // color: $c-dark-primary;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  &:active {
+    opacity: 0.7;
+  }
+
+  &:visited {
+    color: inherit;
+  }
+}
+
+.no-underline {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.viewport {
+  // width: $app-width;
+  // height: calc(#{$app-width} * (9/16));
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  // overflow: auto;
+  // display: grid;
+  // grid-template-columns: 16vmax auto;
+  // background-color: $color--primary;
+}
+
+.mobile {
+  display: block;
+  @screen sm {
+    display: none;
+  }
+}
+
+.tablet {
+  display: none;
+  @screen sm {
+    display: block;
+  }
+}
+
+.desktop {
+  display: none;
+  @screen lg {
+    display: block;
+  }
+}

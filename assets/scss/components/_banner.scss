@@ -1,0 +1,78 @@
+.banner {
+  // height: 20rem;
+  @apply rounded-xl;
+  background: rgba(255, 255, 255, 0.5);
+  height: 22vh;
+  width: 100%;
+  padding: 0.75rem;
+
+  @screen xl {
+    height: 35vh;
+    padding: 1rem;
+  }
+
+  &-slider {
+    @apply pt-10;
+    .glide {
+      &__bullets {
+        @apply absolute z-10 bottom-5 lg:bottom-10 left-10 space-x-1;
+      }
+      &__bullet {
+        @apply bg-gray-300;
+        border: 0;
+        outline: 1;
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        cursor: pointer;
+
+        @screen lg {
+          width: 12px;
+          height: 12px;
+        }
+
+        &--active {
+          @apply bg-gray-500;
+        }
+      }
+    }
+  }
+
+  &__image {
+    @apply h-full w-full;
+    img {
+      @apply rounded-xl;
+    }
+  }
+
+  &__controls {
+    @apply absolute w-screen p-2 sm:p-8 lg:p-16 m-0;
+    width: 95%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0.7;
+      transition: all 0.5s;
+
+      &:active {
+        transform: scale(0.6);
+      }
+    }
+    i {
+      color: gray;
+      font-size: 12px;
+      cursor: pointer;
+    }
+  }
+}

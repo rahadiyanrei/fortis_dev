@@ -1,0 +1,15 @@
+Framework UI:
+https://vuesax.com/
+https://vuestic.dev/
+https://vuetifyjs.com/en/components/hover/#usage
+
+Form Plugin:
+https://vueformulate.com/
+
+Maps Plugin:
+https://www.npmjs.com/package/nuxt-gmaps
+
+Gallery Plugin:
+https://vue-cool-lightbox.lucaspulliese.com/
+https://silentbox.rocek.dev/
+https://vuejsexamples.com/a-simple-image-video-lightbox-component-for-vue-js/

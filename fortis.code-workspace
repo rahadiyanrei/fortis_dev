@@ -1,0 +1,99 @@
+{
+  "folders": [{
+    "path": "."
+  }],
+  "settings": {
+    // ===
+    // Spacing
+    // ===
+
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.trimAutoWhitespace": true,
+    "files.trimTrailingWhitespace": true,
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+
+    // ===
+    // Files
+    // ===
+
+    "files.exclude": {
+      "**/*.log": true,
+      "**/*.log*": true,
+      "**/dist": true,
+      "**/coverage": true
+    },
+    "files.associations": {
+      ".markdownlintrc": "jsonc"
+    },
+
+    // ===
+    // Event Triggers
+    // ===
+
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "editor.codeActionsOnSaveTimeout": 2000,
+
+    "eslint.run": "onType",
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "vue",
+      "vue-html",
+      "html",
+    ],
+    "prettier.disableLanguages": [],
+
+    // ===
+    // HTML
+    // ===
+
+    "html.format.enable": false,
+    "vetur.validation.template": false,
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.includeLanguages": {
+      "vue-html": "html"
+    },
+    "vetur.format.defaultFormatter.html": "none",
+    "vetur.completion.tagCasing": "initial",
+
+    // ===
+    // JS(ON)
+    // ===
+    "javascript.format.enable": false,
+    "json.format.enable": false,
+    "vetur.validation.script": false,
+    "vetur.format.defaultFormatter.js": "none",
+    "vetur.format.defaultFormatter.ts": "none",
+
+    // ===
+    // CSS
+    // ===
+
+    "stylelint.enable": true,
+    "css.validate": false,
+    "scss.validate": false,
+    "vetur.validation.style": false,
+    "vetur.format.defaultFormatter.css": "none",
+    "vetur.format.defaultFormatter.postcss": "none",
+    "vetur.format.defaultFormatter.scss": "none",
+    "vetur.format.defaultFormatter.less": "none",
+    "vetur.format.defaultFormatter.stylus": "none",
+
+    // ===
+    // MARKDOWN
+    // ===
+
+    "[markdown]": {
+      "editor.wordWrap": "wordWrapColumn",
+      "editor.wordWrapColumn": 80
+    },
+
+    "eslint.packageManager": "yarn",
+  }
+}
