@@ -1,0 +1,12 @@
+.gallery {
+  &__overview {
+    &-thumbnail {
+      .v-card {
+        &__title {
+          @apply w-2/5 bg-white justify-center uppercase text-3xl font-normal;
+          word-break: break-word;
+        }
+      }
+    }
+  }
+}

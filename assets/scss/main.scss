@@ -9,15 +9,16 @@
 // @import "base/mixins";
 
 // // Global
-@import "base/global";
+@import 'base/global';
 
 // Components
-@import "components/banner";
+@import 'components/banner';
+@import 'components/gallery';
 // Custom
-@import "base/custom";
+@import 'base/custom';
 
 // Layouts
-@import "layouts/navigation";
-@import "layouts/footer";
+@import 'layouts/navigation';
+@import 'layouts/footer';
 
 // Vendor
