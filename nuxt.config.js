@@ -55,7 +55,7 @@ export default {
     baseURL: process.env.BASE_URL,
   },
   privateRuntimeConfig: {
-    apiSecret: process.env.API_SECRET,
+    baseURL: process.env.BASE_URL,
   },
 
   vuetify: {
