@@ -1,9 +1,156 @@
 .main {
-  @apply h-screen overflow-auto;
+  @apply p-0 m-0 h-screen overflow-auto;
+
+  &__wrapper {
+    &.container {
+      @apply p-0;
+    }
+  }
+
+  &__container {
+    @apply max-w-screen-sm lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl  w-full m-auto p-3 lg:p-8 xl:p-3;
+  }
+
+  &-title {
+    @apply w-max text-2xl lg:text-3xl tracking-wide;
+
+    &.border-accent {
+      &::after {
+        @apply mt-6 mx-auto;
+      }
+    }
+  }
+}
+
+.border-accent {
+  &::after {
+    @apply block h-1.5 w-16 mt-2  bg-red-700;
+    content: '';
+  }
 }
 
 .home {
-  &__gallery {
-    @apply grid grid-cols-2 gap-10;
+  &__gallery,
+  &__blog,
+  &__about,
+  &__wheel {
+    @apply py-20;
+    &-body {
+      @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+    }
+  }
+
+  &__banner {
+    .banner {
+      &.v-card {
+        @apply p-0;
+      }
+
+      &__title {
+        @apply w-full md:w-2/3;
+        &.v-card__title {
+          @apply justify-center;
+        }
+      }
+    }
+    .carousel__banner {
+      height: 25rem !important;
+      @screen sm {
+        height: 35rem !important;
+      }
+      @screen md {
+        height: 45rem !important;
+      }
+      .v-image {
+        height: 100% !important;
+      }
+      button {
+        @apply bg-transparent;
+      }
+      .v-carousel__controls__item {
+        @apply bg-transparent;
+        .v-icon {
+          font-size: 3.5rem !important;
+          opacity: 1 !important;
+        }
+        &.v-btn--active {
+          @apply text-transparent;
+          .v-icon {
+            @apply text-red-700;
+          }
+        }
+      }
+      .v-item-group {
+        @apply pb-12;
+      }
+    }
+  }
+
+  &__blog {
+    @apply bg-gray-100;
+
+    &-body {
+      @apply md:gap-16 px-4 md:px-0;
+    }
+
+    &-description {
+      @apply w-3/4 m-auto text-center;
+    }
+
+    &-action {
+      @apply text-center;
+    }
+  }
+
+  &__about {
+    @apply relative;
+    .main__container {
+      @apply max-w-none xl:max-w-screen-xl 2xl:max-w-screen-2xl p-0 md:p-3;
+    }
+    &-body {
+      @apply w-full md:w-4/5 2xl:w-11/12 md:grid-flow-col ml-auto;
+    }
+
+    &-background {
+      @apply hidden md:block absolute w-full;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__wheel {
+    .border-accent {
+      &::after {
+        @apply content-end mx-0;
+      }
+    }
+    @apply text-center;
+
+    .carousel {
+      &__wheel {
+        &-navigation {
+          &__button {
+            &.v-btn {
+              @apply border-gray-100;
+              min-width: fit-content !important;
+              padding: 1rem 0.25rem !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .about {
+    &__overview {
+      &-title {
+        &.v-card {
+          &__title {
+            @apply h-full flex content-end text-white uppercase text-lg font-semibold p-6;
+          }
+        }
+      }
+    }
   }
 }

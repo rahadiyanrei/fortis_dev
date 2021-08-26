@@ -10,10 +10,7 @@
           <Nuxt />
         </div>
       </v-container>
+      <Footer />
     </v-main>
-
-    <v-footer app>
-      <!-- -->
-    </v-footer>
   </v-app>
 </template>

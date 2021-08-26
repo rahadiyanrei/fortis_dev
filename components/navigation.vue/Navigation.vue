@@ -1,56 +1,62 @@
 <template>
-  <v-app-bar app flat dense elevate-on-scroll class="nav">
-    <v-btn>
-      <v-icon>Wheels</v-icon>
-    </v-btn>
+  <v-app-bar app flat elevate-on-scroll class="nav" color="white">
+    <div class="nav__menu-left desktop">
+      <v-btn text elevation="false">Wheels</v-btn>
+      <v-btn text elevation="false">Gallery</v-btn>
+      <v-btn text elevation="false">Blog</v-btn>
+    </div>
 
-    <v-btn>
-      <v-icon>Gallery</v-icon>
-    </v-btn>
+    <v-spacer class="desktop" />
 
-    <v-btn>
-      <v-icon>Blog</v-icon>
-    </v-btn>
-
-    <v-spacer />
-
-    <v-btn>
-      <v-img src="./logo_fortis.svg"></v-img>
-    </v-btn>
+    <div class="nav__logo">
+      <nuxt-link to="/">
+        <v-img src="./logo_fortis.svg"></v-img>
+      </nuxt-link>
+    </div>
 
     <v-spacer />
 
-    <v-btn>
-      <v-icon>Apparel</v-icon>
-    </v-btn>
+    <div class="nav__menu-right desktop">
+      <v-btn text elevation="false">Apparel</v-btn>
+      <v-btn text elevation="false">About</v-btn>
+      <v-btn text elevation="false">Contact</v-btn>
+    </div>
+    <div class="tablet">
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    </div>
 
-    <v-btn>
-      <v-icon>About</v-icon>
-    </v-btn>
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-list nav dense>
+        <v-list-item-group
+          v-model="group"
+          active-class="deep-purple--text text--accent-4"
+        >
+          <v-list-item>
+            <v-list-item-title>Foo</v-list-item-title>
+          </v-list-item>
 
-    <v-btn>
-      <v-icon>Contact</v-icon>
-    </v-btn>
+          <v-list-item>
+            <v-list-item-title>Bar</v-list-item-title>
+          </v-list-item>
 
-    <!-- <v-menu left bottom>
-      <template #activator="{ on, attrs }">
-        <v-btn icon v-bind="attrs" v-on="on">
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
-      </template>
+          <v-list-item>
+            <v-list-item-title>Fizz</v-list-item-title>
+          </v-list-item>
 
-      <v-list>
-        <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-          <v-list-item-title>Option {{ n }}</v-list-item-title>
-        </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Buzz</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
       </v-list>
-    </v-menu> -->
+    </v-navigation-drawer>
     <!-- -->
   </v-app-bar>
 </template>
 <script>
 export default {
-  data: () => ({}),
+  data: () => ({
+    drawer: false,
+  }),
   methods: {},
 }
 </script>

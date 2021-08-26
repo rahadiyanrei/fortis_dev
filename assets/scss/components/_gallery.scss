@@ -1,10 +1,48 @@
 .gallery {
   &__overview {
+    @apply space-y-4;
+    &-tag {
+      &.v-card {
+        &__title {
+          @apply w-min flex bg-white justify-center uppercase text-xl sm:text-lg lg:text-3xl font-normal tracking-widest px-14 py-6 sm:px-4 lg:px-14 lg:py-6;
+        }
+      }
+    }
+
     &-thumbnail {
+      .v-image {
+        height: 350px;
+      }
+      @screen md {
+        .v-image {
+          height: auto;
+        }
+      }
+    }
+
+    &-list {
+      @apply hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4;
+    }
+
+    &-item {
       .v-card {
         &__title {
-          @apply w-2/5 bg-white justify-center uppercase text-3xl font-normal;
-          word-break: break-word;
+          @apply text-base font-semibold py-2 px-0 pb-4;
+        }
+        &__subtitle {
+          @apply text-sm p-0 pb-3;
+        }
+      }
+    }
+
+    &-action {
+      &__wrapper {
+        @apply flex items-center justify-center border border-gray-100 cursor-pointer;
+        aspect-ratio: 16/9;
+      }
+      .v-card {
+        &__title {
+          @apply justify-center text-sm font-bold text-center;
         }
       }
     }

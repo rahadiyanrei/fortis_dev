@@ -1,7 +1,14 @@
 .nav {
-  // @apply py-2;
-  &__brand {
-    @apply opacity-100 w-1/2 md:w-3/4 lg:ml-2 py-2 lg:w-4/5;
+  z-index: 50 !important;
+
+  .v-toolbar__content {
+    @apply max-w-screen-sm lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl m-auto;
+  }
+  .v-btn {
+    @apply font-semibold;
+  }
+  &__logo {
+    @apply w-36 md:w-auto;
   }
 
   &__menu {

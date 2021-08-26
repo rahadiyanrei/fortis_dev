@@ -1,0 +1,33 @@
+.wheel {
+  // @apply w-max;
+  &__title {
+    &.v-card {
+      &__title {
+        @apply justify-center text-base font-bold uppercase;
+      }
+    }
+  }
+  &__subtitle {
+    &.v-card {
+      &__subtitle {
+        @apply text-sm pb-2;
+      }
+    }
+  }
+  &__description {
+    &.v-card {
+      &__text {
+        @apply w-auto flex justify-center text-sm font-bold text-black;
+      }
+    }
+  }
+  &__image {
+    @apply h-64 w-64 m-auto;
+  }
+  &__color {
+    @apply flex items-center justify-center space-x-3;
+    &-item {
+      @apply h-5 w-5 rounded-full shadow;
+    }
+  }
+}
