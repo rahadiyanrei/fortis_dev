@@ -2,7 +2,8 @@
   "name": "fortis",
   "version": "1.0.0",
   "engines": {
-    "yarn": "1.22.5"
+    "yarn": "1.22.5",
+    "node": "15.4.0"
   },
   "private": true,
   "scripts": {
