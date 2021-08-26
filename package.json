@@ -1,13 +1,16 @@
 {
   "name": "fortis",
   "version": "1.0.0",
+  "engines": {
+    "yarn": "1.22.5"
+  },
   "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "heroku-postbuild": "yarn build",
+    "heroku-postbuild": "yarn && yarn build",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint": "yarn lint:js"
   },
