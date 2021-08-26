@@ -61,7 +61,9 @@
             :key="idx4"
             class="footer__socmed-item"
           >
-            <v-icon color="black">{{ item.icon }}</v-icon>
+            <v-btn :href="item.link" large icon target="_blank">
+              <v-icon color="black">{{ item.icon }}</v-icon>
+            </v-btn>
           </div>
         </div>
       </div>
@@ -187,25 +189,25 @@ export default {
       },
     ],
     socmed: [
-      {
-        icon: 'mdi-facebook',
-        link: '#',
-      },
+      // {
+      //   icon: 'mdi-facebook',
+      //   link: '#',
+      // },
       {
         icon: 'mdi-youtube',
-        link: '#',
+        link: 'https://www.youtube.com/channel/UC2FJfWhPytQdIaz3wvD4VQg',
       },
-      {
-        icon: 'mdi-twitter',
-        link: '#',
-      },
-      {
-        icon: 'mdi-linkedin',
-        link: '#',
-      },
+      // {
+      //   icon: 'mdi-twitter',
+      //   link: '#',
+      // },
+      // {
+      //   icon: 'mdi-linkedin',
+      //   link: '#',
+      // },
       {
         icon: 'mdi-instagram',
-        link: '#',
+        link: 'https://www.instagram.com/fortiswheels/',
       },
     ],
   }),

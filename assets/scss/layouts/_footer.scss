@@ -46,7 +46,7 @@
   }
 
   &__socmed {
-    @apply flex items-center justify-center space-x-6 pb-8 md:pb-0;
+    @apply flex items-center justify-center space-x-4 pb-8 md:pb-0;
     .v-icon {
       @apply text-black opacity-100;
     }

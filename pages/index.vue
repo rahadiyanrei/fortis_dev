@@ -8,6 +8,7 @@
             class="carousel__banner"
             hide-delimiter-background
             delimiter-icon="mdi-minus"
+            height="100%"
           >
             <v-carousel-item v-for="(item, idx) in banners" :key="idx">
               <v-card
@@ -16,7 +17,7 @@
                 color="transparent"
                 height="100%"
               >
-                <v-img :src="item.imageURL" height="100%">
+                <v-img :src="item.image" height="100%" :aspect-ratio="16 / 9">
                   <div
                     class="
                       flex flex-column
@@ -27,12 +28,12 @@
                       space-y-4
                     "
                   >
-                    <v-card-title class="banner__title">
+                    <v-card-title v-if="item.title" class="banner__title">
                       <div
                         class="
                           w-full
                           lg:w-2/3
-                          text-3xl
+                          text-2xl
                           md:text-6xl
                           text-white
                           font-bold
@@ -43,19 +44,19 @@
                         {{ item.title }}
                       </div>
                     </v-card-title>
-                    <v-card-subtitle class="banner__subtitle">
+                    <v-card-subtitle v-if="item.body" class="banner__subtitle">
                       <div
                         class="
                           w-2/3
                           m-auto
-                          text-sm
+                          text-xs
                           md:text-lg
                           text-white
                           tracking-widest
                           break-normal
                         "
                       >
-                        {{ item.subtitle }}
+                        {{ item.body }}
                       </div>
                     </v-card-subtitle>
                   </div>
@@ -274,30 +275,29 @@
                 v-for="(items, idx) in aboutOverviews"
                 :key="idx"
                 class="about__overview"
-                :class="[idx === 0 ? 'md:col-start-2' : 'md:row-start-2']"
               >
                 <v-card
                   class="about__overview-thumbnail cursor-pointer"
                   flat
                   color="transparent"
                 >
-                  <v-img :src="items.imageURL" :aspect-ratio="16 / 9">
-                    <!-- Tag  -->
-                    <v-card-title class="about__overview-title">
-                      <div class="border-accent tracking-widest">
-                        {{ items.title }}
-                      </div>
-                    </v-card-title>
+                  <v-img :src="items.imageURL" :aspect-ratio="3 / 1">
+                    <div class="about__overview-body">
+                      <v-card-title class="about__overview-title">
+                        <div class="border-accent tracking-widest">
+                          {{ items.title }}
+                        </div>
+                      </v-card-title>
+                      <v-card-text class="about__overview-description">
+                        <p class="tracking-wider">
+                          {{ items.description }}
+                        </p>
+                      </v-card-text>
+                    </div>
                   </v-img>
                 </v-card>
               </div>
             </div>
-          </div>
-
-          <div class="home__about-background">
-            <v-img
-              :src="require('@/assets/images/home-about__background.png')"
-            ></v-img>
           </div>
         </div>
       </div>
@@ -307,6 +307,18 @@
 
 <script>
 export default {
+  async asyncData({ $axios, $config }) {
+    console.log($config)
+    const banners = await $axios
+      .$get(
+        `http://devpako-backend.herokuapp.com
+/api/banner`
+      )
+      .then((res) => res.data)
+    console.log(banners)
+
+    return { banners }
+  },
   data: () => ({
     model: 0,
     colors: ['primary', 'secondary', 'yellow darken-2', 'red', 'orange'],
@@ -341,23 +353,23 @@ export default {
         },
       },
     },
-    banners: [
-      {
-        title: `Performance. Strength. Style`,
-        subtitle: `Especially made for the strongest who wants to combine performance with style.`,
-        imageURL: require('@/assets/images/banner/banner-1.png'),
-      },
-      {
-        title: `Fortis Falcon`,
-        subtitle: `Especially made for the strongest who wants to combine performance with style.`,
-        imageURL: require('@/assets/images/banner/banner-2.png'),
-      },
-      {
-        title: `Charge with no limit.`,
-        subtitle: `Especially made for the strongest who wants to combine performance with style.`,
-        imageURL: require('@/assets/images/banner/banner-3.png'),
-      },
-    ],
+    // banners: [
+    //   {
+    //     title: `Performance. Strength. Style`,
+    //     subtitle: `Especially made for the strongest who wants to combine performance with style.`,
+    //     imageURL: require('@/assets/images/banner/banner-1.png'),
+    //   },
+    //   {
+    //     title: `Fortis Falcon`,
+    //     subtitle: `Especially made for the strongest who wants to combine performance with style.`,
+    //     imageURL: require('@/assets/images/banner/banner-2.png'),
+    //   },
+    //   {
+    //     title: `Charge with no limit.`,
+    //     subtitle: `Especially made for the strongest who wants to combine performance with style.`,
+    //     imageURL: require('@/assets/images/banner/banner-3.png'),
+    //   },
+    // ],
     wheels: [
       {
         title: 'Fortis Radix',
@@ -553,18 +565,24 @@ export default {
     aboutOverviews: [
       {
         title: 'Testing Facilities',
+        description: `Fasilitas pengujian kami mampu untuk menguji durability produk, material, korosi, dan ketahanan cat. Alat pengujian kami tersertifikasi oleh ISOTSxxxxx, xxxx, xxxx untuk memberikan hasil yang akurat. Pengujian dan hasil uji telah terakreditasi baik di dalam maupun luar negeri. Fasilitas uji kami telah diakui oleh beberapa brand otomotif seperti Toyota, Daihatsu, Honda, dll.`,
         imageURL: require('@/assets/images/about/testing-facilities.png'),
       },
       {
         title: 'Die Shop',
+        description: `Pako Dieshop memiliki kemampuan untuk memproduksi komponen khusus yang terbuat dari berbagai bahan untuk mould casting, dies stamping, dll. Teknisi kami yang berdedikasi, mengasah keterampilan mereka menggunakan teknologi terbaru, bersama-sama membuat komponen terbaik. Fasilitas kami sepenuhnya mendukung semua kebutuhan pelanggan.`,
         imageURL: require('@/assets/images/about/die-shop.png'),
       },
       {
         title: 'P-Pro',
+        description: `Kami memiliki keahlian dalam mengkonsep sebuah proyek desain hingga terwujud dalam styling concept design yang terintegrasi dengan bidang engineering design untuk diaplikasikan ke dalam manufaktur.`,
         imageURL: require('@/assets/images/about/p-pro.png'),
       },
     ],
   }),
+  mounted() {
+    console.log(process.env)
+  },
   methods: {
     handleSwiperWheel(navigation) {
       if (navigation === 'next') {

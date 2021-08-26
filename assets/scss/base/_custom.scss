@@ -32,7 +32,6 @@
 .home {
   &__gallery,
   &__blog,
-  &__about,
   &__wheel {
     @apply py-20;
     &-body {
@@ -42,6 +41,19 @@
 
   &__banner {
     .banner {
+      height: 13rem !important;
+      @screen sm {
+        height: 27rem !important;
+      }
+      @screen lg {
+        height: 36rem !important;
+      }
+      @screen xl {
+        height: 50rem !important;
+      }
+      // @screen 2xl {
+      //   height: 67rem !;
+      // }
       &.v-card {
         @apply p-0;
       }
@@ -52,15 +64,14 @@
           @apply justify-center;
         }
       }
+
+      &__subtitle {
+        &.v-card__subtitle {
+          @apply m-0 sm:mt-4;
+        }
+      }
     }
     .carousel__banner {
-      height: 25rem !important;
-      @screen sm {
-        height: 35rem !important;
-      }
-      @screen md {
-        height: 45rem !important;
-      }
       .v-image {
         height: 100% !important;
       }
@@ -81,7 +92,7 @@
         }
       }
       .v-item-group {
-        @apply pb-12;
+        @apply sm:pb-12;
       }
     }
   }
@@ -108,7 +119,7 @@
       @apply max-w-none xl:max-w-screen-xl 2xl:max-w-screen-2xl p-0 md:p-3;
     }
     &-body {
-      @apply w-full md:w-4/5 2xl:w-11/12 md:grid-flow-col ml-auto;
+      @apply w-full ml-auto space-y-12 mb-12;
     }
 
     &-background {
@@ -116,6 +127,28 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }
+
+    .about {
+      &__overview {
+        &-body {
+          @apply h-full flex flex-col content-end justify-end text-white p-2 sm:p-6 space-y-2;
+        }
+        &-title {
+          &.v-card {
+            &__title {
+              @apply uppercase text-lg sm:text-2xl;
+            }
+          }
+        }
+        &-description {
+          &.v-card {
+            &__text {
+              @apply hidden sm:block opacity-60;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -136,18 +169,6 @@
               min-width: fit-content !important;
               padding: 1rem 0.25rem !important;
             }
-          }
-        }
-      }
-    }
-  }
-
-  .about {
-    &__overview {
-      &-title {
-        &.v-card {
-          &__title {
-            @apply h-full flex content-end text-white uppercase text-lg font-semibold p-6;
           }
         }
       }

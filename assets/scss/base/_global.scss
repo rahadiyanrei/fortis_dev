@@ -47,24 +47,24 @@ body {
   overflow: hidden;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+// a {
+//   color: inherit;
+//   text-decoration: none;
 
-  &:hover,
-  &:active {
-    color: inherit;
-    text-decoration: underline;
-  }
+//   &:hover,
+//   &:active {
+//     color: inherit;
+//     text-decoration: underline;
+//   }
 
-  &:active {
-    opacity: 0.7;
-  }
+//   &:active {
+//     opacity: 0.7;
+//   }
 
-  &:visited {
-    color: inherit;
-  }
-}
+//   &:visited {
+//     color: inherit;
+//   }
+// }
 
 .no-underline {
   &:hover {

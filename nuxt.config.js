@@ -49,7 +49,13 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://devpako-backend.herokuapp.com',
+    baseURL: process.env.BASE_URL,
+  },
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_URL,
+  },
+  privateRuntimeConfig: {
+    apiSecret: process.env.API_SECRET,
   },
 
   vuetify: {
