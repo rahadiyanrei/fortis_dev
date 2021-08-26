@@ -357,17 +357,17 @@ export default {
     //   {
     //     title: `Performance. Strength. Style`,
     //     subtitle: `Especially made for the strongest who wants to combine performance with style.`,
-    //     imageURL: require('~/assets/images/banner/banner-1.png'),
+    //     imageURL: '/images/banner/banner-1.png',
     //   },
     //   {
     //     title: `Fortis Falcon`,
     //     subtitle: `Especially made for the strongest who wants to combine performance with style.`,
-    //     imageURL: require('~/assets/images/banner/banner-2.png'),
+    //     imageURL: '/images/banner/banner-2.png',
     //   },
     //   {
     //     title: `Charge with no limit.`,
     //     subtitle: `Especially made for the strongest who wants to combine performance with style.`,
-    //     imageURL: require('~/assets/images/banner/banner-3.png'),
+    //     imageURL: '/images/banner/banner-3.png',
     //   },
     // ],
     wheels: [
@@ -381,7 +381,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: require('~/assets/images/wheels/wheel-1.png'),
+        imageURL: '/images/wheels/wheel-1.png',
       },
       {
         title: 'Fortis Radix #2',
@@ -393,7 +393,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: require('~/assets/images/wheels/wheel-2.png'),
+        imageURL: '/images/wheels/wheel-2.png',
       },
       {
         title: 'Fortis Radix #3',
@@ -405,7 +405,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: require('~/assets/images/wheels/wheel-3.png'),
+        imageURL: '/images/wheels/wheel-3.png',
       },
       {
         title: 'Fortis Radix #4',
@@ -417,7 +417,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: require('~/assets/images/wheels/wheel-1.png'),
+        imageURL: '/images/wheels/wheel-1.png',
       },
       {
         title: 'Fortis Radix #5',
@@ -429,7 +429,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: require('~/assets/images/wheels/wheel-2.png'),
+        imageURL: '/images/wheels/wheel-2.png',
       },
       {
         title: 'Fortis Radix #6',
@@ -441,7 +441,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: require('~/assets/images/wheels/wheel-3.png'),
+        imageURL: '/images/wheels/wheel-3.png',
       },
       {
         title: 'Fortis Radix #7',
@@ -453,7 +453,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: require('~/assets/images/wheels/wheel-1.png'),
+        imageURL: '/images/wheels/wheel-1.png',
       },
       {
         title: 'Fortis Radix #8',
@@ -465,79 +465,79 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: require('~/assets/images/wheels/wheel-2.png'),
+        imageURL: '/images/wheels/wheel-2.png',
       },
     ],
     galleryOverviews: [
       {
         placement: 'left',
         title: 'Vehicle Galleries',
-        imageURL: require('~/assets/images/gallery/overview/vehicle.png'),
+        imageURL: '/images/gallery/overview/vehicle.png',
         list: [
           {
             name: 'Mobil #1',
             title: 'Nama Velg | Brand Velg',
-            imageURL: require('~/assets/images/gallery/vehicle-1.png'),
+            imageURL: '/images/gallery/vehicle-1.png',
           },
 
           {
             name: 'Mobil #2',
             title: 'Nama Velg | Brand Velg',
-            imageURL: require('~/assets/images/gallery/vehicle-2.png'),
+            imageURL: '/images/gallery/vehicle-2.png',
           },
 
           {
             name: 'Mobil #3',
             title: 'Nama Velg | Brand Velg',
-            imageURL: require('~/assets/images/gallery/vehicle-1.png'),
+            imageURL: '/images/gallery/vehicle-1.png',
           },
 
           {
             name: 'Mobil #4',
             title: 'Nama Velg | Brand Velg',
-            imageURL: require('~/assets/images/gallery/vehicle-2.png'),
+            imageURL: '/images/gallery/vehicle-2.png',
           },
 
           {
             name: 'Mobil #5',
             title: 'Nama Velg | Brand Velg',
-            imageURL: require('~/assets/images/gallery/vehicle-1.png'),
+            imageURL: '/images/gallery/vehicle-1.png',
           },
         ],
       },
       {
         placement: 'right',
         title: 'Wheels Galleries',
-        imageURL: require('~/assets/images/gallery/overview/wheel.png'),
+        imageURL: '/images/gallery/overview/wheel.png',
         list: [
           {
             name: 'Velg #1',
             title: 'Nama Velg | Brand Velg',
-            imageURL: require('~/assets/images/gallery/wheel-1.png'),
+            imageURL: '/images/gallery/wheel-1.png',
           },
 
           {
             name: 'Velg #2',
             title: 'Nama Velg | Brand Velg',
-            imageURL: require('~/assets/images/gallery/wheel-2.png'),
+            imageURL: '/images/gallery/wheel-2.png',
           },
 
           {
             name: 'Velg #3',
             title: 'Nama Velg | Brand Velg',
-            imageURL: require('~/assets/images/gallery/wheel-1.png'),
+            imageURL: '/images/gallery/wheel-1.png',
           },
 
           {
             name: 'Velg #4',
             title: 'Nama Velg | Brand Velg',
-            imageURL: require('~/assets/images/gallery/wheel-2.png'),
+            imageURL: '/images/gallery/wheel-2.png',
           },
 
           {
             name: 'Velg #5',
             title: 'Nama Velg | Brand Velg',
-            imageURL: require('~/assets/images/gallery/wheel-1.png'),
+            imageURL: '/images/gallery/wheel-1.png',
           },
         ],
       },
@@ -550,7 +550,7 @@ export default {
         title: 'Sit viverra donec sapien ut vel. commo...',
         description:
           'Pellentesque sem bibendum egestas suspendisse enim mi mauris ullamcorper. Risus placerat tellus nunc ante dictum eget hac sed.',
-        imageURL: require('~/assets/images/blog/overview/blog-1.png'),
+        imageURL: '/images/blog/overview/blog-1.png',
       },
       {
         placement: 'right',
@@ -559,24 +559,24 @@ export default {
         title: 'Sit viverra donec sapien ut vel. commo...',
         description:
           'Pellentesque sem bibendum egestas suspendisse enim mi mauris ullamcorper. Risus placerat tellus nunc ante dictum eget hac sed.',
-        imageURL: require('~/assets/images/blog/overview/blog-2.png'),
+        imageURL: '/images/blog/overview/blog-2.png',
       },
     ],
     aboutOverviews: [
       {
         title: 'Testing Facilities',
         description: `Fasilitas pengujian kami mampu untuk menguji durability produk, material, korosi, dan ketahanan cat. Alat pengujian kami tersertifikasi oleh ISOTSxxxxx, xxxx, xxxx untuk memberikan hasil yang akurat. Pengujian dan hasil uji telah terakreditasi baik di dalam maupun luar negeri. Fasilitas uji kami telah diakui oleh beberapa brand otomotif seperti Toyota, Daihatsu, Honda, dll.`,
-        imageURL: require('~/assets/images/about/testing-facilities.png'),
+        imageURL: '/images/about/testing-facilities.png',
       },
       {
         title: 'Die Shop',
         description: `Pako Dieshop memiliki kemampuan untuk memproduksi komponen khusus yang terbuat dari berbagai bahan untuk mould casting, dies stamping, dll. Teknisi kami yang berdedikasi, mengasah keterampilan mereka menggunakan teknologi terbaru, bersama-sama membuat komponen terbaik. Fasilitas kami sepenuhnya mendukung semua kebutuhan pelanggan.`,
-        imageURL: require('~/assets/images/about/die-shop.png'),
+        imageURL: '/images/about/die-shop.png',
       },
       {
         title: 'P-Pro',
         description: `Kami memiliki keahlian dalam mengkonsep sebuah proyek desain hingga terwujud dalam styling concept design yang terintegrasi dengan bidang engineering design untuk diaplikasikan ke dalam manufaktur.`,
-        imageURL: require('~/assets/images/about/p-pro.png'),
+        imageURL: '/images/about/p-pro.png',
       },
     ],
   }),

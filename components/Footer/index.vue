@@ -75,19 +75,19 @@ export default {
   data: () => ({
     brands: [
       {
-        logoURL: require('@/assets/images/brand/Fortis-Wheels-Logo.svg'),
+        logoURL: '/images/brand/Fortis-Wheels-Logo.svg',
       },
 
       {
-        logoURL: require('@/assets/images/brand/Avantech-Wheels-Logo.svg'),
+        logoURL: '/images/brand/Avantech-Wheels-Logo.svg',
       },
 
       {
-        logoURL: require('@/assets/images/brand/PAKO-Logo.svg'),
+        logoURL: '/images/brand/PAKO-Logo.svg',
       },
 
       {
-        logoURL: require('@/assets/images/brand/PAKO-Logo.svg'),
+        logoURL: '/images/brand/PAKO-Logo.svg',
       },
     ],
     navigation: [
