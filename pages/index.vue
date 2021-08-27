@@ -99,7 +99,7 @@
                 <v-card class="wheel cursor-pointer" flat color="transparent">
                   <div class="wheel__head">
                     <v-img
-                      :src="items.imageURL"
+                      :src="getImageURL(items.imageURL)"
                       class="wheel__image"
                       contain
                     ></v-img>
@@ -155,7 +155,10 @@
                 class="gallery__overview"
               >
                 <v-card class="gallery__overview-thumbnail cursor-pointer" flat>
-                  <v-img :src="items.imageURL" :aspect-ratio="16 / 9">
+                  <v-img
+                    :src="getImageURL(items.imageURL)"
+                    :aspect-ratio="16 / 9"
+                  >
                     <v-card-title
                       class="gallery__overview-tag"
                       :class="[
@@ -182,7 +185,10 @@
                     class="gallery__overview-item cursor-pointer"
                     flat
                   >
-                    <v-img :src="item.imageURL" :aspect-ratio="16 / 9"></v-img>
+                    <v-img
+                      :src="getImageURL(item.imageURL)"
+                      :aspect-ratio="16 / 9"
+                    ></v-img>
                     <v-card-title>
                       <div class="break-normal">
                         {{ item.name }}
@@ -248,7 +254,10 @@
                     </div>
                   </v-card-title>
                   <!-- Tag  -->
-                  <v-img :src="items.imageURL" :aspect-ratio="16 / 9"></v-img>
+                  <v-img
+                    :src="getImageURL(items.imageURL)"
+                    :aspect-ratio="16 / 9"
+                  ></v-img>
                   <v-card-subtitle class="blog__overview-subtitle">
                     {{ items.subtitle }}
                   </v-card-subtitle>
@@ -281,7 +290,10 @@
                   flat
                   color="transparent"
                 >
-                  <v-img :src="items.imageURL" :aspect-ratio="3 / 1">
+                  <v-img
+                    :src="getImageURL(items.imageURL)"
+                    :aspect-ratio="3 / 1"
+                  >
                     <div class="about__overview-body">
                       <v-card-title class="about__overview-title">
                         <div class="border-accent tracking-widest">
@@ -307,15 +319,10 @@
 
 <script>
 export default {
-  async asyncData({ $axios, $config }) {
-    console.log($config)
+  async asyncData({ $axios, $config: { baseURL } }) {
     const banners = await $axios
-      .$get(
-        `http://devpako-backend.herokuapp.com
-/api/banner`
-      )
+      .$get(`${baseURL}/api/banner`)
       .then((res) => res.data)
-    console.log(banners)
 
     return { banners }
   },
@@ -353,23 +360,6 @@ export default {
         },
       },
     },
-    // banners: [
-    //   {
-    //     title: `Performance. Strength. Style`,
-    //     subtitle: `Especially made for the strongest who wants to combine performance with style.`,
-    //     imageURL: '/images/banner/banner-1.png',
-    //   },
-    //   {
-    //     title: `Fortis Falcon`,
-    //     subtitle: `Especially made for the strongest who wants to combine performance with style.`,
-    //     imageURL: '/images/banner/banner-2.png',
-    //   },
-    //   {
-    //     title: `Charge with no limit.`,
-    //     subtitle: `Especially made for the strongest who wants to combine performance with style.`,
-    //     imageURL: '/images/banner/banner-3.png',
-    //   },
-    // ],
     wheels: [
       {
         title: 'Fortis Radix',
@@ -381,7 +371,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: '/images/wheels/wheel-1.png',
+        imageURL: '/wheels/wheel-1.png',
       },
       {
         title: 'Fortis Radix #2',
@@ -393,7 +383,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: '/images/wheels/wheel-2.png',
+        imageURL: '/wheels/wheel-2.png',
       },
       {
         title: 'Fortis Radix #3',
@@ -405,7 +395,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: '/images/wheels/wheel-3.png',
+        imageURL: '/wheels/wheel-3.png',
       },
       {
         title: 'Fortis Radix #4',
@@ -417,7 +407,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: '/images/wheels/wheel-1.png',
+        imageURL: '/wheels/wheel-1.png',
       },
       {
         title: 'Fortis Radix #5',
@@ -429,7 +419,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: '/images/wheels/wheel-2.png',
+        imageURL: '/wheels/wheel-2.png',
       },
       {
         title: 'Fortis Radix #6',
@@ -441,7 +431,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: '/images/wheels/wheel-3.png',
+        imageURL: '/wheels/wheel-3.png',
       },
       {
         title: 'Fortis Radix #7',
@@ -453,7 +443,7 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: '/images/wheels/wheel-1.png',
+        imageURL: '/wheels/wheel-1.png',
       },
       {
         title: 'Fortis Radix #8',
@@ -465,79 +455,79 @@ export default {
           ],
           size: ['19”', '21”', '23”'],
         },
-        imageURL: '/images/wheels/wheel-2.png',
+        imageURL: '/wheels/wheel-2.png',
       },
     ],
     galleryOverviews: [
       {
         placement: 'left',
         title: 'Vehicle Galleries',
-        imageURL: '/images/gallery/overview/vehicle.png',
+        imageURL: '/gallery/overview/vehicle.png',
         list: [
           {
             name: 'Mobil #1',
             title: 'Nama Velg | Brand Velg',
-            imageURL: '/images/gallery/vehicle-1.png',
+            imageURL: '/gallery/vehicle-1.png',
           },
 
           {
             name: 'Mobil #2',
             title: 'Nama Velg | Brand Velg',
-            imageURL: '/images/gallery/vehicle-2.png',
+            imageURL: '/gallery/vehicle-2.png',
           },
 
           {
             name: 'Mobil #3',
             title: 'Nama Velg | Brand Velg',
-            imageURL: '/images/gallery/vehicle-1.png',
+            imageURL: '/gallery/vehicle-1.png',
           },
 
           {
             name: 'Mobil #4',
             title: 'Nama Velg | Brand Velg',
-            imageURL: '/images/gallery/vehicle-2.png',
+            imageURL: '/gallery/vehicle-2.png',
           },
 
           {
             name: 'Mobil #5',
             title: 'Nama Velg | Brand Velg',
-            imageURL: '/images/gallery/vehicle-1.png',
+            imageURL: '/gallery/vehicle-1.png',
           },
         ],
       },
       {
         placement: 'right',
         title: 'Wheels Galleries',
-        imageURL: '/images/gallery/overview/wheel.png',
+        imageURL: '/gallery/overview/wheel.png',
         list: [
           {
             name: 'Velg #1',
             title: 'Nama Velg | Brand Velg',
-            imageURL: '/images/gallery/wheel-1.png',
+            imageURL: '/gallery/wheel-1.png',
           },
 
           {
             name: 'Velg #2',
             title: 'Nama Velg | Brand Velg',
-            imageURL: '/images/gallery/wheel-2.png',
+            imageURL: '/gallery/wheel-2.png',
           },
 
           {
             name: 'Velg #3',
             title: 'Nama Velg | Brand Velg',
-            imageURL: '/images/gallery/wheel-1.png',
+            imageURL: '/gallery/wheel-1.png',
           },
 
           {
             name: 'Velg #4',
             title: 'Nama Velg | Brand Velg',
-            imageURL: '/images/gallery/wheel-2.png',
+            imageURL: '/gallery/wheel-2.png',
           },
 
           {
             name: 'Velg #5',
             title: 'Nama Velg | Brand Velg',
-            imageURL: '/images/gallery/wheel-1.png',
+            imageURL: '/gallery/wheel-1.png',
           },
         ],
       },
@@ -550,7 +540,7 @@ export default {
         title: 'Sit viverra donec sapien ut vel. commo...',
         description:
           'Pellentesque sem bibendum egestas suspendisse enim mi mauris ullamcorper. Risus placerat tellus nunc ante dictum eget hac sed.',
-        imageURL: '/images/blog/overview/blog-1.png',
+        imageURL: '/blog/overview/blog-1.png',
       },
       {
         placement: 'right',
@@ -559,31 +549,35 @@ export default {
         title: 'Sit viverra donec sapien ut vel. commo...',
         description:
           'Pellentesque sem bibendum egestas suspendisse enim mi mauris ullamcorper. Risus placerat tellus nunc ante dictum eget hac sed.',
-        imageURL: '/images/blog/overview/blog-2.png',
+        imageURL: '/blog/overview/blog-2.png',
       },
     ],
     aboutOverviews: [
       {
         title: 'Testing Facilities',
         description: `Fasilitas pengujian kami mampu untuk menguji durability produk, material, korosi, dan ketahanan cat. Alat pengujian kami tersertifikasi oleh ISOTSxxxxx, xxxx, xxxx untuk memberikan hasil yang akurat. Pengujian dan hasil uji telah terakreditasi baik di dalam maupun luar negeri. Fasilitas uji kami telah diakui oleh beberapa brand otomotif seperti Toyota, Daihatsu, Honda, dll.`,
-        imageURL: '/images/about/testing-facilities.png',
+        imageURL: '/about/testing-facilities.png',
       },
       {
         title: 'Die Shop',
         description: `Pako Dieshop memiliki kemampuan untuk memproduksi komponen khusus yang terbuat dari berbagai bahan untuk mould casting, dies stamping, dll. Teknisi kami yang berdedikasi, mengasah keterampilan mereka menggunakan teknologi terbaru, bersama-sama membuat komponen terbaik. Fasilitas kami sepenuhnya mendukung semua kebutuhan pelanggan.`,
-        imageURL: '/images/about/die-shop.png',
+        imageURL: '/about/die-shop.png',
       },
       {
         title: 'P-Pro',
         description: `Kami memiliki keahlian dalam mengkonsep sebuah proyek desain hingga terwujud dalam styling concept design yang terintegrasi dengan bidang engineering design untuk diaplikasikan ke dalam manufaktur.`,
-        imageURL: '/images/about/p-pro.png',
+        imageURL: '/about/p-pro.png',
       },
     ],
   }),
-  mounted() {
-    console.log(process.env)
-  },
+  computed: {},
+  mounted() {},
   methods: {
+    getImageURL(filename) {
+      const data =
+        this.$config.imageURL + this.$config.imagePATH + '/images' + filename
+      return data
+    },
     handleSwiperWheel(navigation) {
       if (navigation === 'next') {
         this.$refs.mySwiper.$swiper.slideNext()

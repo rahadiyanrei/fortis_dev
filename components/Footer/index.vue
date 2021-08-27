@@ -8,7 +8,7 @@
             :key="idx"
             class="footer__brand-item"
           >
-            <v-img :src="item.logoURL" />
+            <v-img :src="getImageURL(item.logoURL)" />
           </div>
         </div>
       </div>
@@ -75,19 +75,19 @@ export default {
   data: () => ({
     brands: [
       {
-        logoURL: '/images/brand/Fortis-Wheels-Logo.svg',
+        logoURL: '/brand/Fortis-Wheels-Logo.svg',
       },
 
       {
-        logoURL: '/images/brand/Avantech-Wheels-Logo.svg',
+        logoURL: '/brand/Avantech-Wheels-Logo.svg',
       },
 
       {
-        logoURL: '/images/brand/PAKO-Logo.svg',
+        logoURL: '/brand/PAKO-Logo.svg',
       },
 
       {
-        logoURL: '/images/brand/PAKO-Logo.svg',
+        logoURL: '/brand/PAKO-Logo.svg',
       },
     ],
     navigation: [
@@ -211,6 +211,13 @@ export default {
       },
     ],
   }),
+  methods: {
+    getImageURL(filename) {
+      const data =
+        this.$config.imageURL + this.$config.imagePATH + '/images' + filename
+      return data
+    },
+  },
 }
 </script>
 <style></style>

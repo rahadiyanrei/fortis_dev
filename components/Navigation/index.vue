@@ -10,7 +10,7 @@
 
     <div class="nav__logo">
       <nuxt-link to="/">
-        <v-img src="./logo_fortis.svg"></v-img>
+        <v-img :src="logo"></v-img>
       </nuxt-link>
     </div>
 
@@ -54,9 +54,23 @@
 </template>
 <script>
 export default {
+  asyncData({ env }) {
+    // const logo =
+    //   (await env.IMAGE_URL) +
+    //   `/hardcode-image-dont-delete/static/logo_fortis.svg`
+    // return { logo }
+  },
   data: () => ({
     drawer: false,
   }),
+  computed: {
+    logo() {
+      const data =
+        this.$config.imageURL + this.$config.imagePATH + '/logo_fortis.svg'
+      return data
+    },
+  },
+  mounted() {},
   methods: {},
 }
 </script>

@@ -1,3 +1,4 @@
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -45,17 +46,24 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    [
+      '@nuxtjs/dotenv',
+      {
+        filename: `.env.${process.env.NODE_ENV}`,
+        systemvars: true,
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseURL: process.env.BASE_URL,
-  },
+  // axios: {
+  //   baseURL: process.env.BASE_URL,
+  //   imageBaseURL: process.env.IMAGE_URL,
+  // },
   publicRuntimeConfig: {
     baseURL: process.env.BASE_URL,
-  },
-  privateRuntimeConfig: {
-    baseURL: process.env.BASE_URL,
+    imageURL: process.env.IMAGE_URL,
+    imagePATH: process.env.IMAGE_PATH,
   },
 
   vuetify: {
