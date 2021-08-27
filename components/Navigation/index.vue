@@ -54,12 +54,6 @@
 </template>
 <script>
 export default {
-  asyncData({ env }) {
-    // const logo =
-    //   (await env.IMAGE_URL) +
-    //   `/hardcode-image-dont-delete/static/logo_fortis.svg`
-    // return { logo }
-  },
   data: () => ({
     drawer: false,
   }),
