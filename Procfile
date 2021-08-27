@@ -1,1 +1,1 @@
-web: nuxt start
+web: NODE_ENV=development&& nuxt start
