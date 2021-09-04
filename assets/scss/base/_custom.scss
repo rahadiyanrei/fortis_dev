@@ -18,6 +18,12 @@
       &::after {
         @apply mt-6 mx-auto;
       }
+
+      &.left {
+        &::after {
+          @apply ml-0;
+        }
+      }
     }
   }
 }
@@ -173,5 +179,21 @@
         }
       }
     }
+  }
+}
+
+.about {
+  @apply mb-40;
+  &__wrapper {
+    @apply space-y-20;
+  }
+  &__content {
+    @apply space-y-12;
+  }
+  &__description {
+    @apply w-3/5;
+  }
+  &__action {
+    @apply space-y-4;
   }
 }

@@ -17,7 +17,7 @@
       <div class="main__container">
         <div class="footer__navigation-logo">
           <v-img
-            src="./logo_fortis.svg"
+            src="https://ik.imagekit.io/fjxmsbwas7n/hardcode-image-dont-delete/static/logo_fortis.svg"
             width="180"
             height="48"
             contain

@@ -18,7 +18,16 @@
 
     <div class="nav__menu-right desktop">
       <v-btn text elevation="false">Apparel</v-btn>
-      <v-btn text elevation="false">About</v-btn>
+      <v-menu offset-y rounded>
+        <template #activator="{ on, attrs }">
+          <v-btn text elevation="false" v-bind="attrs" v-on="on">About</v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="(item, index) in abouts" :key="index">
+            <v-btn text elevation="false" :to="item.to">{{ item.name }}</v-btn>
+          </v-list-item>
+        </v-list>
+      </v-menu>
       <v-btn text elevation="false">Contact</v-btn>
     </div>
     <div class="tablet">
@@ -56,6 +65,24 @@
 export default {
   data: () => ({
     drawer: false,
+    abouts: [
+      {
+        name: 'Company',
+        to: '/about/company',
+      },
+      {
+        name: 'Testing Facilities',
+        to: '/about/testing-facilities',
+      },
+      {
+        name: 'Dieshop',
+        to: '/about/dieshop',
+      },
+      {
+        name: 'P-Pro',
+        to: '/about/p-pro',
+      },
+    ],
   }),
   computed: {
     logo() {

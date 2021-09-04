@@ -556,17 +556,17 @@ export default {
       {
         title: 'Testing Facilities',
         description: `Fasilitas pengujian kami mampu untuk menguji durability produk, material, korosi, dan ketahanan cat. Alat pengujian kami tersertifikasi oleh ISOTSxxxxx, xxxx, xxxx untuk memberikan hasil yang akurat. Pengujian dan hasil uji telah terakreditasi baik di dalam maupun luar negeri. Fasilitas uji kami telah diakui oleh beberapa brand otomotif seperti Toyota, Daihatsu, Honda, dll.`,
-        imageURL: '/about/testing-facilities.png',
+        imageURL: '/about/testing-facilities/banner.png',
       },
       {
         title: 'Die Shop',
         description: `Pako Dieshop memiliki kemampuan untuk memproduksi komponen khusus yang terbuat dari berbagai bahan untuk mould casting, dies stamping, dll. Teknisi kami yang berdedikasi, mengasah keterampilan mereka menggunakan teknologi terbaru, bersama-sama membuat komponen terbaik. Fasilitas kami sepenuhnya mendukung semua kebutuhan pelanggan.`,
-        imageURL: '/about/die-shop.png',
+        imageURL: '/about/die-shop/banner.png',
       },
       {
         title: 'P-Pro',
         description: `Kami memiliki keahlian dalam mengkonsep sebuah proyek desain hingga terwujud dalam styling concept design yang terintegrasi dengan bidang engineering design untuk diaplikasikan ke dalam manufaktur.`,
-        imageURL: '/about/p-pro.png',
+        imageURL: '/about/p-pro/banner.png',
       },
     ],
   }),
