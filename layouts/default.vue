@@ -1,6 +1,7 @@
 <template>
   <v-app class="viewport">
-    <Navigation />
+    <NavigationDrawer :is-drawer="drawer" />
+    <Navigation @drawer="handleDrawer" />
     <!-- Sizes your content based upon application components -->
     <v-main class="main">
       <!-- Provides the application the proper gutter -->
@@ -14,3 +15,16 @@
     </v-main>
   </v-app>
 </template>
+<script>
+export default {
+  data: () => ({
+    drawer: false,
+  }),
+  methods: {
+    handleDrawer() {
+      this.drawer = !this.drawer
+      console.log(this.drawer)
+    },
+  },
+}
+</script>
