@@ -72,7 +72,7 @@
               :position="{ lat: location.lat, lng: location.long }"
               @click="selectLocation(location)"
             >
-              <GMapInfoWindow :options="{ maxWidth: 200 }" :opened="false">
+              <GMapInfoWindow :options="{ maxWidth: 300 }" :opened="false">
                 <div class="dealer__map-info">
                   <div class="dealer__map-head">
                     <span class="dealer__map-info__title">
@@ -287,16 +287,14 @@ export default {
   created() {},
   methods: {
     selectLocation(location) {
-      console.log(location)
       if (location.uuid) {
         this.openedMarkerID = location.uuid
       } else {
         this.openedMarkerID = location
       }
-      console.log(this.openedMarkerID === location.uuid)
-      // this.currentLocation = location
-      // this.$refs.gMap.map.setCenter({ lat: location.lat, lng: location.long })
-      // this.$refs.gMap.map.panTo({ lat: location.lat, lng: location.long })
+      this.currentLocation = location
+      this.$refs.gMap.map.setCenter({ lat: location.lat, lng: location.long })
+      this.$refs.gMap.map.panTo({ lat: location.lat, lng: location.long })
       // console.log(
       //   this.$refs.gMap.map
       //     .getBounds()

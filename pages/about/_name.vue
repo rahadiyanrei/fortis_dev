@@ -26,10 +26,14 @@
                     </v-btn>
                   </div>
                   <div class="about__action-item">
-                    <v-btn text outlined elevation="false">Contact Us</v-btn>
+                    <v-btn text outlined elevation="false" to="/contact">
+                      Contact Us
+                    </v-btn>
                   </div>
                   <div class="about__action-item">
-                    <v-btn text outlined elevation="false">Find a Dealer</v-btn>
+                    <v-btn text outlined elevation="false" to="/dealer">
+                      Find a Dealer
+                    </v-btn>
                   </div>
                 </div>
               </div>
@@ -89,7 +93,7 @@
                           :position="{ lat: location.lat, lng: location.lng }"
                           @click="currentLocation = location"
                         >
-                          <GMapInfoWindow :options="{ maxWidth: 200 }">
+                          <GMapInfoWindow :options="{ maxWidth: 300 }">
                             <div class="dealer__map-info">
                               <div class="dealer__map-head">
                                 <span class="dealer__map-info__title">

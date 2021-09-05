@@ -310,6 +310,10 @@
     @apply h-96 lg:h-5/6 mr-2 p-6 pt-0 space-y-6 overflow-auto;
   }
 
+  &__item {
+    @apply cursor-pointer;
+  }
+
   &__subtitle {
     @apply font-semibold uppercase text-red-700 text-sm tracking-wide;
   }
