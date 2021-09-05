@@ -23,8 +23,10 @@
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
+    "nuxt-gmaps": "^1.2.10",
     "swiper": "^6.8.3",
-    "vue-awesome-swiper": "^4.1.1"
+    "vue-awesome-swiper": "^4.1.1",
+    "vue-youtube": "^1.4.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",

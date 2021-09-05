@@ -187,13 +187,44 @@
   &__wrapper {
     @apply space-y-20;
   }
-  &__content {
+  &__body {
     @apply space-y-12;
+  }
+  &__content {
+    @apply space-y-28;
   }
   &__description {
     @apply w-3/5;
   }
   &__action {
     @apply space-y-4;
+  }
+
+  &__card {
+    &-list {
+      @apply grid gap-10;
+    }
+    .v-card {
+      height: min-content;
+      &__title {
+        @apply font-bold;
+      }
+    }
+  }
+
+  &__plugin {
+    @apply space-y-12;
+    &-title {
+      @apply w-1/3 text-2xl;
+    }
+    &-content {
+      @apply w-full;
+      height: calc(100vh - 20vh);
+      iframe,
+      .GMap,
+      .GMap__Wrapper {
+        @apply w-full h-full;
+      }
+    }
   }
 }
