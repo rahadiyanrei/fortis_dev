@@ -289,6 +289,7 @@
                   class="about__overview-thumbnail cursor-pointer"
                   flat
                   color="transparent"
+                  :to="items.to"
                 >
                   <v-img
                     :src="getImageURL(items.imageURL)"
@@ -555,16 +556,19 @@ export default {
     aboutOverviews: [
       {
         title: 'Testing Facilities',
+        to: '/about/testing-facilities',
         description: `Fasilitas pengujian kami mampu untuk menguji durability produk, material, korosi, dan ketahanan cat. Alat pengujian kami tersertifikasi oleh ISOTSxxxxx, xxxx, xxxx untuk memberikan hasil yang akurat. Pengujian dan hasil uji telah terakreditasi baik di dalam maupun luar negeri. Fasilitas uji kami telah diakui oleh beberapa brand otomotif seperti Toyota, Daihatsu, Honda, dll.`,
         imageURL: '/about/testing-facilities/banner.png',
       },
       {
         title: 'Die Shop',
+        to: '/about/dieshop',
         description: `Pako Dieshop memiliki kemampuan untuk memproduksi komponen khusus yang terbuat dari berbagai bahan untuk mould casting, dies stamping, dll. Teknisi kami yang berdedikasi, mengasah keterampilan mereka menggunakan teknologi terbaru, bersama-sama membuat komponen terbaik. Fasilitas kami sepenuhnya mendukung semua kebutuhan pelanggan.`,
         imageURL: '/about/die-shop/banner.png',
       },
       {
         title: 'P-Pro',
+        to: '/about/p-pro',
         description: `Kami memiliki keahlian dalam mengkonsep sebuah proyek desain hingga terwujud dalam styling concept design yang terintegrasi dengan bidang engineering design untuk diaplikasikan ke dalam manufaktur.`,
         imageURL: '/about/p-pro/banner.png',
       },

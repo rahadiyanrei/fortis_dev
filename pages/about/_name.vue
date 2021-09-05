@@ -81,24 +81,32 @@
                           fullscreenControl: false,
                           styles: mapStyle,
                         }"
-                        :zoom="13"
+                        :zoom="15"
                       >
                         <GMapMarker
                           v-for="location in locations"
                           :key="location.id"
                           :position="{ lat: location.lat, lng: location.lng }"
-                          :options="{
-                            icon:
-                              location === currentLocation
-                                ? pins.selected
-                                : pins.notSelected,
-                          }"
                           @click="currentLocation = location"
                         >
                           <GMapInfoWindow :options="{ maxWidth: 200 }">
-                            <code>
-                              lat: {{ location.lat }}, lng: {{ location.lng }}
-                            </code>
+                            <div class="dealer__map-info">
+                              <div class="dealer__map-head">
+                                <span class="dealer__map-info__title">
+                                  {{ location.name }}
+                                </span>
+
+                                <div>
+                                  {{ location.email }} |
+                                  {{ location.phone_number }}
+                                </div>
+                              </div>
+                              <div class="dealer__map-info__body">
+                                <div>
+                                  {{ location.address }}
+                                </div>
+                              </div>
+                            </div>
                           </GMapInfoWindow>
                         </GMapMarker>
                       </GMap>
@@ -351,16 +359,14 @@ export default {
     currentLocation: {},
     locations: [
       {
+        name: 'Pako Group',
+        email: 'hamid@pakoakuina.com',
+        phone_number: '+62 21 651 1228',
+        address: `Jl. Gaya Motor Raya, Sunter II Jakarta Utara - 14330, Indonesia`,
         lat: -6.136722215837163,
         lng: 106.89021826863029,
       },
     ],
-    pins: {
-      selected:
-        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAADgElEQVRIia2XTWhcVRiGn+/MT4JJOq1jok1diD8FBRtBjMG4ahe6lJaIqQkIdaFQZOzGQJM64mBWGuIEwVbRNraWJjuLUDBSkAqzUqMu2gRqUZs0P00mTExm5s75XLSGMPfemTuD7+ryvd99n8M959x7rlCzVI6+8t5uY8xuAGvt3Nj5d+dAtJYUCdr49uHhh9WUUqI8b4WIQPiuVURx1MgPJezg2PjQ9f8F3NNzIbSn4WpakYOCtIH63aMoCxJi4q+NvYmJiZdLdYOTryUbV5zwlIEOhaZqg7xDJ2eQX5xdLQfS6bfyfn2mQoRknfAk8HRQKIBAs6LPmNW1yUp9IT/j2KvRPuANJDh0e64gbZ0dB25kpr//zWeAbvX0XAjtiV6bRXjIfYPQHGsi0hABoJgvkltbR9VjUSt/7HzMeSSZTNpyK+zuhgcbZp9DdIeWraNQJMT97W30Hj1ELB4DILuc5Vx6klt/L2BLZflCy+3ZcBfwYznDc44t2qsq95bXm1uaODLQvwUFiMVjHBnop3mH54zEQ9DrZXiCBX3c1RgydL/YtfWItyvaGKX7hWcxxj1zKjwRGAzcV16IRCO0PhD3aYe29lYiDVFXXZTWwGCFXHmtmC+yOL/sC164uUgxX3BnqbqyfMEiZqa8Zq3lyqUMxXzR1V/YLHDlUgZr3StbjVwNDFbV7xQ2y+u5bI5TH5xmdTm7VVtZWuWz4TOsr617RW1g7ZSX4bmdCtZ8EzXOMEj79nrJKTH/5y1Ovv8F0cY781nYLJDzhoLqiinYb70s33d1oj+VQen084NI0czoV0NdXp7vu1qMngT+qR8qOQOf+vm+4JiUzgIr9YKBVfJN52sGJ79Mbgp8IuDeI1WkQl5U0yMTxzZqBgPEws5HFl2qFSwqS1K4J12px/ezCHD558tO5779GwbpBhoDQZGsEXt85OuBTOW+qlJJ9KV+AukIAlZhenT8+FPVDn8VH/Xdsamo9gMLAbiLxtjDQU6cAcAwcvbEr8AZFa20vdZV+Xzk9Infg2QGAgPsfNR5R6xc87EVmLlZ2DsYNC8wOJlMWsfoQWDOw54PWV6qdqStCwwwNj503Yp5HeX2tvKyNbz54bnBG7VkVdxOXspMT8107dsfV9EnBSkIcmp0fHCs1pw6pZLoS11M9KUuVvizqCjPz2J1iZZ2fXzov+t6Ev4F0gdHv5TSrLMAAAAASUVORK5CYII=',
-      notSelected:
-        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAEjElEQVRIia2Wa0wcZRSG35m9DbcFdrktlVILLQIFKpfSiPaGmjSppqlBhdhEksb6o1E0Jo0Rl21qJE2NbQRNldqiUktKf1QhaoxcpFKg5VpoF4G4QBDoXtgBZneHvcz4C2RhdhnQ99fknHfOk3O+b+b7CGxYPHHq1TMakiQ1AMBx3HRlbdk0QPAbqUKINb5TVL49LMzxEQHu6Ug1KwsPcUoBgJ6Xu4yzlNvDS25bGGlp5XcfGv4XcEHBDUmqerBCGeI89uKB8aj42AWCWNUczxMYmwrmf2zaZpx3yOoemtJK6upe9mwarHtdR3EU33gwZzLjmayZIDGdtHbHMi33tvRbZar8ioq3Fn35SN8leIJTcDdf2D+WJRYKAPuypoKP7DfkqNyWm/58El+J0yeI155Msrx5MHdKNHRJmki7xGwNiErYeni8rbdlUMgjOOqCghuS1IjB0feK+7ZRcu+lGvtbicaeXWBdgQAASmbDs9kPEK+Z9/Kxi1J8cjV9DDGSBJ1Ox61mSIXAjylGn0pNnFWuhvaNxKB9aA+OnngFoepQAMCcZQ63Ltci74lOpO8wLnsphRvJCXRIW3/0XgB3VjME1zg0hC3MSLKoVsbsrBRNXSkoKilehgJAqDoUhW8Xo7E7FY5F75XbnWRRq4JdhUIMQTBJcsmR4Q6vmN6gRvahPMgUsjV+OSVH5oE86P+K8IpHqOwgpZ4U0WCOQ0QA5T1mmlEiPDJSyA4AUEVFwWpTesWCAjzgOULwJUEwISEZxua9/GHB87CaTD7Bs0YjwoO8N9iCTQaC4BnRYPAYoRcor1Dy4xZ0N9+Ba9G1xu5knehpaUPydrNXnF6Qg+P5P0WDGYf0t4lHQezKWCDlxqHsQXx/4TJoy9xy3Gqmcf3i13gu+wECFN7LMzEV4mAYRaMQQ/BzYlhZfb9eXb4vczp2ZTwj8RHCA1vxc5UFrDsYAEBJGRzJGUScZu1Ee4fUVo+D+0mI4fNfffZUaWfJ8ft7VnchVjaHFBdr0jvLPj+7Vyjv819tZ2VftffG2DdFBdDep2FYu/RLX3mfYIWbv9beH231cH7OER/ycCQ6BqJolgmp3TBYV61j3R580atXOzcKvjsQsejiyIoLde86fHn8tiNxSj79pS3O7HSL79rlJtHUEWe2W5QVfmv7S7b0tbhzd+U7OI7MS9w6R/nzLunXtrg5w6Tyg/PX3u/051u3lXNXtZe69epxM70+12Sl0PUwcrz8ivbyel4RMyR4mpYfr2nYYeR53zclnidQU7/TNG+XFom5cfod9ZI6BpqNuan50aSE3x0fy6w9ngD83q2xDRtUl85dKbsupqboXSPZQpxu7YodnjYFrsnNmAP52/diR4asKaVi64kG63Q6zszIjn1bv3N60fnvoFinBNU/JM0wC/Kj611pV0rUqJd0934znZuWrzdMKg9nppgCAALVt5IsRlr+xvlvyvzu4v8EBoA/elpGMpOfV9tYadrohNI5PKaq+rjqTOVG62xSPKE9qW3QntQ2AH62uh8JHovri+Ct8s9eWnreTIV/AIR1wOGopbx1AAAAAElFTkSuQmCC',
-    },
     clusterStyle: [
       {
         url: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png',
@@ -390,10 +396,10 @@ export default {
             color: '#3e606f',
           },
           {
-            weight: 2,
+            weight: 1.5,
           },
           {
-            gamma: 0.84,
+            gamma: 0.5,
           },
         ],
       },
@@ -423,7 +429,7 @@ export default {
         elementType: 'geometry',
         stylers: [
           {
-            color: '#00C5CD',
+            color: '#E5E5E5',
           },
           {
             lightness: '5',
@@ -435,7 +441,7 @@ export default {
         elementType: 'geometry',
         stylers: [
           {
-            color: '#00C5CD',
+            color: '#E5E5E5',
           },
         ],
       },
@@ -444,7 +450,7 @@ export default {
         elementType: 'geometry.stroke',
         stylers: [
           {
-            color: '#00C5CD',
+            color: '#E5E5E5',
           },
           {
             visibility: 'off',
@@ -457,7 +463,7 @@ export default {
         stylers: [
           {
             visibility: 'on',
-            color: '#00C5CD',
+            color: '#E5E5E5',
           },
           {
             lightness: '14',
@@ -469,7 +475,7 @@ export default {
         elementType: 'geometry',
         stylers: [
           {
-            color: '#00C5CD',
+            color: '#E5E5E5',
           },
           {
             visibility: 'simplified',
@@ -484,7 +490,7 @@ export default {
         elementType: 'geometry',
         stylers: [
           {
-            color: '#00C5CD',
+            color: '#E5E5E5',
           },
           {
             lightness: '0',
@@ -496,7 +502,7 @@ export default {
         elementType: 'geometry',
         stylers: [
           {
-            color: '#00C5CD',
+            color: '#E5E5E5',
           },
         ],
       },
