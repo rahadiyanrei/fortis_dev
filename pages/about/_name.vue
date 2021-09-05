@@ -10,12 +10,12 @@
         </div>
         <div class="main__container">
           <div class="about__content">
-            <div class="about__body">
+            <div class="about__head">
               <div class="main-title border-accent left">
                 About
                 <span class="font-bold">{{ selectAbout.name }}</span>
               </div>
-              <div class="flex justify-between">
+              <div class="md:flex justify-between space-y-10 md:space-y-0">
                 <p class="about__description">
                   {{ selectAbout.description }}
                 </p>
@@ -33,82 +33,112 @@
                   </div>
                 </div>
               </div>
-              <div
-                v-if="selectAbout.extendDescription.length"
-                class="flex justify-between w-3/6"
-              >
-                <p
-                  v-for="(item, idx) in selectAbout.extendDescription"
-                  :key="idx"
-                  v-html="item.text"
-                ></p>
-              </div>
-            </div>
-            <div
-              v-for="(items, idx2) in selectAbout.extendDescription"
-              :key="idx2"
-            >
-              <div class="about__plugin">
-                <div class="about__plugin-title">
-                  Volutpat pretium dictum mauris a placerat vulputate.
-                </div>
-                <div class="about__plugin-content">
-                  <youtube video-id="aM5ijokX9R0" />
-                </div>
-              </div>
-              <div class="about__plugin">
-                <div class="about__plugin-title">
-                  Volutpat pretium dictum mauris a placerat vulputate.
-                </div>
-                <div class="about__plugin-content">
-                  <GMap
-                    ref="gMap"
-                    language="en"
-                    :cluster="{ options: { styles: clusterStyle } }"
-                    :center="{ lat: locations[0].lat, lng: locations[0].lng }"
-                    :options="{ fullscreenControl: false, styles: mapStyle }"
-                    :zoom="13"
-                  >
-                    <GMapMarker
-                      v-for="location in locations"
-                      :key="location.id"
-                      :position="{ lat: location.lat, lng: location.lng }"
-                      :options="{
-                        icon:
-                          location === currentLocation
-                            ? pins.selected
-                            : pins.notSelected,
-                      }"
-                      @click="currentLocation = location"
-                    >
-                      <GMapInfoWindow :options="{ maxWidth: 200 }">
-                        <code>
-                          lat: {{ location.lat }}, lng: {{ location.lng }}
-                        </code>
-                      </GMapInfoWindow>
-                    </GMapMarker>
-                  </GMap>
-                </div>
-              </div>
-              {{ items.contens.length }}
-              <div v-if="items.type === 'card'" class="about__card-list">
-                <v-card
-                  v-for="(item, idx3) in items.contents"
-                  :key="idx3"
-                  class="about__card"
-                  :elevation="0"
+              <template v-if="selectAbout.extendDescription.length">
+                <div
+                  v-if="selectAbout.extendDescription[0].type === 'description'"
+                  class="w-3/6 mt-0 flex justify-between"
                 >
-                  <v-img :src="item.imageURL" height="100%" />
-                  <v-card-title class="about__card-title">
-                    {{ item.title }}
-                  </v-card-title>
-                  <v-card-text
-                    class="about__card-description"
+                  <p
+                    v-for="(item, idx3) in selectAbout.extendDescription[0]
+                      .contents"
+                    :key="idx3"
                     v-html="item.description"
-                  ></v-card-text>
-                </v-card>
-              </div>
+                  ></p>
+                </div>
+              </template>
             </div>
+            <template v-if="selectAbout.extendDescription.length">
+              <div
+                v-for="(items, idx2) in selectAbout.extendDescription"
+                :key="idx2"
+                class="about__body"
+              >
+                <template v-if="items.type === 'youtube'">
+                  <div class="about__plugin">
+                    <div class="about__plugin-title">
+                      Volutpat pretium dictum mauris a placerat vulputate.
+                    </div>
+                    <div class="about__plugin-content">
+                      <youtube video-id="aM5ijokX9R0" resize />
+                    </div>
+                  </div>
+                </template>
+                <template v-if="items.type === 'google-maps'">
+                  <div class="about__plugin">
+                    <div class="about__plugin-title">
+                      Volutpat pretium dictum mauris a placerat vulputate.
+                    </div>
+                    <div class="about__plugin-content">
+                      <GMap
+                        ref="gMap"
+                        language="en"
+                        :cluster="{ options: { styles: clusterStyle } }"
+                        :center="{
+                          lat: locations[0].lat,
+                          lng: locations[0].lng,
+                        }"
+                        :options="{
+                          fullscreenControl: false,
+                          styles: mapStyle,
+                        }"
+                        :zoom="13"
+                      >
+                        <GMapMarker
+                          v-for="location in locations"
+                          :key="location.id"
+                          :position="{ lat: location.lat, lng: location.lng }"
+                          :options="{
+                            icon:
+                              location === currentLocation
+                                ? pins.selected
+                                : pins.notSelected,
+                          }"
+                          @click="currentLocation = location"
+                        >
+                          <GMapInfoWindow :options="{ maxWidth: 200 }">
+                            <code>
+                              lat: {{ location.lat }}, lng: {{ location.lng }}
+                            </code>
+                          </GMapInfoWindow>
+                        </GMapMarker>
+                      </GMap>
+                    </div>
+                  </div>
+                </template>
+                <div
+                  v-if="items.type === 'card'"
+                  class="about__card-list md:grid-cols-2"
+                  :class="[
+                    items.gridCols
+                      ? `lg:grid-cols-${items.gridCols}`
+                      : 'lg:grid-cols-3',
+                  ]"
+                >
+                  <v-card
+                    v-for="(item, idx3) in items.contents"
+                    :key="idx3"
+                    class="about__card"
+                    :elevation="0"
+                  >
+                    <v-img
+                      :src="getImageURL(item.imageURL)"
+                      :aspect-ratio="16 / 9"
+                    />
+                    <v-card-title
+                      v-if="item.title !== ''"
+                      class="about__card-title"
+                    >
+                      {{ item.title }}
+                    </v-card-title>
+                    <v-card-text
+                      v-if="item.description !== ''"
+                      class="about__card-description"
+                      v-html="item.description"
+                    ></v-card-text>
+                  </v-card>
+                </div>
+              </div>
+            </template>
           </div>
         </div>
       </div>
@@ -124,7 +154,26 @@ export default {
         to: 'company',
         bannerURL: '/about/pako-group/banner.png',
         description: `Pako Group adalah perusahaan yang bergerak dalam industri komponen otomotif yang menghasilkan wheel rim yang terbuat dari baja dan alumunium untuk kendaraan roda dua dan roda empat. Pako Group mengawali bisnisnya dengan membuat produk OEM untuk customer dari dalam negeri dan luar negeri seperti Malaysia, Jepang, Jerman, Thailand, Hungaria, dan Italia. Perusahaan yang menjadi customer dari Pako Group antara lain Toyota, Daihatsu, Honda, dan lain sebagainya. Sejak tahun 2015, Pako Group mulai merambah ke bidang After Market dengan produknya yang bernama Fortis dan Avantech.`,
-        extendDescription: [],
+        extendDescription: [
+          {
+            type: 'youtube',
+            contents: [
+              {
+                title: 'Volutpat pretium dictum mauris a placerat vulputate.',
+                videoId: 'aM5ijokX9R0',
+              },
+            ],
+          },
+          {
+            type: 'google-maps',
+            contents: [
+              {
+                title: 'Volutpat pretium dictum mauris a placerat vulputate.',
+                videoId: 'aM5ijokX9R0',
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Testing Facilities',
@@ -137,7 +186,7 @@ export default {
             contents: [
               {
                 title: 'Drum Test',
-                imageURL: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+                imageURL: '/about/testing-facilities/drum-test.png',
                 description: `
                 Specification : <br/>
                 • Truck & Bus. Load : Max 9000 Kg<br/>
@@ -149,7 +198,7 @@ export default {
               },
               {
                 title: 'Impact Test',
-                imageURL: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+                imageURL: '/about/testing-facilities/impact-test.png',
                 description: `
                 Specification :<br/>
                 • Load : Max 1010 Kg<br/>
@@ -162,7 +211,7 @@ export default {
               },
               {
                 title: 'Salt Spray Test',
-                imageURL: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+                imageURL: '/about/testing-facilities/salt-spray-test.png',
                 description: `
                 Specification :<br/>
                 • Spray Capacity : 1-2 (ml/80cm2/Hr)<br/>
@@ -173,7 +222,7 @@ export default {
               },
               {
                 title: 'Moment Life Test',
-                imageURL: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+                imageURL: '/about/testing-facilities/moment-life-test.png',
                 description: `
                 Specification :<br/>
                 • Load : Max 2000 Kg<br/>
@@ -185,7 +234,7 @@ export default {
               },
               {
                 title: 'Tensile Test',
-                imageURL: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+                imageURL: '/about/testing-facilities/tensile-test.png',
                 description: `
                 Specification :<br/>
                 -
@@ -193,7 +242,7 @@ export default {
               },
               {
                 title: 'Humidity Test',
-                imageURL: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+                imageURL: '/about/testing-facilities/humidity-test.png',
                 description: `
                 Temperature : 40C<br/>
                 Humidty : 85% RH<br/>
@@ -211,28 +260,59 @@ export default {
         description: `Pako Dieshop memiliki kemampuan untuk memproduksi komponen khusus yang terbuat dari berbagai bahan untuk mould casting, dies stamping, dll. Teknisi kami yang berdedikasi, mengasah keterampilan mereka menggunakan teknologi terbaru, bersama-sama membuat komponen terbaik. Fasilitas kami sepenuhnya mendukung semua kebutuhan pelanggan.`,
         extendDescription: [
           {
-            text: `
-            <b>EXPERIENCE :</b><br/>
-            1. LPDC (Low Pressure Die Casting) - Car Wheel Mould<br/>
-            2. GDC (Gravity Die Casting) - Motorcycle Wheel Mould<br/>
-            3. Press/ Stamping Die - Steel Wheel Disc<br/>
-            4. General Parts<br/>
-            5. Sand Core Mould<br/>
-            6. HPDC (High Pressure Die Casting)<br/>
-            7. Roll Forming & Expander Die - Steel Wheel Rim<br/>
-            `,
+            type: 'description',
+            contents: [
+              {
+                description: `
+                <b>EXPERIENCE :</b><br/>
+                1. LPDC (Low Pressure Die Casting) - Car Wheel Mould<br/>
+                2. GDC (Gravity Die Casting) - Motorcycle Wheel Mould<br/>
+                3. Press/ Stamping Die - Steel Wheel Disc<br/>
+                4. General Parts<br/>
+                5. Sand Core Mould<br/>
+                6. HPDC (High Pressure Die Casting)<br/>
+                7. Roll Forming & Expander Die - Steel Wheel Rim<br/>
+                `,
+              },
+              {
+                description: `
+                Lathe Machine <br/>
+                CNC Milling <br/>
+                Feeler <br/>
+                Conture Machine <br/>
+                Cylindrical Machine <br/>
+                Manual Milling <br/>
+                Drilling Machine <br/>
+                Cutting Machine (Wire cut) <br/>
+                `,
+              },
+            ],
           },
           {
-            text: `
-            Lathe Machine <br/>
-            CNC Milling <br/>
-            Feeler <br/>
-            Conture Machine <br/>
-            Cylindrical Machine <br/>
-            Manual Milling <br/>
-            Drilling Machine <br/>
-            Cutting Machine (Wire cut) <br/>
-            `,
+            type: 'card',
+            gridCols: 2,
+            contents: [
+              {
+                title: '',
+                imageURL: '/about/testing-facilities/drum-test.png',
+                description: ``,
+              },
+              {
+                title: '',
+                imageURL: '/about/testing-facilities/drum-test.png',
+                description: ``,
+              },
+              {
+                title: '',
+                imageURL: '/about/testing-facilities/drum-test.png',
+                description: ``,
+              },
+              {
+                title: '',
+                imageURL: '/about/testing-facilities/drum-test.png',
+                description: ``,
+              },
+            ],
           },
         ],
       },
@@ -241,7 +321,31 @@ export default {
         to: 'p-pro',
         bannerURL: '/about/p-pro/banner.png',
         description: `Kami memiliki keahlian dalam mengkonsep sebuah proyek desain hingga terwujud dalam styling concept design yang terintegrasi dengan bidang engineering design untuk diaplikasikan ke dalam manufaktur.`,
-        extendDescription: [],
+        extendDescription: [
+          {
+            type: 'card',
+            contents: [
+              {
+                title: 'Styling',
+                imageURL: '/about/testing-facilities/drum-test.png',
+                description: `Kami merealisasikan ide melalui sebuah konsep desain yang diwujudkan dalam sajian gambar rendering baik 2D maupun 3D.
+                `,
+              },
+              {
+                title: 'Engineering',
+                imageURL: '/about/testing-facilities/impact-test.png',
+                description: `Kami mempersiapkan 3D drawing dan 2D drawing sebagai langkah lanjutan untuk kebutuhan mass production.
+                `,
+              },
+              {
+                title: 'Prototyping',
+                imageURL: '/about/testing-facilities/salt-spray-test.png',
+                description: `-
+                `,
+              },
+            ],
+          },
+        ],
       },
     ],
     currentLocation: {},
