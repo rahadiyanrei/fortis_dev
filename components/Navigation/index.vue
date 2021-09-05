@@ -28,7 +28,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-btn text elevation="false">Contact</v-btn>
+      <v-btn text elevation="false" to="/contact">Contact</v-btn>
     </div>
     <div class="tablet">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>

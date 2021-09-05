@@ -65,10 +65,12 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  // axios: {
-  //   baseURL: process.env.BASE_URL,
-  //   imageBaseURL: process.env.IMAGE_URL,
-  // },
+  axios: {
+    baseURL: process.env.BASE_URL,
+    sendEmailURL: process.env.SEND_EMAIL_URL,
+    proxyHeaders: false,
+    credentials: false,
+  },
   publicRuntimeConfig: {
     baseURL: process.env.BASE_URL,
     imageURL: process.env.IMAGE_URL,

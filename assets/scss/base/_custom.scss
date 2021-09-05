@@ -233,3 +233,99 @@
     }
   }
 }
+
+.contact {
+  @apply relative lg:h-screen mt-20 pb-20 lg:pb-0;
+  margin-bottom: -2rem;
+  &__body {
+    @apply relative z-10  lg:flex justify-between space-y-20 lg:space-y-0;
+  }
+  &__info {
+    @apply space-y-20;
+    &-list {
+      @apply grid md:grid-cols-2 gap-8;
+    }
+    &-item {
+      @apply space-y-2;
+    }
+    &-title {
+      @apply font-bold uppercase tracking-wider;
+    }
+    &-value {
+      @apply md:w-2/3;
+    }
+
+    &-action {
+      .v-btn {
+        @apply font-semibold;
+      }
+    }
+  }
+  &__form {
+    @apply lg:w-2/3 lg:max-w-xl m-auto;
+    &-title {
+      @apply text-xl uppercase pb-8;
+    }
+    &-card {
+      @apply p-8;
+    }
+  }
+  &__background {
+    @apply absolute h-screen w-full bottom-0;
+    .v-image {
+      @apply h-full w-full;
+    }
+  }
+}
+
+.dealer {
+  @apply h-full lg:h-screen relative;
+  margin-bottom: -2rem;
+
+  @screen lg {
+    margin-bottom: -7rem;
+  }
+
+  &__wrapper {
+    @apply lg:flex items-center justify-center;
+    height: 100%;
+    @screen lg {
+      height: calc(100vh - 5rem);
+    }
+  }
+
+  &__menu {
+    @apply h-full py-8 bg-black text-white;
+  }
+
+  &__filter {
+    @apply p-6;
+    input {
+      @apply text-white;
+    }
+  }
+
+  &__list {
+    @apply h-96 lg:h-5/6 mr-2 p-6 pt-0 space-y-6 overflow-auto;
+  }
+
+  &__subtitle {
+    @apply font-semibold uppercase text-red-700 text-sm tracking-wide;
+  }
+
+  &__title {
+    @apply py-2 text-lg;
+  }
+
+  &__address {
+    @apply max-w-lg opacity-80;
+  }
+
+  &__map {
+    @apply w-full h-96 lg:h-full;
+    .GMap,
+    .GMap__Wrapper {
+      @apply w-full h-full;
+    }
+  }
+}
