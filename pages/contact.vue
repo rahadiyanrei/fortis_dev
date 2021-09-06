@@ -117,14 +117,16 @@
                   </div>
 
                   <div class="grid grid-cols-2 gap-4">
-                    <v-select
+                    <v-autocomplete
                       v-model="form.country"
                       :rules="[(v) => !!v || 'Item is required']"
                       :items="country"
+                      item-text="name"
+                      item-value="id"
                       label="Negara"
                       outlined
                       required
-                    ></v-select>
+                    ></v-autocomplete>
                     <v-text-field
                       v-model="form.postalCode"
                       :rules="[(v) => !!v || 'Item is required']"
@@ -167,6 +169,21 @@
 </template>
 <script>
 export default {
+  async asyncData({ $axios, $config: { baseURL } }) {
+    const country = await $axios
+      .$get(`${baseURL}/api/country`)
+      .then((res) => res.data)
+
+    // const locations = await dealer.map((item) => {
+    //   const data = {
+    //     lat: parseFloat(item.lat),
+    //     lng: parseFloat(item.long),
+    //   }
+    //   return data
+    // })
+
+    return { country }
+  },
   data: () => ({
     valid: false,
     form: {
@@ -230,7 +247,7 @@ export default {
       }
       const body = {
         From: form.email,
-        To: 'malvin@member.id',
+        To: 'hamid@pakoakuina.com',
         // Cc: 'string',
         // Bcc: 'string',
         Subject: 'Send Email',
@@ -255,19 +272,13 @@ export default {
         //   },
         // ],
       }
-      const dataHeaders = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-Postmark-Server-Token': '0649124d-6fe8-4094-9571-40007489dc04',
-      }
       const valid = this.$refs.form.validate()
 
       if (valid) {
         try {
           const sendEmail = await this.$axios.$post(
             this.$config.baseURL + '/api/email',
-            body,
-            { headers: dataHeaders }
+            body
           )
           if (sendEmail) {
             this.notification.isOpen = true
