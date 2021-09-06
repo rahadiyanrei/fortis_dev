@@ -195,7 +195,7 @@
     @apply space-y-28;
   }
   &__description {
-    @apply md:w-3/5;
+    @apply md:w-3/5 space-y-12;
   }
   &__action {
     @apply space-y-4;
@@ -296,7 +296,9 @@
 
   &__menu {
     @apply h-full lg:max-w-lg py-8 bg-black text-white;
-    width: 32rem;
+    @screen md {
+      width: 32rem;
+    }
   }
 
   &__filter {

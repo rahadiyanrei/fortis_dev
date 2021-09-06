@@ -16,9 +16,27 @@
                 <span class="font-bold">{{ selectAbout.name }}</span>
               </div>
               <div class="md:flex justify-between space-y-10 md:space-y-0">
-                <p class="about__description">
-                  {{ selectAbout.description }}
-                </p>
+                <div class="about__description">
+                  <p>
+                    {{ selectAbout.description }}
+                  </p>
+                  <template v-if="selectAbout.extendDescription.length">
+                    <div
+                      v-if="
+                        selectAbout.extendDescription[0].type === 'description'
+                      "
+                      class="md:w-5/6 lg:mt-0 md:flex justify-between"
+                    >
+                      <p
+                        v-for="(item, idx3) in selectAbout.extendDescription[0]
+                          .contents"
+                        :key="idx3"
+                        v-html="item.description"
+                      ></p>
+                    </div>
+                  </template>
+                </div>
+
                 <div class="about__action">
                   <div class="about__action-item">
                     <v-btn text outlined elevation="false">
@@ -37,19 +55,6 @@
                   </div>
                 </div>
               </div>
-              <template v-if="selectAbout.extendDescription.length">
-                <div
-                  v-if="selectAbout.extendDescription[0].type === 'description'"
-                  class="w-3/6 mt-0 flex justify-between"
-                >
-                  <p
-                    v-for="(item, idx3) in selectAbout.extendDescription[0]
-                      .contents"
-                    :key="idx3"
-                    v-html="item.description"
-                  ></p>
-                </div>
-              </template>
             </div>
             <template v-if="selectAbout.extendDescription.length">
               <div
@@ -311,12 +316,12 @@ export default {
               },
               {
                 title: '',
-                imageURL: '/about/testing-facilities/drum-test.png',
+                imageURL: '/about/testing-facilities/impact-test.png',
                 description: ``,
               },
               {
                 title: '',
-                imageURL: '/about/testing-facilities/drum-test.png',
+                imageURL: '/about/testing-facilities/tensile-test.png',
                 description: ``,
               },
               {

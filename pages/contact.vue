@@ -203,6 +203,10 @@ export default {
         link: 'https://www.instagram.com/fortiswheels/',
       },
     ],
+    notification: {
+      isOpen: true,
+      message: 'Test',
+    },
     country: ['Indonesia', 'Other'],
   }),
   methods: {
@@ -211,7 +215,8 @@ export default {
         this.$config.imageURL + this.$config.imagePATH + '/images' + filename
       return data
     },
-    submitForm() {
+    async submitForm() {
+      this.notification.isOpen = false
       const form = {
         fullname: this.form.fullname,
         contactType: this.form.contactType,
@@ -225,12 +230,12 @@ export default {
       }
       const body = {
         From: form.email,
-        To: 'alvinharis08@gmail.com',
+        To: 'malvin@member.id',
         // Cc: 'string',
         // Bcc: 'string',
         Subject: 'Send Email',
         // Tag: 'string',
-        HtmlBody: form,
+        HtmlBody: 'Test Email Postmark',
         TextBody: 'Test Send Email',
         // ReplyTo: 'string',
         // TrackOpens: true,
@@ -257,15 +262,25 @@ export default {
       }
       const valid = this.$refs.form.validate()
 
-      console.log(valid)
       if (valid) {
-        const sendEmail = this.$axios.$post(
-          'https://api.postmarkapp.com/email',
-          body,
-          { headers: dataHeaders }
-        )
-        console.log(this.$axios, sendEmail)
-        console.log(this.$refs.form.validate())
+        try {
+          const sendEmail = await this.$axios.$post(
+            this.$config.baseURL + '/api/email',
+            body,
+            { headers: dataHeaders }
+          )
+          if (sendEmail) {
+            this.notification.isOpen = true
+            this.notification.message = 'Thank you, your form has been sent'
+          }
+          console.log(sendEmail)
+        } catch (error) {
+          if (!error.response.status) {
+            this.notification.isOpen = true
+            this.notification.message = error.response.statusText
+          }
+          console.log(error.response)
+        }
       }
     },
   },

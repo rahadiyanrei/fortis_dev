@@ -28,7 +28,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-btn text elevation="false" to="/contact">Contact</v-btn>
+      <v-btn text elevation="false" to="contact">Contact</v-btn>
       <v-btn icon to="/dealer">
         <v-icon>mdi-map-marker-outline</v-icon>
       </v-btn>

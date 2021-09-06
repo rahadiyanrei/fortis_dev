@@ -63,7 +63,7 @@
               fullscreenControl: false,
               styles: mapStyle,
             }"
-            :zoom="7"
+            :zoom="5"
           >
             <GMapMarker
               v-for="location in dealer"

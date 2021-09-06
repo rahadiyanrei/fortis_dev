@@ -1,4 +1,5 @@
 require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -63,6 +64,19 @@ export default {
       },
     ],
   ],
+  router: {
+    scrollBehavior(to, from, savedPosition) {
+      return new Promise((resolve) =>
+        this.app.$once('scrollAfterEnter', () => {
+          if (savedPosition) {
+            return resolve(savedPosition)
+          }
+
+          return resolve({ x: 0, y: 0 })
+        })
+      )
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
