@@ -15,7 +15,7 @@
                 About
                 <span class="font-bold">{{ selectAbout.name }}</span>
               </div>
-              <div class="md:flex justify-between space-y-10 md:space-y-0">
+              <div class="md:flex justify-between space-y-8 md:space-y-0">
                 <div class="about__description">
                   <p>
                     {{ selectAbout.description }}
@@ -25,7 +25,7 @@
                       v-if="
                         selectAbout.extendDescription[0].type === 'description'
                       "
-                      class="md:w-5/6 lg:mt-0 md:flex justify-between"
+                      class="justify-between space-y-10"
                     >
                       <p
                         v-for="(item, idx3) in selectAbout.extendDescription[0]
@@ -65,17 +65,17 @@
                 <template v-if="items.type === 'youtube'">
                   <div class="about__plugin">
                     <div class="about__plugin-title">
-                      Volutpat pretium dictum mauris a placerat vulputate.
+                      {{ items.contents.title }}
                     </div>
                     <div class="about__plugin-content">
-                      <youtube video-id="aM5ijokX9R0" resize />
+                      <youtube :video-id="items.contents.videoId" resize />
                     </div>
                   </div>
                 </template>
                 <template v-if="items.type === 'google-maps'">
                   <div class="about__plugin">
                     <div class="about__plugin-title">
-                      Volutpat pretium dictum mauris a placerat vulputate.
+                      {{ items.contents.title }}
                     </div>
                     <div class="about__plugin-content">
                       <GMap
@@ -83,8 +83,8 @@
                         language="en"
                         :cluster="{ options: { styles: clusterStyle } }"
                         :center="{
-                          lat: locations[0].lat,
-                          lng: locations[0].lng,
+                          lat: items.contents.locations[0].lat,
+                          lng: items.contents.locations[0].lng,
                         }"
                         :options="{
                           fullscreenControl: false,
@@ -93,10 +93,10 @@
                         :zoom="15"
                       >
                         <GMapMarker
-                          v-for="location in locations"
+                          v-for="location in items.contents.locations"
                           :key="location.id"
                           :position="{ lat: location.lat, lng: location.lng }"
-                          @click="currentLocation = location"
+                          @click="items.contents.currentLocation = location"
                         >
                           <GMapInfoWindow :options="{ maxWidth: 300 }">
                             <div class="dealer__map-info">
@@ -170,25 +170,48 @@ export default {
         name: 'Pako Group',
         to: 'company',
         bannerURL: '/about/pako-group/banner.png',
-        description: `Pako Group adalah perusahaan yang bergerak dalam industri komponen otomotif yang menghasilkan wheel rim yang terbuat dari baja dan alumunium untuk kendaraan roda dua dan roda empat. Pako Group mengawali bisnisnya dengan membuat produk OEM untuk customer dari dalam negeri dan luar negeri seperti Malaysia, Jepang, Jerman, Thailand, Hungaria, dan Italia. Perusahaan yang menjadi customer dari Pako Group antara lain Toyota, Daihatsu, Honda, dan lain sebagainya. Sejak tahun 2015, Pako Group mulai merambah ke bidang After Market dengan produknya yang bernama Fortis dan Avantech.`,
+        description: `Pako Group adalah perusahaan yang bergerak dalam industri komponen otomotif yang menghasilkan wheel rim yang terbuat dari baja dan alumunium untuk kendaraan roda dua dan roda empat. Pako Group mengawali bisnisnya dengan membuat produk original equipment manufacturer (OEM) untuk customer dari dalam negeri dan luar negeri seperti Malaysia, Jepang, Jerman, Thailand, Hungaria, dan Italia. Sejak tahun 2015, Pako Group merambah ke bidang wheel aftermarket dengan brand Fortis dan Avantech.`,
         extendDescription: [
           {
-            type: 'youtube',
+            type: 'description',
             contents: [
               {
-                title: 'Volutpat pretium dictum mauris a placerat vulputate.',
-                videoId: 'aM5ijokX9R0',
+                description: `
+                <b>Pakoakuina</b><br/>
+                Pakoakuina Car Wheel & Motorcycle memproduksi alloy wheel untuk OEM dan aftermarket untuk mobil dan motor dengan total annual capacity sebesar 5.400.000 pcs. Perusahaan yang menjadi customer dari Pakoakuina antara lain Toyota, Daihatsu, Lexus, Honda, dan Perodua.
+                `,
+              },
+              {
+                description: `
+                <b>Inkoasku</b><br/>
+                Inkoasku memproduksi steel wheel untuk OEM dan aftermarket dengan annual capacity sebesar 5.000.000 pcs. Perusahaan yang menjadi customer dari Inkoasku antara lain Toyota, Daihatsu, dan Isuzu.
+                `,
               },
             ],
           },
           {
+            type: 'youtube',
+            contents: {
+              title: 'Company Profile',
+              videoId: 'aM5ijokX9R0',
+            },
+          },
+          {
             type: 'google-maps',
-            contents: [
-              {
-                title: 'Volutpat pretium dictum mauris a placerat vulputate.',
-                videoId: 'aM5ijokX9R0',
-              },
-            ],
+            contents: {
+              title: 'Our Location',
+              currentLocation: {},
+              locations: [
+                {
+                  name: 'Pako Group',
+                  email: 'hamid@pakoakuina.com',
+                  phone_number: '+62 21 651 1228',
+                  address: `Jl. Gaya Motor Raya, Sunter II Jakarta Utara - 14330, Indonesia`,
+                  lat: -6.136722215837163,
+                  lng: 106.89021826863029,
+                },
+              ],
+            },
           },
         ],
       },
@@ -200,72 +223,30 @@ export default {
         extendDescription: [
           {
             type: 'card',
+            gridCols: 3,
             contents: [
               {
-                title: 'Drum Test',
-                imageURL: '/about/testing-facilities/drum-test.png',
-                description: `
-                Specification : <br/>
-                • Truck & Bus. Load : Max 9000 Kg<br/>
-                • Passenger car. Load : Max 2500 Kg & 4000 Kg<br/>
-                • Motorcycle Wheel. Max Size : 18:<br/>
-                • Accuracy for Testing Machine<br/>
-                • Testing Improvement Program<br/>
-                `,
+                imageURL: '/about/testing-facilities/image-1.png',
               },
               {
-                title: 'Impact Test',
-                imageURL: '/about/testing-facilities/impact-test.png',
-                description: `
-                Specification :<br/>
-                • Load : Max 1010 Kg<br/>
-                • Passenger car. Load : Max 2500 Kg & 4000 Kg<br/>
-                • Wheel Size : 12” - 20”<br/>
-                • Max Drop Height : 270mm<br/>
-                • Accuracy for Testing Machine<br/>
-                • Testing Improvement Program<br/>
-                `,
+                imageURL: '/about/testing-facilities/image-2.png',
               },
               {
-                title: 'Salt Spray Test',
-                imageURL: '/about/testing-facilities/salt-spray-test.png',
-                description: `
-                Specification :<br/>
-                • Spray Capacity : 1-2 (ml/80cm2/Hr)<br/>
-                • PH : 6,5 - 7,2<br/>
-                • Pressure : 0,098 Mpa (0,07 - 1,67 Mpa)<br/>
-                • Time Test : 24 Hours<br/>
-                `,
+                imageURL: '/about/testing-facilities/image-3.png',
               },
-              {
-                title: 'Moment Life Test',
-                imageURL: '/about/testing-facilities/moment-life-test.png',
-                description: `
-                Specification :<br/>
-                • Load : Max 2000 Kg<br/>
-                • car. Wheel Product. max Size : 20”<br/>
-                • Motorcycle Wheel. Max Size : 18”<br/>
-                • Accuracy for Testing Machine<br/>
-                • Testing Improvement Program<br/>
-                `,
-              },
-              {
-                title: 'Tensile Test',
-                imageURL: '/about/testing-facilities/tensile-test.png',
-                description: `
-                Specification :<br/>
-                -
-                `,
-              },
-              {
-                title: 'Humidity Test',
-                imageURL: '/about/testing-facilities/humidity-test.png',
-                description: `
-                Temperature : 40C<br/>
-                Humidty : 85% RH<br/>
-                Time Test : 120 Hours<br/>
-                `,
-              },
+              // {
+              //   title: 'Impact Test',
+              //   imageURL: '/about/testing-facilities/impact-test.png',
+              //   description: `
+              //   Specification :<br/>
+              //   • Load : Max 1010 Kg<br/>
+              //   • Passenger car. Load : Max 2500 Kg & 4000 Kg<br/>
+              //   • Wheel Size : 12” - 20”<br/>
+              //   • Max Drop Height : 270mm<br/>
+              //   • Accuracy for Testing Machine<br/>
+              //   • Testing Improvement Program<br/>
+              //   `,
+              // },
             ],
           },
         ],
@@ -291,42 +272,25 @@ export default {
                 7. Roll Forming & Expander Die - Steel Wheel Rim<br/>
                 `,
               },
-              {
-                description: `
-                Lathe Machine <br/>
-                CNC Milling <br/>
-                Feeler <br/>
-                Conture Machine <br/>
-                Cylindrical Machine <br/>
-                Manual Milling <br/>
-                Drilling Machine <br/>
-                Cutting Machine (Wire cut) <br/>
-                `,
-              },
             ],
           },
           {
             type: 'card',
-            gridCols: 2,
+            gridCols: 3,
             contents: [
               {
                 title: '',
-                imageURL: '/about/testing-facilities/drum-test.png',
+                imageURL: '/about/die-shop/image-1.png',
                 description: ``,
               },
               {
                 title: '',
-                imageURL: '/about/testing-facilities/impact-test.png',
+                imageURL: '/about/die-shop/image-2.png',
                 description: ``,
               },
               {
                 title: '',
-                imageURL: '/about/testing-facilities/tensile-test.png',
-                description: ``,
-              },
-              {
-                title: '',
-                imageURL: '/about/testing-facilities/drum-test.png',
+                imageURL: '/about/die-shop/image-3.png',
                 description: ``,
               },
             ],
@@ -343,21 +307,21 @@ export default {
             type: 'card',
             contents: [
               {
-                title: 'Styling',
-                imageURL: '/about/testing-facilities/drum-test.png',
-                description: `Kami merealisasikan ide melalui sebuah konsep desain yang diwujudkan dalam sajian gambar rendering baik 2D maupun 3D.
+                title: '',
+                imageURL: '/about/p-pro/image-1.png',
+                description: `
                 `,
               },
               {
-                title: 'Engineering',
-                imageURL: '/about/testing-facilities/impact-test.png',
-                description: `Kami mempersiapkan 3D drawing dan 2D drawing sebagai langkah lanjutan untuk kebutuhan mass production.
+                title: '',
+                imageURL: '/about/p-pro/image-2.png',
+                description: `
                 `,
               },
               {
-                title: 'Prototyping',
-                imageURL: '/about/testing-facilities/salt-spray-test.png',
-                description: `-
+                title: '',
+                imageURL: '/about/p-pro/image-3.png',
+                description: `
                 `,
               },
             ],
@@ -365,17 +329,7 @@ export default {
         ],
       },
     ],
-    currentLocation: {},
-    locations: [
-      {
-        name: 'Pako Group',
-        email: 'hamid@pakoakuina.com',
-        phone_number: '+62 21 651 1228',
-        address: `Jl. Gaya Motor Raya, Sunter II Jakarta Utara - 14330, Indonesia`,
-        lat: -6.136722215837163,
-        lng: 106.89021826863029,
-      },
-    ],
+
     clusterStyle: [
       {
         url: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png',
