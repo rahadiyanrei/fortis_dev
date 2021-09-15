@@ -87,7 +87,7 @@ export default {
       },
 
       {
-        logoURL: '/brand/PAKO-Logo.svg',
+        logoURL: '/brand/Inko-Logo.svg',
       },
     ],
     navigation: [
