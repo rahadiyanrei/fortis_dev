@@ -247,10 +247,10 @@ export default {
       }
       const body = {
         From: form.email,
-        To: 'hamid@pakoakuina.com',
+        To: 'luthfillah.amin@pakoakuina.com',
         // Cc: 'string',
         // Bcc: 'string',
-        Subject: 'Send Email',
+        Subject: 'Test Send Email',
         // Tag: 'string',
         HtmlBody: 'Test Email Postmark',
         TextBody: 'Test Send Email',
@@ -272,13 +272,19 @@ export default {
         //   },
         // ],
       }
+      const dataHeaders = {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Postmark-Server-Token': '4da461ab-ce9e-4ec3-8c03-c52474f3e5a8',
+      }
       const valid = this.$refs.form.validate()
 
       if (valid) {
         try {
           const sendEmail = await this.$axios.$post(
             this.$config.baseURL + '/api/email',
-            body
+            body,
+            { headers: dataHeaders }
           )
           if (sendEmail) {
             this.notification.isOpen = true
