@@ -12,9 +12,11 @@
             </v-btn>
             <div class="wheels-detail__gallery">
               <lingallery
-                :iid.sync="currentId"
+                ref="gallery"
+                :start-image="currentId"
                 :width="500"
                 :height="500"
+                accent-color="rgba(185, 28, 28)"
                 :mobile-height="340"
                 :show-controls="false"
                 :items="gallery"
@@ -31,6 +33,7 @@
                   :key="idx2"
                   class="wheel__color-item"
                   :style="{ 'background-color': color.color_hex }"
+                  @click="handleIdChange(idx2)"
                 ></div>
               </div>
             </div>
@@ -119,7 +122,7 @@ export default {
 
     const gallery = _.map(wheel.colors, (item) => {
       return {
-        id: item.wheel_id,
+        id: item.id,
         src: item.image[0].image,
         thumbnail: item.image[0].image,
       }
@@ -130,9 +133,18 @@ export default {
     return { wheel, gallery }
   },
   data: () => ({
-    currentId: null,
+    currentId: 0,
   }),
   computed: {},
+  methods: {
+    handleIdChange(idx) {
+      if (this.$refs.gallery.currentIndex !== idx) {
+        console.log(this.$refs.gallery)
+        console.log(this.$refs.gallery.pickImage(idx))
+        this.$refs.gallery.currentIndex = idx
+      }
+    },
+  },
 }
 </script>
 <style></style>

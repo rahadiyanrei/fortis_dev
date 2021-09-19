@@ -390,7 +390,6 @@
 
       .v-btn {
         @apply absolute top-4 md:top-8;
-        padding: 0 !important;
       }
       .lingallery {
         @apply space-y-4;
@@ -437,6 +436,7 @@
     }
 
     &__colors {
+      @apply flex gap-3;
       .wheel__color-item {
         @apply h-7 w-7 cursor-pointer;
       }
