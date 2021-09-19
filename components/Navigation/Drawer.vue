@@ -6,7 +6,9 @@
     width="100%"
   >
     <v-list nav dense>
-      <v-list-item class="nav__menu-mobile__item" link>Wheels</v-list-item>
+      <v-list-item class="nav__menu-mobile__item" link to="/wheels">
+        Wheels
+      </v-list-item>
 
       <v-list-item class="nav__menu-mobile__item" link>Gallery</v-list-item>
 

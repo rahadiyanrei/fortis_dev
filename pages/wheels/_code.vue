@@ -93,7 +93,13 @@
                   View Vehicle Gallery
                 </v-btn>
               </div>
-              <v-btn large block dark class="wheels-detail__button">
+              <v-btn
+                large
+                block
+                dark
+                class="wheels-detail__button"
+                to="/dealer"
+              >
                 Find A Dealer
               </v-btn>
             </div>
