@@ -32,6 +32,7 @@
                   v-for="(color, idx2) in wheel.colors"
                   :key="idx2"
                   class="wheel__color-item"
+                  :class="{ active: currentColorIdx === idx2 }"
                   :style="{ 'background-color': color.color_hex }"
                   @click="handleIdChange(idx2)"
                 ></div>
@@ -133,15 +134,15 @@ export default {
     return { wheel, gallery }
   },
   data: () => ({
-    currentId: 0,
+    currentColorIdx: 0,
   }),
   computed: {},
   methods: {
     handleIdChange(idx) {
       if (this.$refs.gallery.currentIndex !== idx) {
-        console.log(this.$refs.gallery)
-        console.log(this.$refs.gallery.pickImage(idx))
+        this.currentColorIdx = idx
         this.$refs.gallery.currentIndex = idx
+        this.$refs.gallery.pickImage(idx)
       }
     },
   },

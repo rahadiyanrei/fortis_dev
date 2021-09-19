@@ -436,9 +436,13 @@
     }
 
     &__colors {
-      @apply flex gap-3;
+      @apply flex items-center gap-3;
       .wheel__color-item {
         @apply h-7 w-7 cursor-pointer;
+
+        // &.active {
+        //   @apply border-4 border-double;
+        // }
       }
     }
 
