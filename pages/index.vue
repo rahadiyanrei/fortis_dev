@@ -96,7 +96,12 @@
           <div class="carousel__wheel lg:mt-20">
             <swiper ref="mySwiper" :options="swiperOptions">
               <swiper-slide v-for="(items, idx) in newArrival" :key="idx">
-                <v-card class="wheel cursor-pointer" flat color="transparent">
+                <v-card
+                  class="wheel cursor-pointer"
+                  flat
+                  color="transparent"
+                  :to="`/wheels/${items.uuid}`"
+                >
                   <div class="wheel__head">
                     <v-img
                       :src="items.image"
@@ -136,7 +141,7 @@
             </swiper>
           </div>
           <div class="home__wheel-action mt-16">
-            <v-btn dark large>View All Wheel</v-btn>
+            <v-btn dark large to="/wheels">View All Wheel</v-btn>
           </div>
         </div>
         <div class="home__gallery">
@@ -323,7 +328,9 @@ export default {
       .then((res) => res.data)
 
     const newArrival = await $axios
-      .$get(`${baseURL}/api/wheel/new_arrival`)
+      .$get(`${baseURL}/api/wheel/new_arrival`, {
+        params: { limit: 10, offset: 0 },
+      })
       .then((res) => res.data)
 
     return { banners, newArrival }
