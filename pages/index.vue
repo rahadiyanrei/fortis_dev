@@ -95,38 +95,35 @@
           </div>
           <div class="carousel__wheel lg:mt-20">
             <swiper ref="mySwiper" :options="swiperOptions">
-              <swiper-slide v-for="(items, idx) in wheels" :key="idx">
+              <swiper-slide v-for="(items, idx) in newArrival" :key="idx">
                 <v-card class="wheel cursor-pointer" flat color="transparent">
                   <div class="wheel__head">
                     <v-img
-                      :src="getImageURL(items.imageURL)"
+                      :src="items.image"
                       class="wheel__image"
                       contain
                     ></v-img>
                     <div class="wheel__color">
                       <div
-                        v-for="(color, idx2) in items.variant.colors"
+                        v-for="(color, idx2) in items.colors"
                         :key="idx2"
                         class="wheel__color-item"
-                        :style="{ 'background-color': color.colorHEX }"
+                        :style="{ 'background-color': color.color_hex }"
                       ></div>
                     </div>
                   </div>
                   <div class="wheel__body">
                     <v-card-title class="wheel__title">
-                      {{ items.title }}
+                      {{ items.brand }}
                     </v-card-title>
                     <v-card-subtitle class="wheel__subtitle">
-                      {{ items.subtitle }}
+                      {{ items.name }}
                     </v-card-subtitle>
                     <v-card-text class="wheel__description">
-                      <div
-                        v-for="(size, idx3) in items.variant.size"
-                        :key="idx3"
-                      >
-                        {{ size }}
+                      <div v-for="(size, idx3) in items.size" :key="idx3">
+                        {{ size.diamter }}
                         <span
-                          v-if="idx3 !== items.variant.size.length - 1"
+                          v-if="idx3 !== items.size.length - 1"
                           class="pr-1"
                         >
                           |
@@ -325,7 +322,11 @@ export default {
       .$get(`${baseURL}/api/banner`)
       .then((res) => res.data)
 
-    return { banners }
+    const newArrival = await $axios
+      .$get(`${baseURL}/api/wheel/new_arrival`)
+      .then((res) => res.data)
+
+    return { banners, newArrival }
   },
   data: () => ({
     model: 0,
