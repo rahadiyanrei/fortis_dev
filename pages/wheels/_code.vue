@@ -90,10 +90,10 @@
             </div>
             <div class="wheels-detail__action">
               <div class="wheels-detail__action-group">
-                <v-btn large outlined class="wheels-detail__button">
+                <v-btn block large outlined class="wheels-detail__button">
                   View Wheel Gallery
                 </v-btn>
-                <v-btn large outlined class="wheels-detail__button">
+                <v-btn block large outlined class="wheels-detail__button">
                   View Vehicle Gallery
                 </v-btn>
               </div>

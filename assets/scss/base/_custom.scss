@@ -393,6 +393,9 @@
       }
       .lingallery {
         @apply space-y-4;
+        &_thumbnails_content {
+          @apply space-x-4;
+        }
         &_thumbnails_content_elem {
           img {
             height: 7rem;
@@ -413,15 +416,15 @@
     &__action {
       @apply space-y-8;
       &-group {
-        @apply md:flex space-y-8 md:space-y-0 md:space-x-8;
-        .v-btn {
-          @apply w-full md:w-min;
-        }
+        @apply md:grid grid-cols-2 gap-8 space-y-8 md:space-y-0;
+        // .v-btn {
+        //   @apply w-full md:w-min;
+        // }
       }
     }
 
     &__content {
-      @apply my-10 space-y-8;
+      @apply w-full md:w-2/5 my-10 space-y-8;
     }
 
     &__features {
