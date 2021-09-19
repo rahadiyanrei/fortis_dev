@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app flat elevate-on-scroll class="nav" color="white">
     <div class="nav__menu-left desktop">
-      <v-btn text elevation="false">Wheels</v-btn>
+      <v-btn text elevation="false" to="/wheels">Wheels</v-btn>
       <v-btn text elevation="false">Gallery</v-btn>
       <v-btn text elevation="false">Blog</v-btn>
     </div>

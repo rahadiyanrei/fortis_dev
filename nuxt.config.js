@@ -1,5 +1,5 @@
+import webpack from 'webpack'
 require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
-
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -32,6 +32,7 @@ export default {
   plugins: [
     { src: '@/plugins/vue-awesome-swiper', mode: 'client' },
     { src: '@/plugins/vue-youtube', mode: 'client' },
+    { src: '@/plugins/lingallery', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -98,5 +99,12 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        // global modules
+        _: 'lodash',
+      }),
+    ],
+  },
 }

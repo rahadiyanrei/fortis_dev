@@ -1,16 +1,16 @@
 .wheel {
-  // @apply w-max;
+  @apply p-4;
   &__title {
     &.v-card {
       &__title {
-        @apply justify-center text-base font-bold uppercase;
+        @apply text-center justify-center text-base font-bold uppercase whitespace-nowrap;
       }
     }
   }
   &__subtitle {
     &.v-card {
       &__subtitle {
-        @apply text-sm pb-2;
+        @apply uppercase text-center text-sm pb-2;
       }
     }
   }
@@ -25,9 +25,9 @@
     @apply h-64 w-64 m-auto;
   }
   &__color {
-    @apply flex items-center justify-center space-x-3;
+    @apply flex items-center justify-center space-x-3 pt-2;
     &-item {
-      @apply h-5 w-5 rounded-full shadow;
+      @apply h-5 w-5 rounded-full shadow-md border;
     }
   }
 }
