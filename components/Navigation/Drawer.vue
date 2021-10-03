@@ -10,7 +10,38 @@
         Wheels
       </v-list-item>
 
-      <v-list-item class="nav__menu-mobile__item" link>Gallery</v-list-item>
+      <v-list-group :value="false">
+        <template #activator>
+          <v-list-item-content class="nav__menu-mobile__item">
+            <div
+              class="
+                font-medium
+                justify-start
+                text-sm
+                tracking-widest
+                uppercase
+              "
+            >
+              Gallery
+            </div>
+          </v-list-item-content>
+        </template>
+
+        <v-list-item v-for="(item, i) in gallerys" :key="i" link :to="item.to">
+          <v-list-item-title
+            class="
+              font-medium
+              justify-start
+              pl-4
+              text-sm
+              tracking-widest
+              uppercase
+            "
+            :to="item.to"
+            v-text="item.name"
+          ></v-list-item-title>
+        </v-list-item>
+      </v-list-group>
 
       <v-list-item class="nav__menu-mobile__item" link>Blog</v-list-item>
 
@@ -33,7 +64,7 @@
           </v-list-item-content>
         </template>
 
-        <v-list-item v-for="(item, i) in cruds" :key="i" link :to="item.to">
+        <v-list-item v-for="(item, i) in abouts" :key="i" link :to="item.to">
           <v-list-item-title
             class="
               font-medium
@@ -64,7 +95,7 @@ export default {
     },
   },
   data: () => ({
-    cruds: [
+    abouts: [
       {
         name: 'Company',
         to: '/about/company',
@@ -80,6 +111,16 @@ export default {
       {
         name: 'P-Pro',
         to: '/about/p-pro',
+      },
+    ],
+    gallerys: [
+      {
+        name: 'Vehicle',
+        to: '/gallery/vehicle',
+      },
+      {
+        name: 'Wheel',
+        to: '/gallery/wheel',
       },
     ],
   }),

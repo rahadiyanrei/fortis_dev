@@ -458,3 +458,109 @@
     }
   }
 }
+
+.gallery {
+  @apply relative md:mt-20 pb-20 lg:pb-0;
+  &-wrapper {
+    @apply m-4 space-y-20;
+  }
+
+  &__head {
+    @apply md:flex items-center justify-between space-y-12 md:space-y-0;
+  }
+
+  &__filter {
+    @apply md:w-2/6 md:flex justify-end gap-4;
+  }
+
+  &__list {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-4;
+  }
+
+  &__empty {
+    @apply flex items-center h-40 justify-center;
+  }
+
+  &-detail {
+    &__banner {
+      @apply absolute w-full top-0;
+      filter: brightness(0.3);
+    }
+
+    &__wrapper {
+      @apply relative my-8 md:my-20;
+    }
+
+    &__content {
+      @apply space-y-16 py-16;
+    }
+
+    &__head {
+      @apply text-center md:text-white;
+    }
+
+    &__body {
+      @apply max-w-screen-xl space-y-20 md:space-y-40 m-auto;
+    }
+
+    &__title {
+      @apply text-4xl lg:text-5xl font-semibold tracking-wider uppercase;
+    }
+
+    &__subtitle {
+      @apply text-lg text-red-700 font-semibold uppercase;
+    }
+
+    .lingallery_thumbnails_content {
+      @apply grid grid-cols-2 md:block pt-4 md:space-x-4 gap-4 md:gap-0;
+      &_elem {
+        img {
+          width: 180px;
+        }
+      }
+    }
+
+    &__card {
+      @apply flex bg-gray-300;
+      height: 100% !important;
+      @screen md {
+        height: 350px !important;
+      }
+
+      &-image {
+        min-width: 300px !important;
+        width: 300px !important;
+        height: 300px !important;
+      }
+
+      .v-list-item {
+        display: block !important;
+        @screen md {
+          display: flex !important;
+        }
+      }
+
+      .v-card__actions {
+        @apply space-y-4 md:space-y-0 my-6 md:my-0;
+        display: block !important;
+        @screen md {
+          display: flex !important;
+        }
+        .v-btn {
+          margin-left: 0 !important;
+        }
+      }
+
+      &-body {
+        &.v-list-item__content {
+          @apply p-4 md:p-8 my-8 md:my-20 md:mx-8 shadow-lg;
+          flex: auto !important;
+        }
+      }
+    }
+
+    .wheel__color {
+      @apply justify-start;
+    }
+  }
+}

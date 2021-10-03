@@ -2,7 +2,16 @@
   <v-app-bar app flat elevate-on-scroll class="nav" color="white">
     <div class="nav__menu-left desktop">
       <v-btn text elevation="false" to="/wheels">Wheels</v-btn>
-      <v-btn text elevation="false">Gallery</v-btn>
+      <v-menu offset-y rounded>
+        <template #activator="{ on, attrs }">
+          <v-btn text elevation="false" v-bind="attrs" v-on="on">Gallery</v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="(item, index) in gallerys" :key="index">
+            <v-btn text elevation="false" :to="item.to">{{ item.name }}</v-btn>
+          </v-list-item>
+        </v-list>
+      </v-menu>
       <v-btn text elevation="false">Blog</v-btn>
     </div>
 
@@ -65,6 +74,16 @@ export default {
       {
         name: 'P-Pro',
         to: '/about/p-pro',
+      },
+    ],
+    gallerys: [
+      {
+        name: 'Vehicle',
+        to: '/gallery/vehicle',
+      },
+      {
+        name: 'Wheel',
+        to: '/gallery/wheel',
       },
     ],
   }),
