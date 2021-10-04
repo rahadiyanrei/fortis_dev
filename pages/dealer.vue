@@ -5,7 +5,7 @@
         <div class="dealer__menu">
           <div class="dealer__filter">
             <v-autocomplete
-              v-model="dealerFilter"
+              v-model="query['province_id']"
               :items="province"
               label="Lokasi Dealer"
               color="#ffffff"
@@ -14,7 +14,6 @@
               dark
               outlined
               clearable
-              @change="handleFilterDealer"
             ></v-autocomplete>
           </div>
           <div class="dealer__list">
@@ -25,9 +24,9 @@
               ></v-progress-circular>
             </div>
             <template v-else>
-              <template v-if="filterDealer.length">
+              <template v-if="dealers.length">
                 <div
-                  v-for="(item, idx) in filterDealer"
+                  v-for="(item, idx) in dealers"
                   :key="idx"
                   class="dealer__item"
                   @click="selectLocation(item)"
@@ -98,6 +97,7 @@
   </section>
 </template>
 <script>
+import _ from 'lodash'
 export default {
   async asyncData({ $axios, $config: { baseURL } }) {
     const province = await $axios
@@ -283,15 +283,105 @@ export default {
     ],
     province: [],
     filterDealer: [],
+    dealers: [],
+    dealerMap: [],
+    query: {},
   }),
-  created() {},
+  computed: {
+    datatableModels() {
+      const datatableModels = []
+      for (const [model] of Object.entries(this.defaultDatatableQuery)) {
+        datatableModels.push(model)
+      }
+      return datatableModels
+    },
+    defaultDatatableQuery() {
+      return {
+        wheel_id: 0,
+        province_id: 0,
+      }
+    },
+  },
+  watch: {
+    query: {
+      handler(val, oldVal) {
+        console.log('watcher')
+        const query = { ...this.query }
+        for (const [model, value] of Object.entries(query)) {
+          if (value === '') {
+            delete query[model]
+          }
+        }
+        this.$router.replace({
+          query,
+        })
+        console.log(query)
+        this.getData()
+      },
+      deep: true,
+    },
+    $route(to, from) {
+      console.log('route')
+      this.buildQuery()
+    },
+  },
+  created() {
+    this.buildQuery()
+  },
   methods: {
+    async getData() {
+      console.log('get Data')
+      const query = { ...this.query }
+      this.loading = true
+      this.data = []
+      try {
+        const responseBody = await this.$axios
+          .$get(`${this.$config.baseURL}/api/dealer`, {
+            params: query,
+          })
+          .then((res) => res)
+
+        this.dealers = responseBody.data
+        this.dealerMap = _.map(this.dealers, (item) => {
+          item.lat = parseFloat(item.lat)
+          item.long = parseFloat(item.long)
+        })
+      } finally {
+        this.loading = false
+      }
+    },
+    buildQuery() {
+      console.log('buildQuery')
+      const models = [...this.datatableModels]
+      let query = {
+        ...this.defaultDatatableQuery,
+        ...this.defaultGeneratorQuery,
+      }
+      let isManipulate = false
+      if (Object.keys(this.$route.query).length > 0) {
+        for (const [model] of Object.entries(this.$route.query)) {
+          if (!models.includes(model)) {
+            delete this.$route.query[model]
+            isManipulate = true
+          }
+        }
+        query = Object.assign(query, this.$route.query)
+      }
+      if (
+        Object.keys(this.query).length < 1 ||
+        Object.keys(this.$route.query).length < 1 ||
+        isManipulate
+      ) {
+        this.query = query
+      }
+    },
     selectLocation(location) {
       if (location.uuid) {
         this.openedMarkerID = location.uuid
       } else {
         this.openedMarkerID = location
       }
+      console.log(location, this.$data)
       this.currentLocation = location
       this.$refs.gMap.map.setCenter({ lat: location.lat, lng: location.long })
       this.$refs.gMap.map.panTo({ lat: location.lat, lng: location.long })

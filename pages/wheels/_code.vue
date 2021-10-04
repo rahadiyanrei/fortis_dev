@@ -41,10 +41,22 @@
             <div class="wheels-detail__body">
               <div class="wheels-detail__features">
                 <div class="wheels-detail__features-item">
-                  Diameter : 19”, 24”
+                  Diameter :
+                  <span v-for="(item, idx3) in wheel.sizes" :key="idx3">
+                    {{ item.diameter }}”
+                  </span>
+                  <span v-if="idx3 === wheel.sizes.length - 1" class="pr-1">
+                    ,
+                  </span>
                 </div>
                 <div class="wheels-detail__features-item">
-                  Widths : 8.5”, 12”
+                  Widths :
+                  <span v-for="(item, idx3) in wheel.sizes" :key="idx3">
+                    {{ item.option_width }}
+                  </span>
+                  <span v-if="idx3 === wheel.sizes.length - 1" class="pr-1">
+                    |
+                  </span>
                 </div>
                 <div class="wheels-detail__features-item">
                   PCD : {{ wheel.pcd }}
@@ -102,7 +114,7 @@
                 block
                 dark
                 class="wheels-detail__button"
-                to="/dealer"
+                :to="`/dealer?wheel_id=${wheel.id}`"
               >
                 Find A Dealer
               </v-btn>
