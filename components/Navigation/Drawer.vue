@@ -43,7 +43,9 @@
         </v-list-item>
       </v-list-group>
 
-      <v-list-item class="nav__menu-mobile__item" link>Blog</v-list-item>
+      <v-list-item class="nav__menu-mobile__item" link to="/blog">
+        Blog
+      </v-list-item>
 
       <v-list-item class="nav__menu-mobile__item" link>Apparel</v-list-item>
 

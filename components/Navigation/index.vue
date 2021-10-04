@@ -12,7 +12,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-btn text elevation="false">Blog</v-btn>
+      <v-btn text elevation="false" to="/blog">Blog</v-btn>
     </div>
 
     <v-spacer class="desktop" />

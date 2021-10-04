@@ -33,6 +33,7 @@ export default {
     { src: '@/plugins/vue-awesome-swiper', mode: 'client' },
     { src: '@/plugins/vue-youtube', mode: 'client' },
     { src: '@/plugins/lingallery', mode: 'client' },
+    { src: '@/plugins/utils/filters/common.filter.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
