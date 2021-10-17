@@ -4,7 +4,7 @@
       <div class="main__container">
         <div class="product-wrapper">
           <div class="product__category desktop">
-            <div class="product__category-title">Category</div>
+            <div class="product__category-title">Shop By Categories</div>
             <div class="product__category-list">
               <div class="product__category-item">
                 <v-checkbox
@@ -12,8 +12,8 @@
                   :key="idx"
                   v-model="category"
                   dense
-                  :label="item.label"
-                  :value="item.value"
+                  :label="item.name"
+                  :value="item.id"
                   color="rgba(185, 28, 28)"
                   @change="handleCategories"
                 ></v-checkbox>
@@ -23,7 +23,7 @@
           <div class="product__content">
             <div class="product__head">
               <div class="main-title border-accent left">
-                Wheel
+                All
                 <span class="font-bold">Product</span>
               </div>
               <div class="product__sort">
@@ -59,49 +59,27 @@
             <div class="product__body">
               <div class="product__list">
                 <div
-                  v-for="(items, idx) in wheels"
+                  v-for="(items, idx) in products"
                   :key="idx"
                   class="product__item"
                 >
                   <v-card
-                    class="wheel cursor-pointer"
+                    class="product cursor-pointer"
                     flat
                     color="transparent"
-                    :to="`/wheels/${items.uuid}`"
+                    :to="`/apparel/${items.uuid}`"
                   >
-                    <div class="wheel__head">
+                    <div class="product__head">
                       <v-img
-                        :src="items.image"
-                        class="wheel__image"
+                        :src="items.image_thumbnail"
+                        class="product__image"
                         contain
                       ></v-img>
-                      <div class="wheel__color">
-                        <div
-                          v-for="(color, idx2) in items.colors"
-                          :key="idx2"
-                          class="wheel__color-item"
-                          :style="{ 'background-color': color.color_hex }"
-                        ></div>
-                      </div>
                     </div>
-                    <div class="wheel__body">
-                      <v-card-title class="wheel__title">
+                    <div class="product__body">
+                      <v-card-title class="product__title">
                         {{ items.name }}
                       </v-card-title>
-                      <v-card-subtitle class="wheel__subtitle">
-                        {{ items.brand }}
-                      </v-card-subtitle>
-                      <v-card-text class="wheel__description">
-                        <div v-for="(size, idx3) in items.sizes" :key="idx3">
-                          {{ size.diameter }}"
-                          <span
-                            v-if="idx3 !== items.sizes.length - 1"
-                            class="pr-1"
-                          >
-                            |
-                          </span>
-                        </div>
-                      </v-card-text>
                     </div>
                   </v-card>
                 </div>
@@ -123,48 +101,22 @@
 </template>
 <script>
 export default {
-  // async asyncData({ $axios, $config: { baseURL } }) {
-  //   const wheels = await $axios
-  //     .$get(`${baseURL}/api/wheel/list`)
-  //     .then((res) => res.data)
+  async asyncData({ $axios, $config: { baseURL } }) {
+    const categories = await $axios
+      .$get(`${baseURL}/api/apparel_category/dropdown`)
+      .then((res) => res.data)
 
-  //   return { wheels }
-  // },
+    return { categories }
+  },
   data: () => ({
     titleWheel: [],
-    category: 'all-wheels',
+    category: 0,
     filter: null,
     page: 0,
     limit: 0,
     totalData: 0,
     query: {},
-    wheels: [],
-    categories: [
-      {
-        label: 'All Wheels',
-        value: 'all-wheels',
-      },
-      {
-        label: 'New Release',
-        value: 'new-release',
-      },
-      {
-        label: 'Pako',
-        value: 'pako',
-      },
-      {
-        label: 'Inko',
-        value: 'inko',
-      },
-      {
-        label: 'Fortis',
-        value: 'fortis',
-      },
-      {
-        label: 'Avantech',
-        value: 'avantech',
-      },
-    ],
+    products: [],
     sorts: [
       {
         label: 'A to Z',
@@ -224,10 +176,9 @@ export default {
       return {
         orderBy: 'created_at',
         orderType: 'desc',
-        brand: null,
+        apparel_category_id: null,
         limit: 12,
         offset: 0,
-        newRelease: 0,
       }
     },
     selectCategory() {
@@ -270,12 +221,12 @@ export default {
       this.data = []
       try {
         const responseBody = await this.$axios
-          .$get(`${this.$config.baseURL}/api/wheel/list`, {
+          .$get(`${this.$config.baseURL}/api/apparel`, {
             params: query,
           })
           .then((res) => res)
 
-        this.wheels = responseBody.data
+        this.products = responseBody.data
         this.totalData = responseBody.count
         this.page =
           Math.ceil((Number(query.offset) - 1) / Number(query.limit)) + 1
@@ -324,19 +275,8 @@ export default {
       return data
     },
     handleCategories() {
-      if (this.category === 'new-release') {
-        this.query.brand = null
-        this.query.newRelease = 1
-        this.query.offset = 0
-      } else if (this.category === 'all-wheels') {
-        this.query.brand = null
-        this.query.newRelease = 0
-        this.query.offset = 0
-      } else {
-        this.query.brand = this.category
-        this.query.newRelease = 0
-        this.query.offset = 0
-      }
+      this.query.apparel_category_id = this.category
+      this.query.offset = 0
     },
     handleFilterWheel() {
       const data = this.sorts.find((item) => item.label === this.filter)

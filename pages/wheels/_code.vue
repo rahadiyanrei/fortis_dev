@@ -1,16 +1,16 @@
 <template>
   <section class="main__section">
-    <div class="wheels-detail">
+    <div class="product-detail">
       <div class="main__container">
-        <div class="wheels-detail__wrapper">
-          <div class="wheels-detail__preview">
+        <div class="product-detail__wrapper">
+          <div class="product-detail__preview">
             <v-btn plain to="/wheels">
-              <v-subheader class="wheels-detail__navigation">
+              <v-subheader class="product-detail__navigation">
                 <v-icon class="mr-4">mdi-chevron-left</v-icon>
                 Back to Product List
               </v-subheader>
             </v-btn>
-            <div class="wheels-detail__gallery">
+            <div class="product-detail__gallery">
               <lingallery
                 ref="gallery"
                 :start-image="currentId"
@@ -23,11 +23,11 @@
               />
             </div>
           </div>
-          <div class="wheels-detail__content">
-            <div class="wheels-detail__head">
-              <div class="wheels-detail__title">{{ wheel.brand }}</div>
-              <div class="wheels-detail__name">{{ wheel.name }}</div>
-              <div class="wheels-detail__colors">
+          <div class="product-detail__content">
+            <div class="product-detail__head">
+              <div class="product-detail__title">{{ wheel.brand }}</div>
+              <div class="product-detail__name">{{ wheel.name }}</div>
+              <div class="product-detail__colors">
                 <div
                   v-for="(color, idx2) in wheel.colors"
                   :key="idx2"
@@ -38,9 +38,9 @@
                 ></div>
               </div>
             </div>
-            <div class="wheels-detail__body">
-              <div class="wheels-detail__features">
-                <div class="wheels-detail__features-item">
+            <div class="product-detail__body">
+              <div class="product-detail__features">
+                <div class="product-detail__features-item">
                   Diameter :
                   <span v-for="(item, idx3) in wheel.sizes" :key="idx3">
                     {{ item.diameter }}”
@@ -49,7 +49,7 @@
                     ,
                   </span>
                 </div>
-                <div class="wheels-detail__features-item">
+                <div class="product-detail__features-item">
                   Widths :
                   <span v-for="(item, idx3) in wheel.sizes" :key="idx3">
                     {{ item.option_width }}
@@ -58,17 +58,17 @@
                     |
                   </span>
                 </div>
-                <div class="wheels-detail__features-item">
+                <div class="product-detail__features-item">
                   PCD : {{ wheel.pcd }}
                 </div>
-                <div class="wheels-detail__features-item">
+                <div class="product-detail__features-item">
                   ET : {{ wheel.et }}
                 </div>
-                <div class="wheels-detail__features-item">
+                <div class="product-detail__features-item">
                   Hub : {{ wheel.hub }}
                 </div>
               </div>
-              <div class="wheels-detail__panels">
+              <div class="product-detail__panels">
                 <v-expansion-panels flat>
                   <v-expansion-panel>
                     <v-expansion-panel-header>
@@ -78,7 +78,7 @@
                       <div
                         v-for="(size, idx) in wheel.sizes"
                         :key="idx"
-                        class="wheels-detail__panels-text"
+                        class="product-detail__panels-text"
                       >
                         <div class="text-lg font-bold">
                           {{ size.diameter }}”
@@ -100,12 +100,12 @@
                 </v-expansion-panels>
               </div>
             </div>
-            <div class="wheels-detail__action">
-              <div class="wheels-detail__action-group">
-                <v-btn block large outlined class="wheels-detail__button">
+            <div class="product-detail__action">
+              <div class="product-detail__action-group">
+                <v-btn block large outlined class="product-detail__button">
                   View Wheel Gallery
                 </v-btn>
-                <v-btn block large outlined class="wheels-detail__button">
+                <v-btn block large outlined class="product-detail__button">
                   View Vehicle Gallery
                 </v-btn>
               </div>
@@ -113,7 +113,7 @@
                 large
                 block
                 dark
-                class="wheels-detail__button"
+                class="product-detail__button"
                 :to="`/dealer?wheel_id=${wheel.id}`"
               >
                 Find A Dealer

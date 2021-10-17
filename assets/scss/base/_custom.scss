@@ -38,7 +38,7 @@
 .home {
   &__gallery,
   &__blog,
-  &__wheel {
+  &__product {
     @apply py-20;
     &-body {
       @apply grid grid-cols-1 md:grid-cols-2 gap-8;
@@ -158,7 +158,7 @@
     }
   }
 
-  &__wheel {
+  &__product {
     .border-accent {
       &::after {
         @apply content-end mx-0;
@@ -167,7 +167,7 @@
     @apply text-center;
 
     .carousel {
-      &__wheel {
+      &__product {
         &-navigation {
           &__button {
             &.v-btn {
@@ -344,7 +344,7 @@
   }
 }
 
-.wheels {
+.product {
   @apply relative md:mt-20 pb-20 lg:pb-0;
   &-wrapper {
     @apply md:flex justify-center m-4 gap-40;
@@ -374,11 +374,13 @@
   &__sort {
     @apply md:w-1/5;
   }
-
   &-detail {
     @apply my-12 md:my-16;
     &__wrapper {
-      @apply md:flex justify-around;
+      @apply grid justify-items-center lg:justify-between lg:mx-28 lg:gap-40;
+      @screen lg {
+        grid-template-columns: auto 1fr;
+      }
     }
 
     &__preview {
@@ -424,7 +426,7 @@
     }
 
     &__content {
-      @apply w-full md:w-2/5 my-10 space-y-8;
+      @apply w-full 2xl:w-3/4 my-10 space-y-8;
     }
 
     &__features {
@@ -440,7 +442,7 @@
 
     &__colors {
       @apply flex items-center gap-3;
-      .wheel__color-item {
+      .product__color-item {
         @apply h-7 w-7 cursor-pointer;
 
         // &.active {
@@ -455,6 +457,16 @@
 
     &__name {
       @apply text-2xl lg:text-3xl tracking-wide font-bold;
+    }
+
+    &__related {
+      @apply flex flex-col justify-center items-center space-y-12 mt-20 lg:mx-28;
+      &-title {
+        @apply text-lg font-semibold uppercase;
+      }
+      &-list {
+        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5;
+      }
     }
   }
 }

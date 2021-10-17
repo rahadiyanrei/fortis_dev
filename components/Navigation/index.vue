@@ -26,7 +26,7 @@
     <v-spacer />
 
     <div class="nav__menu-right desktop">
-      <v-btn text elevation="false">Apparel</v-btn>
+      <v-btn text elevation="false" to="/apparel">Apparel</v-btn>
       <v-menu offset-y rounded>
         <template #activator="{ on, attrs }">
           <v-btn text elevation="false" v-bind="attrs" v-on="on">About</v-btn>
