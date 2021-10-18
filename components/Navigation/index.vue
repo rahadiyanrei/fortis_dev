@@ -12,21 +12,21 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-btn text elevation="false" to="/blog">Blog</v-btn>
+      <v-btn text elevation="false" to="/apparel">Apparel</v-btn>
     </div>
 
     <v-spacer class="desktop" />
 
     <div class="nav__logo">
       <nuxt-link to="/">
-        <v-img :src="logo"></v-img>
+        <v-img :src="logo" width="150"></v-img>
       </nuxt-link>
     </div>
 
     <v-spacer />
 
     <div class="nav__menu-right desktop">
-      <v-btn text elevation="false" to="/apparel">Apparel</v-btn>
+      <v-btn text elevation="false" to="/blog">Blog</v-btn>
       <v-menu offset-y rounded>
         <template #activator="{ on, attrs }">
           <v-btn text elevation="false" v-bind="attrs" v-on="on">About</v-btn>
@@ -90,7 +90,7 @@ export default {
   computed: {
     logo() {
       const data =
-        this.$config.imageURL + this.$config.imagePATH + '/logo_fortis.svg'
+        this.$config.imageURL + this.$config.imagePATH + '/logo_fortis.png'
       return data
     },
   },

@@ -65,7 +65,7 @@
             </v-carousel-item>
           </v-carousel>
         </div>
-        <div class="home__wheel">
+        <div class="home__product">
           <div class="main__container relative">
             <div class="flex justify-between items-center">
               <div class="main-title border-accent content-end">
@@ -156,9 +156,13 @@
                 :key="idx"
                 class="gallery__overview"
               >
-                <v-card class="gallery__overview-thumbnail cursor-pointer" flat>
+                <v-card
+                  class="gallery__overview-thumbnail cursor-pointer"
+                  flat
+                  :to="`/gallery/${items.thumbnail.uuid}`"
+                >
                   <v-img
-                    :src="getImageURL(items.imageURL)"
+                    :src="items.thumbnail.image_thumbnail"
                     :aspect-ratio="16 / 9"
                   >
                     <v-card-title
@@ -185,10 +189,11 @@
                     v-for="(item, idx2) in items.list"
                     :key="idx2"
                     class="gallery__overview-item cursor-pointer"
+                    :to="`/gallery/${item.uuid}`"
                     flat
                   >
                     <v-img
-                      :src="getImageURL(item.imageURL)"
+                      :src="item.image_thumbnail"
                       :aspect-ratio="16 / 9"
                     ></v-img>
                     <v-card-title>
@@ -202,7 +207,15 @@
                       </div>
                     </v-card-subtitle>
                   </v-card>
-                  <v-card class="gallery__overview-action" flat>
+                  <v-card
+                    class="gallery__overview-action"
+                    flat
+                    :to="
+                      items.title === 'Vehicle Galleries'
+                        ? '/gallery/vehicle'
+                        : '/gallery/wheel'
+                    "
+                  >
                     <div class="gallery__overview-action__wrapper">
                       <v-card-title>
                         View The Full
@@ -238,12 +251,12 @@
                 class="blog__overview"
               >
                 <v-card
-                  class="blog__overview-thumbnail cursor-pointer"
+                  class="blog__overview-thumbnail flex-col cursor-pointer"
                   flat
                   color="transparent"
                 >
                   <!-- Tag  -->
-                  <v-card-title class="blog__overview-tag left">
+                  <!-- <v-card-title class="blog__overview-tag left">
                     <div
                       class="break-normal whitespace-nowrap"
                       :class="[
@@ -254,7 +267,7 @@
                     >
                       {{ items.tag }}
                     </div>
-                  </v-card-title>
+                  </v-card-title> -->
                   <!-- Tag  -->
                   <v-img
                     :src="getImageURL(items.imageURL)"
@@ -275,7 +288,7 @@
               </div>
             </div>
             <div class="home__blog-action mt-16">
-              <v-btn outlined large>Explore Our Blog</v-btn>
+              <v-btn outlined large to="/blog">Explore Our Blog</v-btn>
             </div>
           </div>
         </div>
@@ -327,13 +340,32 @@ export default {
       .$get(`${baseURL}/api/banner`)
       .then((res) => res.data)
 
+    let galleryOverviews = await $axios
+      .$get(`${baseURL}/api/gallery/dashboard`)
+      .then((res) => res.data)
+
+    galleryOverviews = [
+      {
+        placement: 'left',
+        title: 'Vehicle Galleries',
+        thumbnail: galleryOverviews.single_vehicle,
+        list: [...galleryOverviews.multiple_vehicle],
+      },
+      {
+        placement: 'right',
+        title: 'Wheels Galleries',
+        thumbnail: galleryOverviews.single_wheel,
+        list: [...galleryOverviews.multiple_wheel],
+      },
+    ]
+
     const newArrival = await $axios
       .$get(`${baseURL}/api/wheel/new_arrival`, {
         params: { limit: 10, offset: 0 },
       })
       .then((res) => res.data)
 
-    return { banners, newArrival }
+    return { banners, newArrival, galleryOverviews }
   },
   data: () => ({
     model: 0,
@@ -467,80 +499,80 @@ export default {
         imageURL: '/wheels/wheel-2.png',
       },
     ],
-    galleryOverviews: [
-      {
-        placement: 'left',
-        title: 'Vehicle Galleries',
-        imageURL: '/gallery/overview/vehicle.png',
-        list: [
-          {
-            name: 'Mobil #1',
-            title: 'Nama Velg | Brand Velg',
-            imageURL: '/gallery/vehicle-1.png',
-          },
+    // galleryOverviews: [
+    //   {
+    //     placement: 'left',
+    //     title: 'Vehicle Galleries',
+    //     imageURL: '/gallery/overview/vehicle.png',
+    //     list: [
+    //       {
+    //         name: 'Mobil #1',
+    //         title: 'Nama Velg | Brand Velg',
+    //         imageURL: '/gallery/vehicle-1.png',
+    //       },
 
-          {
-            name: 'Mobil #2',
-            title: 'Nama Velg | Brand Velg',
-            imageURL: '/gallery/vehicle-2.png',
-          },
+    //       {
+    //         name: 'Mobil #2',
+    //         title: 'Nama Velg | Brand Velg',
+    //         imageURL: '/gallery/vehicle-2.png',
+    //       },
 
-          {
-            name: 'Mobil #3',
-            title: 'Nama Velg | Brand Velg',
-            imageURL: '/gallery/vehicle-1.png',
-          },
+    //       {
+    //         name: 'Mobil #3',
+    //         title: 'Nama Velg | Brand Velg',
+    //         imageURL: '/gallery/vehicle-1.png',
+    //       },
 
-          {
-            name: 'Mobil #4',
-            title: 'Nama Velg | Brand Velg',
-            imageURL: '/gallery/vehicle-2.png',
-          },
+    //       {
+    //         name: 'Mobil #4',
+    //         title: 'Nama Velg | Brand Velg',
+    //         imageURL: '/gallery/vehicle-2.png',
+    //       },
 
-          {
-            name: 'Mobil #5',
-            title: 'Nama Velg | Brand Velg',
-            imageURL: '/gallery/vehicle-1.png',
-          },
-        ],
-      },
-      {
-        placement: 'right',
-        title: 'Wheels Galleries',
-        imageURL: '/gallery/overview/wheel.png',
-        list: [
-          {
-            name: 'Velg #1',
-            title: 'Nama Velg | Brand Velg',
-            imageURL: '/gallery/wheel-1.png',
-          },
+    //       {
+    //         name: 'Mobil #5',
+    //         title: 'Nama Velg | Brand Velg',
+    //         imageURL: '/gallery/vehicle-1.png',
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     placement: 'right',
+    //     title: 'Wheels Galleries',
+    //     imageURL: '/gallery/overview/wheel.png',
+    //     list: [
+    //       {
+    //         name: 'Velg #1',
+    //         title: 'Nama Velg | Brand Velg',
+    //         imageURL: '/gallery/wheel-1.png',
+    //       },
 
-          {
-            name: 'Velg #2',
-            title: 'Nama Velg | Brand Velg',
-            imageURL: '/gallery/wheel-2.png',
-          },
+    //       {
+    //         name: 'Velg #2',
+    //         title: 'Nama Velg | Brand Velg',
+    //         imageURL: '/gallery/wheel-2.png',
+    //       },
 
-          {
-            name: 'Velg #3',
-            title: 'Nama Velg | Brand Velg',
-            imageURL: '/gallery/wheel-1.png',
-          },
+    //       {
+    //         name: 'Velg #3',
+    //         title: 'Nama Velg | Brand Velg',
+    //         imageURL: '/gallery/wheel-1.png',
+    //       },
 
-          {
-            name: 'Velg #4',
-            title: 'Nama Velg | Brand Velg',
-            imageURL: '/gallery/wheel-2.png',
-          },
+    //       {
+    //         name: 'Velg #4',
+    //         title: 'Nama Velg | Brand Velg',
+    //         imageURL: '/gallery/wheel-2.png',
+    //       },
 
-          {
-            name: 'Velg #5',
-            title: 'Nama Velg | Brand Velg',
-            imageURL: '/gallery/wheel-1.png',
-          },
-        ],
-      },
-    ],
+    //       {
+    //         name: 'Velg #5',
+    //         title: 'Nama Velg | Brand Velg',
+    //         imageURL: '/gallery/wheel-1.png',
+    //       },
+    //     ],
+    //   },
+    // ],
     blogOverviews: [
       {
         placement: 'left',

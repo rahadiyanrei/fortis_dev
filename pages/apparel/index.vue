@@ -47,8 +47,8 @@
                       :key="idx"
                       v-model="category"
                       dense
-                      :label="item.label"
-                      :value="item.value"
+                      :label="item.name"
+                      :value="item.id"
                       color="rgba(185, 28, 28)"
                       @change="handleCategories"
                     ></v-checkbox>

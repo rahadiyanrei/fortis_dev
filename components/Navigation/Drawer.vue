@@ -43,11 +43,12 @@
         </v-list-item>
       </v-list-group>
 
+      <v-list-item class="nav__menu-mobile__item" link to="/apparel">
+        Apparel
+      </v-list-item>
       <v-list-item class="nav__menu-mobile__item" link to="/blog">
         Blog
       </v-list-item>
-
-      <v-list-item class="nav__menu-mobile__item" link>Apparel</v-list-item>
 
       <v-list-group :value="false">
         <template #activator>

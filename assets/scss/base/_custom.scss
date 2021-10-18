@@ -349,6 +349,9 @@
   &-wrapper {
     @apply md:flex justify-center m-4 gap-40;
   }
+  &__content {
+    @apply space-y-8;
+  }
   &__head {
     @apply md:flex justify-between items-center space-y-12 md:space-y-0;
   }
@@ -595,7 +598,7 @@
   }
   &__overview {
     .v-card {
-      @apply md:space-x-8;
+      // @apply md:space-x-8;
       @screen md {
         display: flex !important;
       }

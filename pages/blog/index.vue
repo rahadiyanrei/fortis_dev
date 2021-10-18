@@ -17,7 +17,7 @@
                 class="blog__overview"
               >
                 <v-card
-                  class="blog__overview-thumbnail cursor-pointer"
+                  class="blog__overview-thumbnail md:space-x-8 cursor-pointer"
                   flat
                   color="transparent"
                   :to="`/blog/${items.slug}`"
