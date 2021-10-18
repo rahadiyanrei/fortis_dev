@@ -5,7 +5,7 @@
     class="nav__menu-mobile"
     width="100%"
   >
-    <v-list nav dense>
+    <v-list nav dense class="mt-4 space-y-4">
       <v-list-item class="nav__menu-mobile__item" link to="/wheels">
         Wheels
       </v-list-item>
@@ -85,6 +85,17 @@
 
       <v-list-item class="nav__menu-mobile__item" link to="/contact">
         Contact
+      </v-list-item>
+
+      <v-list-item
+        class="nav__menu-mobile__item justify-center mt-8"
+        link
+        to="/dealer"
+      >
+        <v-btn outlined large>
+          <v-icon class="mr-2">mdi-map-marker-outline</v-icon>
+          Find Dealer
+        </v-btn>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
