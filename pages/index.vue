@@ -198,7 +198,11 @@
                     ></v-img>
                     <v-card-title>
                       <div class="break-normal">
-                        {{ item.name }}
+                        {{
+                          item.vehicle_brand
+                            ? item.vehicle_brand.name
+                            : item.wheel.name
+                        }}
                       </div>
                     </v-card-title>
                     <v-card-subtitle>
@@ -254,6 +258,7 @@
                   class="blog__overview-thumbnail flex-col cursor-pointer"
                   flat
                   color="transparent"
+                  :to="`/blog/${items.slug}`"
                 >
                   <!-- Tag  -->
                   <!-- <v-card-title class="blog__overview-tag left">
@@ -269,21 +274,18 @@
                     </div>
                   </v-card-title> -->
                   <!-- Tag  -->
-                  <v-img
-                    :src="getImageURL(items.imageURL)"
-                    :aspect-ratio="16 / 9"
-                  ></v-img>
+                  <v-img :src="items.image" :aspect-ratio="16 / 9"></v-img>
                   <v-card-subtitle class="blog__overview-subtitle">
-                    {{ items.subtitle }}
+                    {{ items.created_at | datetimeToDatetime }} /
+                    {{ items.created_by.fullname }}
                   </v-card-subtitle>
                   <v-card-title class="blog__overview-title">
                     {{ items.title }}
                   </v-card-title>
-                  <v-card-text class="blog__overview-description">
-                    <p>
-                      {{ items.description }}
-                    </p>
-                  </v-card-text>
+                  <v-card-text
+                    class="blog__overview-description"
+                    v-html="$options.filters.textElipsis(items.content)"
+                  ></v-card-text>
                 </v-card>
               </div>
             </div>
@@ -344,6 +346,10 @@ export default {
       .$get(`${baseURL}/api/gallery/dashboard`)
       .then((res) => res.data)
 
+    const blogOverviews = await $axios
+      .$get(`${baseURL}/api/blog/dashboard`)
+      .then((res) => res.data)
+
     galleryOverviews = [
       {
         placement: 'left',
@@ -365,7 +371,7 @@ export default {
       })
       .then((res) => res.data)
 
-    return { banners, newArrival, galleryOverviews }
+    return { banners, newArrival, galleryOverviews, blogOverviews }
   },
   data: () => ({
     model: 0,
@@ -499,80 +505,6 @@ export default {
         imageURL: '/wheels/wheel-2.png',
       },
     ],
-    // galleryOverviews: [
-    //   {
-    //     placement: 'left',
-    //     title: 'Vehicle Galleries',
-    //     imageURL: '/gallery/overview/vehicle.png',
-    //     list: [
-    //       {
-    //         name: 'Mobil #1',
-    //         title: 'Nama Velg | Brand Velg',
-    //         imageURL: '/gallery/vehicle-1.png',
-    //       },
-
-    //       {
-    //         name: 'Mobil #2',
-    //         title: 'Nama Velg | Brand Velg',
-    //         imageURL: '/gallery/vehicle-2.png',
-    //       },
-
-    //       {
-    //         name: 'Mobil #3',
-    //         title: 'Nama Velg | Brand Velg',
-    //         imageURL: '/gallery/vehicle-1.png',
-    //       },
-
-    //       {
-    //         name: 'Mobil #4',
-    //         title: 'Nama Velg | Brand Velg',
-    //         imageURL: '/gallery/vehicle-2.png',
-    //       },
-
-    //       {
-    //         name: 'Mobil #5',
-    //         title: 'Nama Velg | Brand Velg',
-    //         imageURL: '/gallery/vehicle-1.png',
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     placement: 'right',
-    //     title: 'Wheels Galleries',
-    //     imageURL: '/gallery/overview/wheel.png',
-    //     list: [
-    //       {
-    //         name: 'Velg #1',
-    //         title: 'Nama Velg | Brand Velg',
-    //         imageURL: '/gallery/wheel-1.png',
-    //       },
-
-    //       {
-    //         name: 'Velg #2',
-    //         title: 'Nama Velg | Brand Velg',
-    //         imageURL: '/gallery/wheel-2.png',
-    //       },
-
-    //       {
-    //         name: 'Velg #3',
-    //         title: 'Nama Velg | Brand Velg',
-    //         imageURL: '/gallery/wheel-1.png',
-    //       },
-
-    //       {
-    //         name: 'Velg #4',
-    //         title: 'Nama Velg | Brand Velg',
-    //         imageURL: '/gallery/wheel-2.png',
-    //       },
-
-    //       {
-    //         name: 'Velg #5',
-    //         title: 'Nama Velg | Brand Velg',
-    //         imageURL: '/gallery/wheel-1.png',
-    //       },
-    //     ],
-    //   },
-    // ],
     blogOverviews: [
       {
         placement: 'left',
