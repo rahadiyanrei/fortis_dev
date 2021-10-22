@@ -14,31 +14,36 @@
                   <div class="contact__info-item">
                     <span class="contact__info-title">Office Address</span>
                     <div class="contact__info-value">
-                      Jl. Gaya Motor Raya, Sunter II Jakarta Utara - 14330,
-                      Indonesia
+                      PT. Pakoakuina Marketing Office Jl. Surya Madya VII,
+                      Kutanegara, Kec. Ciampel, Kabupaten Karawang, Jawa Barat
+                      41363, Indonesia
                     </div>
                   </div>
                   <div class="contact__info-item">
                     <span class="contact__info-title">Email</span>
-                    <div class="contact__info-value">hamid@pakoakuina.com</div>
+                    <div class="contact__info-value">
+                      fortiswheel.info@pakoakuina.co
+                    </div>
                   </div>
                   <div class="contact__info-item">
                     <span class="contact__info-title">Phone Number</span>
-                    <div class="contact__info-value">+62 21 651 1228</div>
+                    <div class="contact__info-value">0267 – 8610163</div>
                   </div>
                   <div class="contact__info-item">
                     <span class="contact__info-title">Social Media</span>
                     <div class="contact__info-value">
-                      <v-btn
-                        v-for="(item, idx) in socmed"
-                        :key="idx"
-                        :href="item.link"
-                        large
-                        icon
-                        target="_blank"
-                      >
-                        <v-icon color="black">{{ item.icon }}</v-icon>
-                      </v-btn>
+                      <template v-for="item in socmed">
+                        <v-btn
+                          v-if="item.status"
+                          :key="item"
+                          :href="item.link"
+                          large
+                          icon
+                          target="_blank"
+                        >
+                          <v-icon color="black">{{ item.icon }}</v-icon>
+                        </v-btn>
+                      </template>
                     </div>
                   </div>
                 </div>
@@ -174,6 +179,38 @@ export default {
       .$get(`${baseURL}/api/country`)
       .then((res) => res.data)
 
+    let socmed = await $axios
+      .$get(`${baseURL}/api/social_media`)
+      .then((res) => res.data)
+
+    socmed = [
+      {
+        icon: 'mdi-facebook',
+        link: socmed.facebook,
+        status: socmed.facebook !== null ? socmed.facebook : false,
+      },
+      {
+        icon: 'mdi-youtube',
+        link: socmed.youtube,
+        status: socmed.youtube !== null ? socmed.youtube : false,
+      },
+      {
+        icon: 'mdi-twitter',
+        link: socmed.twitter,
+        status: socmed.twitter !== null ? socmed.twitter : false,
+      },
+      {
+        icon: 'mdi-linkedin',
+        link: socmed.linkedin,
+        status: socmed.linkedin !== null ? socmed.linkedin : false,
+      },
+      {
+        icon: 'mdi-instagram',
+        link: socmed.instagram,
+        status: socmed.instagram !== null ? socmed.instagram : false,
+      },
+    ]
+
     // const locations = await dealer.map((item) => {
     //   const data = {
     //     lat: parseFloat(item.lat),
@@ -182,7 +219,7 @@ export default {
     //   return data
     // })
 
-    return { country }
+    return { country, socmed }
   },
   data: () => ({
     valid: false,
@@ -198,28 +235,7 @@ export default {
       postalCode: '',
       comment: '',
     },
-    socmed: [
-      // {
-      //   icon: 'mdi-facebook',
-      //   link: '#',
-      // },
-      {
-        icon: 'mdi-youtube',
-        link: 'https://www.youtube.com/channel/UC2FJfWhPytQdIaz3wvD4VQg',
-      },
-      // {
-      //   icon: 'mdi-twitter',
-      //   link: '#',
-      // },
-      // {
-      //   icon: 'mdi-linkedin',
-      //   link: '#',
-      // },
-      {
-        icon: 'mdi-instagram',
-        link: 'https://www.instagram.com/fortiswheels/',
-      },
-    ],
+
     notification: {
       isOpen: true,
       message: 'Test',
