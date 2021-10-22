@@ -33,6 +33,20 @@
             <div class="product-detail__body">
               <div class="product-detail__features">
                 <div
+                  v-if="product.is_all_sizes !== 1"
+                  class="product-detail__features-item flex"
+                >
+                  Available Size :
+                  <div
+                    v-for="(size, idx3) in product.sizes"
+                    :key="idx3"
+                    class="md:pl-1 space-x-2"
+                  >
+                    {{ size }}
+                    <span v-if="idx3 !== product.sizes.length - 1">,</span>
+                  </div>
+                </div>
+                <div
                   class="product-detail__features-item"
                   v-html="product.description"
                 ></div>
