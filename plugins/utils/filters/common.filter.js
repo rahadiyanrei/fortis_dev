@@ -22,5 +22,5 @@ Vue.filter('textElipsis', (value) => {
   if (!value) {
     return ''
   }
-  return value.slice(0, 200) + '...'
+  return value.replace(/<[^>]+>/g, '').slice(0, 200) + '...'
 })
