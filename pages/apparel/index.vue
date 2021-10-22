@@ -57,7 +57,7 @@
               </div>
             </div>
             <div class="product__body">
-              <div class="product__list">
+              <div v-if="products.length" class="product__list">
                 <div
                   v-for="(items, idx) in products"
                   :key="idx"
@@ -84,6 +84,7 @@
                   </v-card>
                 </div>
               </div>
+              <div v-else class="gallery__empty">Product Tidak Ditemukan</div>
               <div class="product__pagination">
                 <v-pagination
                   v-model="currentPage"
