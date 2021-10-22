@@ -59,10 +59,10 @@
                   </span>
                 </div>
                 <div class="product-detail__features-item">
-                  PCD : {{ wheel.pcd }}
+                  PCD : {{ wheel.PCD }}
                 </div>
                 <div class="product-detail__features-item">
-                  ET : {{ wheel.et }}
+                  ET : {{ wheel.ET }}
                 </div>
                 <div class="product-detail__features-item">
                   Hub : {{ wheel.hub }}
@@ -102,10 +102,22 @@
             </div>
             <div class="product-detail__action">
               <div class="product-detail__action-group">
-                <v-btn block large outlined class="product-detail__button">
+                <v-btn
+                  block
+                  large
+                  outlined
+                  class="product-detail__button"
+                  :to="`/gallery/wheel?limit=12&offset=0&type=wheel&vehicle_brand_id=0&wheel_id=${wheel.id}`"
+                >
                   View Wheel Gallery
                 </v-btn>
-                <v-btn block large outlined class="product-detail__button">
+                <v-btn
+                  block
+                  large
+                  outlined
+                  class="product-detail__button"
+                  :to="`/gallery/vehicle?limit=12&offset=0&type=car&vehicle_brand_id=0&wheel_id=${wheel.id}`"
+                >
                   View Vehicle Gallery
                 </v-btn>
               </div>
