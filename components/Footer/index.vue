@@ -56,15 +56,13 @@
           ©2021 PAKO Group. Design by Alteridea.
         </div>
         <div class="footer__socmed">
-          <div
-            v-for="(item, idx4) in socmed"
-            :key="idx4"
-            class="footer__socmed-item"
-          >
-            <v-btn :href="item.link" large icon target="_blank">
-              <v-icon color="black">{{ item.icon }}</v-icon>
-            </v-btn>
-          </div>
+          <template v-for="item in socmed">
+            <div v-if="item.status" :key="item" class="footer__socmed-item">
+              <v-btn :href="item.link" large icon target="_blank">
+                <v-icon color="black">{{ item.icon }}</v-icon>
+              </v-btn>
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -72,6 +70,36 @@
 </template>
 <script>
 export default {
+  // async asyncData({ $axios, $config: { baseURL } }) {
+  //   let socmed = await $axios
+  //     .$get(`${baseURL}/api/social_media`)
+  //     .then((res) => res.data)
+
+  //   socmed = [
+  //     {
+  //       icon: 'mdi-facebook',
+  //       link: socmed.facebook,
+  //     },
+  //     {
+  //       icon: 'mdi-youtube',
+  //       link: socmed.youtube,
+  //     },
+  //     {
+  //       icon: 'mdi-twitter',
+  //       link: socmed.twitter,
+  //     },
+  //     {
+  //       icon: 'mdi-linkedin',
+  //       link: socmed.linkedin,
+  //     },
+  //     {
+  //       icon: 'mdi-instagram',
+  //       link: socmed.instagram,
+  //     },
+  //   ]
+
+  //   return { socmed }
+  // },
   data: () => ({
     brands: [
       {
@@ -188,34 +216,68 @@ export default {
         ],
       },
     ],
-    socmed: [
-      // {
-      //   icon: 'mdi-facebook',
-      //   link: '#',
-      // },
-      {
-        icon: 'mdi-youtube',
-        link: 'https://www.youtube.com/channel/UC2FJfWhPytQdIaz3wvD4VQg',
-      },
-      // {
-      //   icon: 'mdi-twitter',
-      //   link: '#',
-      // },
-      // {
-      //   icon: 'mdi-linkedin',
-      //   link: '#',
-      // },
-      {
-        icon: 'mdi-instagram',
-        link: 'https://www.instagram.com/fortiswheels/',
-      },
-    ],
+    socmed: [],
   }),
+  async mounted() {
+    await this.getData()
+  },
   methods: {
     getImageURL(filename) {
       const data =
         this.$config.imageURL + this.$config.imagePATH + '/images' + filename
       return data
+    },
+    async getData() {
+      console.log('get Data')
+      this.data = []
+      try {
+        const responseBody = await this.$axios
+          .$get(`${this.$config.baseURL}/api/social_media`)
+          .then((res) => res.data)
+
+        this.socmed = [
+          {
+            icon: 'mdi-facebook',
+            link: responseBody.facebook,
+            status:
+              responseBody.facebook !== null ? responseBody.facebook : false,
+          },
+          {
+            icon: 'mdi-youtube',
+            link: responseBody.youtube,
+            status:
+              responseBody.youtube !== null ? responseBody.youtube : false,
+          },
+          {
+            icon: 'mdi-twitter',
+            link: responseBody.twitter,
+            status:
+              responseBody.twitter !== null ? responseBody.twitter : false,
+          },
+          {
+            icon: 'mdi-linkedin',
+            link: responseBody.linkedin,
+            status:
+              responseBody.linkedin !== null ? responseBody.linkedin : false,
+          },
+          {
+            icon: 'mdi-instagram',
+            link: responseBody.instagram,
+            status:
+              responseBody.instagram !== null ? responseBody.instagram : false,
+          },
+        ]
+
+        // if (this.GENERATOR.DATATABLE.FILTERS) {
+        //   this.GENERATOR.DATATABLE.FILTERS.forEach((filter, index) => {
+        //     if (filter.valueType === "number" && this.query[filter.model]) {
+        //       this.query[filter.model] = Number(this.query[filter.model]);
+        //     }
+        //   });
+        // }
+      } finally {
+        this.loading = false
+      }
     },
   },
 }
