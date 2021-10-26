@@ -531,6 +531,19 @@
       &_elem {
         img {
           width: 180px;
+          max-height: 6rem;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .lingallery {
+      figure {
+        @apply bg-gray-100;
+        img {
+          max-height: 720px !important;
+          height: 720px !important;
+          margin: auto !important;
         }
       }
     }

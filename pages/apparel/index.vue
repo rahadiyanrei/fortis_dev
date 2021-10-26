@@ -76,7 +76,7 @@
                         contain
                       ></v-img>
                     </div>
-                    <div class="product__body">
+                    <div class="product__body my-0">
                       <v-card-title class="product__title">
                         {{ items.name }}
                       </v-card-title>

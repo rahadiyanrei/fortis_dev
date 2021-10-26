@@ -38,7 +38,9 @@
               </div>
               <v-card class="gallery-detail__card" flat>
                 <v-list-item two-line>
-                  <v-list-item-avatar class="gallery-detail__card-image">
+                  <v-list-item-avatar
+                    class="gallery-detail__card-image rounded-0"
+                  >
                     <v-img :src="data.wheel.image"></v-img>
                   </v-list-item-avatar>
                   <v-list-item-content class="gallery-detail__card-body">
@@ -139,7 +141,7 @@ export default {
     return { data, gallery }
   },
   data: () => ({
-    bannerURL: '/about/pako-group/banner.png',
+    bannerURL: '/gallery__banner.png',
   }),
   methods: {
     getImageURL(filename) {

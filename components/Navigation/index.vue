@@ -90,7 +90,7 @@ export default {
   computed: {
     logo() {
       const data =
-        this.$config.imageURL + this.$config.imagePATH + '/logo_fortis.png'
+        this.$config.imageURL + this.$config.imagePATH + '/logo_pako.png'
       return data
     },
   },

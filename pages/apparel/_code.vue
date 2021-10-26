@@ -53,9 +53,70 @@
               </div>
             </div>
             <div class="product-detail__action">
+              <span v-if="product.tokopedia_url || product.shopee_url">
+                Buy now on :
+              </span>
               <div class="product-detail__action-group">
-                <v-btn block large dark class="product-detail__button">
-                  Buy Product
+                <v-btn
+                  v-if="product.tokopedia_url"
+                  :href="product.tokopedia_url"
+                  target="_blank"
+                  block
+                  large
+                  dark
+                  class="product-detail__button"
+                  color="#21883D"
+                  link
+                >
+                  Tokopedia
+                </v-btn>
+                <v-btn
+                  v-if="product.shopee_url"
+                  :href="product.shopee_url"
+                  target="_blank"
+                  block
+                  large
+                  dark
+                  class="product-detail__button"
+                  color="#F94C2F"
+                >
+                  Shopee
+                </v-btn>
+                <v-btn
+                  v-if="product.lazada_url"
+                  :href="product.lazada_url"
+                  target="_blank"
+                  block
+                  large
+                  dark
+                  class="product-detail__button"
+                  color="#181B56"
+                >
+                  Lazada
+                </v-btn>
+                <v-btn
+                  v-if="product.bukalapak_url"
+                  :href="product.bukalapak_url"
+                  target="_blank"
+                  block
+                  large
+                  dark
+                  class="product-detail__button"
+                  color="#E31F52"
+                >
+                  Bukalapak
+                </v-btn>
+                <v-btn
+                  v-if="product.blibli_url"
+                  :href="product.blibli_url"
+                  target="_blank"
+                  block
+                  large
+                  dark
+                  class="product-detail__button"
+                  color="#0095DA"
+                >
+                  Blibli
                 </v-btn>
               </div>
             </div>
@@ -82,7 +143,7 @@
                     contain
                   ></v-img>
                 </div>
-                <div class="product__body">
+                <div class="product__body my-0">
                   <v-card-title class="product__title">
                     {{ items.name }}
                   </v-card-title>
