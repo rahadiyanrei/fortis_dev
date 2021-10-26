@@ -17,7 +17,7 @@
       <div class="main__container">
         <div class="footer__navigation-logo">
           <v-img
-            src="https://ik.imagekit.io/fjxmsbwas7n/hardcode-image-dont-delete/static/logo_fortis.png"
+            src="https://ik.imagekit.io/fjxmsbwas7n/hardcode-image-dont-delete/static/logo_pako.png"
             width="180"
             height="48"
             contain
