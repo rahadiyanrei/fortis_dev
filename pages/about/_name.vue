@@ -11,14 +11,41 @@
         <div class="main__container">
           <div class="about__content">
             <div class="about__head">
-              <div class="main-title border-accent left">
-                About
-                <span class="font-bold">{{ selectAbout.name }}</span>
+              <div class="align-center md:flex justify-between">
+                <div class="main-title border-accent left">
+                  {{ activeLanguage === 'ID' ? 'Tentang' : 'About' }}
+                  <span class="font-bold">{{ selectAbout.name }}</span>
+                </div>
+                <div class="languages">
+                  <span class="pr-2">Language :</span>
+                  <div class="languages__group">
+                    <div
+                      class="languages__item"
+                      :class="activeLanguage === 'ID' ? 'active' : ''"
+                      @click="activeLanguage = 'ID'"
+                    >
+                      ID
+                    </div>
+                    /
+                    <div
+                      class="languages__item"
+                      :class="activeLanguage === 'EN' ? 'active' : ''"
+                      @click="activeLanguage = 'EN'"
+                    >
+                      EN
+                    </div>
+                  </div>
+                </div>
               </div>
+
               <div class="md:flex justify-between space-y-8 md:space-y-0">
                 <div class="about__description">
                   <p>
-                    {{ selectAbout.description }}
+                    {{
+                      selectAbout.description.find(
+                        (item) => item.type === activeLanguage
+                      ).text
+                    }}
                   </p>
                   <template v-if="selectAbout.extendDescription.length">
                     <div
@@ -31,7 +58,11 @@
                         v-for="(item, idx3) in selectAbout.extendDescription[0]
                           .contents"
                         :key="idx3"
-                        v-html="item.description"
+                        v-html="
+                          item.description.find(
+                            (item2) => item2.type === activeLanguage
+                          ).text
+                        "
                       ></p>
                     </div>
                   </template>
@@ -165,27 +196,49 @@
 <script>
 export default {
   data: () => ({
+    activeLanguage: 'ID',
     abouts: [
       {
         name: 'Pako Group',
         to: 'company',
         bannerURL: '/about/pako-group/banner.png',
-        description: `Pako Group adalah perusahaan yang bergerak dalam industri komponen otomotif yang menghasilkan wheel rim yang terbuat dari baja dan alumunium untuk kendaraan roda dua dan roda empat. Pako Group mengawali bisnisnya dengan membuat produk original equipment manufacturer (OEM) untuk customer dari dalam negeri dan luar negeri seperti Malaysia, Jepang, Jerman, Thailand, Hungaria, dan Italia. Sejak tahun 2015, Pako Group merambah ke bidang wheel aftermarket dengan brand Fortis dan Avantech.`,
+        description: [
+          {
+            type: 'ID',
+            text: `Pako Group adalah perusahaan yang bergerak dalam industri komponen otomotif yang menghasilkan wheel rim yang terbuat dari baja dan alumunium untuk kendaraan roda dua dan roda empat. Pako Group mengawali bisnisnya dengan membuat produk original equipment manufacturer (OEM) untuk customer dari dalam negeri dan luar negeri seperti Malaysia, Jepang, Jerman, Thailand, Hungaria, dan Italia. Sejak tahun 2015, Pako Group merambah ke bidang wheel aftermarket dengan brand Fortis dan Avantech.`,
+          },
+          {
+            type: 'EN',
+            text: `Pako Group is a company engaged in the automotive component industry that produces steel and aluminum wheels. Pako Group established the business by making original equipment manufacturer (OEM) products for domestic and export markets such as Malaysia, Japan, Germany, Thailand, Hungary, and Italy. Since 2015, Pako Group started the aftermarket wheel business with Fortis and Avantech brands.`,
+          },
+        ],
         extendDescription: [
           {
             type: 'description',
             contents: [
               {
-                description: `
-                <b>Pakoakuina</b><br/>
-                Pakoakuina Car Wheel & Motorcycle memproduksi alloy wheel untuk OEM dan aftermarket untuk mobil dan motor dengan total annual capacity sebesar 5.400.000 pcs. Perusahaan yang menjadi customer dari Pakoakuina antara lain Toyota, Daihatsu, Lexus, Honda, dan Perodua.
-                `,
+                description: [
+                  {
+                    type: 'ID',
+                    text: `<b>Pakoakuina</b><br/>Pakoakuina Car Wheel & Motorcycle memproduksi alloy wheel untuk OEM dan aftermarket untuk mobil dan motor dengan total annual capacity sebesar 5.400.000 pcs. Perusahaan yang menjadi customer dari Pakoakuina antara lain Toyota, Daihatsu, Lexus, Honda, dan Perodua.`,
+                  },
+                  {
+                    type: 'EN',
+                    text: `<b>Pakoakuina</b><br/>Pakoakuina Car & Motorcycle Wheel produces alloy wheels for OEM and aftermarket with a total annual capacity of 5,400,000 pcs. Customers of Pakoakuina include Toyota, Daihatsu, Lexus, Honda, and Perodua.`,
+                  },
+                ],
               },
               {
-                description: `
-                <b>Inkoasku</b><br/>
-                Inkoasku memproduksi steel wheel untuk OEM dan aftermarket dengan annual capacity sebesar 5.000.000 pcs. Perusahaan yang menjadi customer dari Inkoasku antara lain Toyota, Daihatsu, dan Isuzu.
-                `,
+                description: [
+                  {
+                    type: 'ID',
+                    text: `<b>Inkoasku</b><br/>Inkoasku memproduksi steel wheel untuk OEM dan aftermarket dengan annual capacity sebesar 5.000.000 pcs. Perusahaan yang menjadi customer dari Inkoasku antara lain Toyota, Daihatsu, dan Isuzu.`,
+                  },
+                  {
+                    type: 'EN',
+                    text: `<b>Inkoasku</b><br/>Inkoasku produces steel wheels for OEM and aftermarket with an annual capacity of 5,000,000 pcs. Customers of Inkoasku include Toyota, Daihatsu, and Isuzu.`,
+                  },
+                ],
               },
             ],
           },
@@ -204,11 +257,11 @@ export default {
               locations: [
                 {
                   name: 'Pako Group',
-                  email: 'hamid@pakoakuina.com',
-                  phone_number: '+62 21 651 1228',
-                  address: `Jl. Gaya Motor Raya, Sunter II Jakarta Utara - 14330, Indonesia`,
-                  lat: -6.136722215837163,
-                  lng: 106.89021826863029,
+                  email: 'fortiswheel.info@pakoakuina.co',
+                  phone_number: '0267 – 8610163',
+                  address: `Kawasan Industri Surya Cipta, Jl. Surya Madya III Kav. 1-35, Karawang Timur, Kutanegara, Kec. Ciampel, Kabupaten Karawang, Jawa Barat 41361`,
+                  lat: -6.4085846,
+                  lng: 107.3300849,
                 },
               ],
             },
@@ -219,7 +272,16 @@ export default {
         name: 'Testing Facilities',
         to: 'testing-facilities',
         bannerURL: '/about/testing-facilities/banner.png',
-        description: `Fasilitas pengujian kami mampu untuk menguji durability produk, material, korosi, dan ketahanan cat. Alat pengujian kami tersertifikasi oleh ISOTSxxxxx, xxxx, xxxx untuk memberikan hasil yang akurat. Pengujian dan hasil uji telah terakreditasi baik di dalam maupun luar negeri. Fasilitas uji kami telah diakui oleh beberapa brand otomotif seperti Toyota, Daihatsu, Honda, dll.`,
+        description: [
+          {
+            type: 'ID',
+            text: `Fasilitas pengujian kami mampu untuk menguji durability product, material, korosi, dan ketahanan cat. Alat pengujian kami tersertifikasi oleh IATF 16949:2016, ISO 9001:2015, ISO 14001:2015, ISO 45000:2015, JWL, dan PT. Astra Honda Motor untuk memberikan hasil yang akurat. Pengujian dan hasil uji telah terakreditasi baik di dalam maupun luar negeri. Fasilitas uji kami telah diakui oleh beberapa brand otomotif seperti Toyota, Daihatsu, Honda, dll.`,
+          },
+          {
+            type: 'EN',
+            text: `Our testing facilities are capable of testing product durability, material, corrosion, and paint resistance. The certification includes IATF 16949:2016, ISO 9001:2015, ISO 14001:2015, ISO 45000:2015, JWL, and PT. Astra Honda Motor to provide accurate results. Our test facilities have been recognized by global automotive brands such as Toyota, Daihatsu, and Honda.`,
+          },
+        ],
         extendDescription: [
           {
             type: 'card',
@@ -255,22 +317,49 @@ export default {
         name: 'Dieshop',
         to: 'dieshop',
         bannerURL: '/about/die-shop/banner.png',
-        description: `Pako Dieshop memiliki kemampuan untuk memproduksi komponen khusus yang terbuat dari berbagai bahan untuk mould casting, dies stamping, dll. Teknisi kami yang berdedikasi, mengasah keterampilan mereka menggunakan teknologi terbaru, bersama-sama membuat komponen terbaik. Fasilitas kami sepenuhnya mendukung semua kebutuhan pelanggan.`,
+        description: [
+          {
+            type: 'ID',
+            text: `Pako Dieshop memiliki kemampuan untuk memproduksi komponen khusus yang terbuat dari berbagai bahan untuk mold casting, dies stamping dll. Teknisi kami yang berdedikasi, mengasah keterampilan mereka menggunakan teknologi terbaru, bersama-sama membuat komponen terbaik. Fasilitas kami sepenuhnya mendukung semua kebutuhan pelanggan.`,
+          },
+          {
+            type: 'EN',
+            text: `Pako Dieshop is capable of manufacturing custom components made by various materials for mold casting, dies stamping, etc. Our dedicated technicians are skilled with the latest technology to make the best components. Our facilities fully support every customer's needs.`,
+          },
+        ],
         extendDescription: [
           {
             type: 'description',
             contents: [
               {
-                description: `
-                <b>EXPERIENCE :</b><br/>
-                1. LPDC (Low Pressure Die Casting) - Car Wheel Mould<br/>
-                2. GDC (Gravity Die Casting) - Motorcycle Wheel Mould<br/>
-                3. Press/ Stamping Die - Steel Wheel Disc<br/>
-                4. General Parts<br/>
-                5. Sand Core Mould<br/>
-                6. HPDC (High Pressure Die Casting)<br/>
-                7. Roll Forming & Expander Die - Steel Wheel Rim<br/>
-                `,
+                description: [
+                  {
+                    type: 'ID',
+                    text: `
+                    <b>PENGALAMAN :</b><br/>
+                    1. LPDC (Low Pressure Die Casting) - Car Wheel Mould<br/>
+                    2. GDC (Gravity Die Casting) - Motorcycle Wheel Mould<br/>
+                    3. Press/ Stamping Die - Steel Wheel Disc<br/>
+                    4. General Parts<br/>
+                    5. Sand Core Mould<br/>
+                    6. HPDC (High Pressure Die Casting)<br/>
+                    7. Roll Forming & Expander Die - Steel Wheel Rim<br/>
+                    `,
+                  },
+                  {
+                    type: 'EN',
+                    text: `
+                    <b>EXPERIENCE :</b><br/>
+                    1. LPDC (Low Pressure Die Casting) - Car Wheel Mould<br/>
+                    2. GDC (Gravity Die Casting) - Motorcycle Wheel Mould<br/>
+                    3. Press/ Stamping Die - Steel Wheel Disc<br/>
+                    4. General Parts<br/>
+                    5. Sand Core Mould<br/>
+                    6. HPDC (High Pressure Die Casting)<br/>
+                    7. Roll Forming & Expander Die - Steel Wheel Rim<br/>
+                    `,
+                  },
+                ],
               },
             ],
           },
@@ -301,7 +390,16 @@ export default {
         name: 'P-Pro',
         to: 'p-pro',
         bannerURL: '/about/p-pro/banner.png',
-        description: `Kami memiliki keahlian dalam mengkonsep sebuah proyek desain hingga terwujud dalam styling concept design yang terintegrasi dengan bidang engineering design untuk diaplikasikan ke dalam manufaktur.`,
+        description: [
+          {
+            type: 'ID',
+            text: `Kami memiliki keahlian dalam mengkonsep proyek desain hingga terwujud dalam styling concept design dan prototyping yang terintegrasi dengan bidang Engineering Design untuk diaplikasikan ke dalam manufaktur.`,
+          },
+          {
+            type: 'EN',
+            text: `We are expertise in wheel design conception, then realized in styling design and prototyping. Our design process is integrated with engineering design to make for efficient manufacturing.`,
+          },
+        ],
         extendDescription: [
           {
             type: 'card',

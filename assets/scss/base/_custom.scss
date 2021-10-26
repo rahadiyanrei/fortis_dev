@@ -35,6 +35,19 @@
   }
 }
 
+.languages {
+  @apply flex pt-8 md:pt-0;
+  &__group {
+    @apply flex gap-1.5;
+  }
+  &__item {
+    @apply cursor-pointer;
+    &.active {
+      @apply font-bold;
+    }
+  }
+}
+
 .home {
   &__gallery,
   &__blog,
