@@ -91,13 +91,28 @@
 <script>
 export default {
   async asyncData({ $axios, $config: { baseURL } }) {
-    const vehicleBrand = await $axios
+    let vehicleBrand = await $axios
       .$get(`${baseURL}/api/vehicle_brand/dropdown`)
       .then((res) => res.data)
 
-    const wheel = await $axios
+    vehicleBrand = vehicleBrand.map((item) => {
+      return {
+        id: item.id.toString(),
+        name: item.name,
+        logo: item.logo,
+      }
+    })
+
+    let wheel = await $axios
       .$get(`${baseURL}/api/wheel/dropdown`)
       .then((res) => res.data)
+
+    wheel = wheel.map((item) => {
+      return {
+        id: item.id.toString(),
+        name: item.name,
+      }
+    })
 
     return { vehicleBrand, wheel }
   },
@@ -147,8 +162,8 @@ export default {
         limit: 12,
         offset: 0,
         type: 'wheel',
-        vehicle_brand_id: 0,
-        wheel_id: 0,
+        vehicle_brand_id: '0',
+        wheel_id: '0',
       }
     },
     // selectCategory() {
@@ -230,6 +245,7 @@ export default {
           }
         }
         query = Object.assign(query, this.$route.query)
+        this.query = query
       }
       if (
         Object.keys(this.query).length < 1 ||

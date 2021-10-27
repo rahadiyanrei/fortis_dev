@@ -145,8 +145,8 @@ export default {
         value: 'all-wheels',
       },
       {
-        label: 'New Release',
-        value: 'new-release',
+        label: 'New Arrival',
+        value: 'new-arrival',
       },
       {
         label: 'Pako',
@@ -309,12 +309,29 @@ export default {
           }
         }
         query = Object.assign(query, this.$route.query)
+
+        this.query = query
+
+        if (query.newRelease === '1') {
+          this.category = 'new-arrival'
+        } else if (query.newRelease === '0' && query.brand === null) {
+          this.category = 'all-wheels'
+        } else {
+          this.category = query.brand
+        }
       }
       if (
         Object.keys(this.query).length < 1 ||
         Object.keys(this.$route.query).length < 1 ||
         isManipulate
       ) {
+        if (query.newRelease === 1) {
+          this.category = 'new-arrival'
+        } else if (query.newRelease === 0 && query.brand === null) {
+          this.category = 'all-wheels'
+        } else {
+          this.category = query.brand
+        }
         this.query = query
       }
     },
@@ -324,7 +341,7 @@ export default {
       return data
     },
     handleCategories() {
-      if (this.category === 'new-release') {
+      if (this.category === 'new-arrival') {
         this.query.brand = null
         this.query.newRelease = 1
         this.query.offset = 0

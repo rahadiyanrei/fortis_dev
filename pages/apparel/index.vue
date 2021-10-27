@@ -10,7 +10,7 @@
                 <v-checkbox
                   v-for="(item, idx) in categories"
                   :key="idx"
-                  v-model="category"
+                  v-model="query['apparel_category_id']"
                   dense
                   :label="item.name"
                   :value="item.id"
@@ -103,15 +103,25 @@
 <script>
 export default {
   async asyncData({ $axios, $config: { baseURL } }) {
-    const categories = await $axios
+    let categories = await $axios
       .$get(`${baseURL}/api/apparel_category/dropdown`)
       .then((res) => res.data)
+
+    categories = categories.map((item) => {
+      return {
+        id: item.id.toString(),
+        name: item.name,
+        status: item.status,
+      }
+    })
+
+    categories = [{ id: '0', name: 'All Product', status: 1 }, ...categories]
 
     return { categories }
   },
   data: () => ({
     titleWheel: [],
-    category: 0,
+    category: '0',
     filter: null,
     page: 0,
     limit: 0,
@@ -177,15 +187,10 @@ export default {
       return {
         orderBy: 'created_at',
         orderType: 'desc',
-        apparel_category_id: null,
+        apparel_category_id: '0',
         limit: 12,
         offset: 0,
       }
-    },
-    selectCategory() {
-      const data = this.categories.find((item) => item.value === this.category)
-
-      return data
     },
   },
   watch: {
@@ -252,6 +257,7 @@ export default {
         ...this.defaultDatatableQuery,
         ...this.defaultGeneratorQuery,
       }
+      console.log(query)
       let isManipulate = false
       if (Object.keys(this.$route.query).length > 0) {
         for (const [model] of Object.entries(this.$route.query)) {
@@ -261,6 +267,8 @@ export default {
           }
         }
         query = Object.assign(query, this.$route.query)
+        this.query = query
+        console.log(this.query)
       }
       if (
         Object.keys(this.query).length < 1 ||
@@ -268,6 +276,7 @@ export default {
         isManipulate
       ) {
         this.query = query
+        console.log(this.query)
       }
     },
     getImageURL(filename) {
@@ -275,8 +284,10 @@ export default {
         this.$config.imageURL + this.$config.imagePATH + '/images' + filename
       return data
     },
-    handleCategories() {
-      this.query.apparel_category_id = this.category
+    handleCategories(value) {
+      if (value === null) {
+        this.query.apparel_category_id = 0
+      }
       this.query.offset = 0
     },
     handleFilterWheel() {
