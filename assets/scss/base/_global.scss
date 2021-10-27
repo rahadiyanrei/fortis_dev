@@ -72,6 +72,12 @@ body {
   }
 }
 
+.no-active {
+  &::before {
+    opacity: 0 !important;
+  }
+}
+
 .bg-transparent {
   background-color: transparent;
 }

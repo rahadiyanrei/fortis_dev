@@ -36,12 +36,14 @@
               <v-btn
                 v-for="(itemChild, idx3) in item.menu"
                 :key="idx3"
+                :to="itemChild.to"
                 class="footer__navigation-menu__item"
                 width="min-content"
                 left
                 text
                 depressed
                 small
+                active-class="no-active"
               >
                 {{ itemChild.name }}
               </v-btn>
@@ -124,15 +126,19 @@ export default {
         menu: [
           {
             name: 'Pako',
+            to: '/wheels?orderBy=created_at&orderType=desc&brand=pako&limit=12&offset=0&newRelease=0',
           },
           {
             name: 'Inko',
+            to: '/wheels?orderBy=created_at&orderType=desc&brand=inko&limit=12&offset=0&newRelease=0',
           },
           {
             name: 'Fortis',
+            to: '/wheels?orderBy=created_at&orderType=desc&brand=fortis&limit=12&offset=0&newRelease=0',
           },
           {
             name: 'Avantech',
+            to: '/wheels?orderBy=created_at&orderType=desc&brand=avantech&limit=12&offset=0&newRelease=0',
           },
         ],
       },
@@ -141,9 +147,11 @@ export default {
         menu: [
           {
             name: 'Wheel',
+            to: '/gallery/wheel?limit=12&offset=0&type=wheel&vehicle_brand_id=0&wheel_id=0',
           },
           {
             name: 'Vehicle',
+            to: '/gallery/vehicle?limit=12&offset=0&type=car&vehicle_brand_id=0&wheel_id=0',
           },
         ],
       },
@@ -151,16 +159,8 @@ export default {
         name: 'Blog',
         menu: [
           {
-            name: 'Recent',
-          },
-          {
-            name: 'Event',
-          },
-          {
-            name: 'Dealer Spotlight',
-          },
-          {
-            name: 'Owner Spotlight',
+            name: 'Latest Update',
+            to: '/blog',
           },
         ],
       },
@@ -168,16 +168,16 @@ export default {
         name: 'Apparel',
         menu: [
           {
-            name: 'Hoodie',
+            name: 'Shirt',
+            to: '/apparel?orderBy=created_at&orderType=desc&apparel_category_id=1&limit=12&offset=0',
           },
           {
-            name: 'Hat',
+            name: 'Headwear',
+            to: '/apparel?orderBy=created_at&orderType=desc&apparel_category_id=2&limit=12&offset=0',
           },
           {
-            name: 'T-Shirt',
-          },
-          {
-            name: 'Polo Shirt',
+            name: 'Accessories',
+            to: '/apparel?orderBy=created_at&orderType=desc&apparel_category_id=3&limit=12&offset=0',
           },
         ],
       },
@@ -185,22 +185,20 @@ export default {
         name: 'About',
         menu: [
           {
-            name: 'Pako 2W',
-          },
-          {
-            name: 'Pako 4W',
-          },
-          {
-            name: 'Inko',
-          },
-          {
-            name: 'Dieshop',
-          },
-          {
-            name: 'P-Pro',
+            name: 'Company',
+            to: '/about/company',
           },
           {
             name: 'Testing Facilities',
+            to: '/about/testing-facilities',
+          },
+          {
+            name: 'Dieshop',
+            to: '/about/dieshop',
+          },
+          {
+            name: 'P-Pro',
+            to: '/about/p-pro',
           },
         ],
       },
@@ -208,10 +206,12 @@ export default {
         name: 'Contact',
         menu: [
           {
-            name: 'Contact Us',
+            name: 'Contact',
+            to: '/contact',
           },
           {
             name: 'Find Dealer',
+            to: '/dealer',
           },
         ],
       },
