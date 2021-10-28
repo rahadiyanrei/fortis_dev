@@ -17,7 +17,7 @@
                 color="transparent"
                 height="100%"
               >
-                <v-img :src="item.image" height="100%" :aspect-ratio="9 / 3">
+                <v-img :src="item.image" height="100%" :aspect-ratio="18 / 6">
                   <div
                     class="
                       flex flex-column
@@ -93,7 +93,7 @@
               </div>
             </div>
           </div>
-          <div class="carousel__wheel lg:mt-20">
+          <div class="carousel__wheel lg:mt-16">
             <swiper ref="mySwiper" :options="swiperOptions">
               <swiper-slide v-for="(items, idx) in newArrival" :key="idx">
                 <v-card
@@ -150,7 +150,7 @@
               Our
               <span class="font-bold">Gallery</span>
             </div>
-            <div class="home__gallery-body mt-12 lg:mt-20">
+            <div class="home__gallery-body mt-12 lg:mt-16">
               <div
                 v-for="(items, idx) in galleryOverviews"
                 :key="idx"
