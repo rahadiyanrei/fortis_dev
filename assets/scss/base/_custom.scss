@@ -60,15 +60,18 @@
 
   &__banner {
     .banner {
-      height: 13rem !important;
+      height: 8rem !important;
       @screen sm {
-        height: 27rem !important;
+        height: 16rem !important;
       }
       @screen lg {
-        height: 36rem !important;
+        height: 22rem !important;
       }
       @screen xl {
-        height: 50rem !important;
+        height: 30rem !important;
+      }
+      @screen 2xl {
+        height: 41rem !important;
       }
       // @screen 2xl {
       //   height: 67rem !;

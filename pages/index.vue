@@ -17,7 +17,7 @@
                 color="transparent"
                 height="100%"
               >
-                <v-img :src="item.image" height="100%" :aspect-ratio="16 / 9">
+                <v-img :src="item.image" height="100%" :aspect-ratio="9 / 3">
                   <div
                     class="
                       flex flex-column
@@ -239,14 +239,6 @@
             <div class="main-title border-accent m-auto">
               Latest
               <span class="font-bold">Update</span>
-            </div>
-            <div class="home__blog-description mt-16">
-              <p>
-                Hendrerit vestibulum nulla nibh massa mollis feugiat maecenas
-                integer. Mollis quis feugiat viverra sit. Tristique integer
-                vulputate at orci sem ut. Scelerisque id scelerisque sed
-                dignissim tortor adipiscing tempus.
-              </p>
             </div>
             <div class="home__blog-body mt-20">
               <div
