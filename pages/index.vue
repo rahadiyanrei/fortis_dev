@@ -124,11 +124,12 @@
                     <v-card-subtitle class="wheel__subtitle">
                       {{ items.name }}
                     </v-card-subtitle>
-                    <v-card-text class="wheel__description">
-                      <div v-for="(size, idx3) in items.size" :key="idx3">
-                        {{ size.diamter }}
+                    <v-card-text v-if="items.sizes" class="wheel__description">
+                      <div v-for="(size, idx3) in items.sizes" :key="idx3">
+                        {{ size.diameter }}
+
                         <span
-                          v-if="idx3 !== items.size.length - 1"
+                          v-if="idx3 !== items.sizes.length - 1"
                           class="pr-1"
                         >
                           |
