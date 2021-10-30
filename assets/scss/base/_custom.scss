@@ -396,7 +396,7 @@
   &-detail {
     @apply my-12 md:my-16;
     &__wrapper {
-      @apply grid justify-items-center lg:justify-between lg:mx-28 lg:gap-40;
+      @apply grid justify-items-center lg:justify-between lg:mx-20 lg:gap-40;
       @screen lg {
         grid-template-columns: auto 1fr;
       }

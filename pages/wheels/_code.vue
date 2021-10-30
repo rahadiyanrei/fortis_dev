@@ -41,21 +41,10 @@
             <div class="product-detail__body">
               <div class="product-detail__features">
                 <div class="product-detail__features-item">
-                  Diameter :
+                  Size :
                   <span v-for="(item, idx3) in wheel.sizes" :key="idx3">
-                    {{ item.diameter }}”
-                  </span>
-                  <span v-if="idx3 === wheel.sizes.length - 1" class="pr-1">
-                    ,
-                  </span>
-                </div>
-                <div class="product-detail__features-item">
-                  Widths :
-                  <span v-for="(item, idx3) in wheel.sizes" :key="idx3">
-                    {{ item.option_width }}
-                  </span>
-                  <span v-if="idx3 === wheel.sizes.length - 1" class="pr-1">
-                    |
+                    {{ item.diameter }} {{ item.option_width }}
+                    <span v-if="idx3 !== wheel.sizes.length - 1">|</span>
                   </span>
                 </div>
                 <div class="product-detail__features-item">
@@ -70,7 +59,7 @@
               </div>
               <div class="product-detail__panels">
                 <v-expansion-panels flat>
-                  <v-expansion-panel>
+                  <!-- <v-expansion-panel>
                     <v-expansion-panel-header>
                       Sizing Options
                     </v-expansion-panel-header>
@@ -88,13 +77,13 @@
                         </div>
                       </div>
                     </v-expansion-panel-content>
-                  </v-expansion-panel>
+                  </v-expansion-panel> -->
                   <v-expansion-panel>
                     <v-expansion-panel-header>
-                      About Fortis Radix
+                      About {{ wheel.name }}
                     </v-expansion-panel-header>
                     <v-expansion-panel-content>
-                      {{ wheel.about }}
+                      <div v-html="wheel.about"></div>
                     </v-expansion-panel-content>
                   </v-expansion-panel>
                 </v-expansion-panels>
