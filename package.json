@@ -8,9 +8,9 @@
   "private": true,
   "scripts": {
     "dev:development": "SET NODE_ENV=development&& nuxt",
-    "dev:production": "SET NODE_ENV=production&& nuxt",
+    "dev:production": "NODE_ENV=production&& nuxt",
     "build:development": "SET NODE_ENV=development&& nuxt build",
-    "build:production": "SET NODE_ENV=production&& nuxt build",
+    "build:production": "NODE_ENV=production&& nuxt build",
     "heroku-postbuild": "NODE_ENV=development&& nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
