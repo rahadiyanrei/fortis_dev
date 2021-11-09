@@ -70,7 +70,13 @@
 
                 <div class="about__action">
                   <div class="about__action-item">
-                    <v-btn text outlined elevation="false">
+                    <v-btn
+                      text
+                      outlined
+                      elevation="false"
+                      :href="selectAbout.brochureURL"
+                      blank
+                    >
                       Download Brochure
                     </v-btn>
                   </div>
@@ -202,6 +208,8 @@ export default {
         name: 'Pako Group',
         to: 'company',
         bannerURL: '/about/pako-group/banner.png',
+        brochureURL:
+          'https://ik.imagekit.io/fjxmsbwas7n/hardcode-image-dont-delete/static/files/Pako_Group_Company_Profile.pdf',
         description: [
           {
             type: 'ID',
@@ -272,6 +280,8 @@ export default {
         name: 'Testing Facilities',
         to: 'testing-facilities',
         bannerURL: '/about/testing-facilities/banner.png',
+        brochureURL:
+          'https://ik.imagekit.io/fjxmsbwas7n/hardcode-image-dont-delete/static/files/Pako_Testing_Facilities.pdf',
         description: [
           {
             type: 'ID',
@@ -317,6 +327,8 @@ export default {
         name: 'Dieshop',
         to: 'dieshop',
         bannerURL: '/about/die-shop/banner.png',
+        brochureURL:
+          'https://ik.imagekit.io/fjxmsbwas7n/hardcode-image-dont-delete/static/files/Pako_Dieshop.pdf',
         description: [
           {
             type: 'ID',
@@ -390,6 +402,8 @@ export default {
         name: 'P-Pro',
         to: 'p-pro',
         bannerURL: '/about/p-pro/banner.png',
+        brochureURL:
+          'https://ik.imagekit.io/fjxmsbwas7n/hardcode-image-dont-delete/static/files/Pako_P-Pro.pdf',
         description: [
           {
             type: 'ID',
