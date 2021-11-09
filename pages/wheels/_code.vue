@@ -134,17 +134,24 @@ export default {
       .$get(`${baseURL}/api/wheel/retrieve/` + route.params.code)
       .then((res) => res.data)
 
-    const gallery = _.map(wheel.colors, (item) => {
-      return {
-        id: item.id,
-        src: item.image[0].image,
-        thumbnail: item.image[0].image,
-      }
-    })
+    if (
+      _.find(wheel.colors, function (o) {
+        return o.image.length
+      }) !== undefined
+    ) {
+      const gallery = _.map(wheel.colors, (item) => {
+        return {
+          id: item.id,
+          src: item.image[0].image,
+          thumbnail: item.image[0].image,
+        }
+      })
+      return { wheel, gallery }
+    } else {
+      const gallery = [{ id: 1, src: wheel.image, thumbnail: wheel.image }]
 
-    console.log(gallery)
-
-    return { wheel, gallery }
+      return { wheel, gallery }
+    }
   },
   data: () => ({
     currentColorIdx: 0,
