@@ -3,13 +3,16 @@
   &__brand {
     @apply bg-black w-full py-8 px-12 md:h-32;
     &-list {
-      @apply h-full grid grid-cols-2 md:grid-cols-4 justify-center items-center gap-8 md:gap-0 md:space-x-28;
+      @apply h-full grid grid-cols-2 md:grid-cols-4 justify-center items-center gap-8 lg:gap-0;
     }
     &-item {
       @apply m-auto;
       .v-image {
-        @apply w-28 md:w-56;
+        @apply w-28 sm:w-32 lg:w-40 xl:w-56;
       }
+    }
+    .main__container {
+      padding: 0 !important;
     }
   }
 
