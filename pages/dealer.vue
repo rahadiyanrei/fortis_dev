@@ -53,10 +53,10 @@
             ref="gMap"
             language="en"
             :center="{
-              lat: currentLocation.length ? currentLocation.lat : dealer[1].lat,
+              lat: currentLocation.length ? currentLocation.lat : dealer[0].lat,
               lng: currentLocation.length
                 ? currentLocation.long
-                : dealer[1].long,
+                : dealer[0].long,
             }"
             :options="{
               fullscreenControl: false,
