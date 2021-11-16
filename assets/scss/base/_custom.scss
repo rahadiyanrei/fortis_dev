@@ -1,5 +1,5 @@
 .main {
-  @apply p-0 m-0 h-screen overflow-auto;
+  @apply p-0 m-0;
 
   &__wrapper {
     &.container {
@@ -376,6 +376,11 @@
   }
   &__list {
     @apply grid grid-cols-2 md:grid-cols-4 gap-6;
+  }
+  &__title {
+    &.v-card__title {
+      @apply break-normal;
+    }
   }
   &__category {
     @apply mt-4 md:mt-0 space-y-8 min-w-max;

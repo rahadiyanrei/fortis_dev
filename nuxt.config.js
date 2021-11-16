@@ -6,14 +6,19 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Fortis Wheels',
+    title: 'Pako Wheels',
     htmlAttrs: {
       lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Pako wheels diproduksi di Indonesia oleh PT. Pakoakuina & PT. Inkoasku dengan sub brand PAKO Wheels, FORTIS Wheels, Avantech, dan INKO. Mempunya selogan produk lokal dikenal dunia',
+      },
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
@@ -68,15 +73,7 @@ export default {
   ],
   router: {
     scrollBehavior(to, from, savedPosition) {
-      return new Promise((resolve) =>
-        this.app.$once('scrollAfterEnter', () => {
-          if (savedPosition) {
-            return resolve(savedPosition)
-          }
-
-          return resolve({ x: 0, y: 0 })
-        })
-      )
+      return { x: 0, y: 0 }
     },
   },
 
