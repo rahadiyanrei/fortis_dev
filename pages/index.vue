@@ -330,6 +330,7 @@
 
 <script>
 export default {
+  scrollToTop: true,
   async asyncData({ $axios, $config: { baseURL } }) {
     const banners = await $axios
       .$get(`${baseURL}/api/banner`)

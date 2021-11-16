@@ -8,7 +8,9 @@
         </template>
         <v-list>
           <v-list-item v-for="(item, index) in gallerys" :key="index">
-            <v-btn text elevation="false" :to="item.to">{{ item.name }}</v-btn>
+            <v-btn text elevation="false" :to="item.to">
+              {{ item.name }}
+            </v-btn>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -95,7 +97,11 @@ export default {
     },
   },
   mounted() {},
-  methods: {},
+  methods: {
+    goToTop() {
+      return window.scrollTo(0, 0)
+    },
+  },
 }
 </script>
 <style></style>
