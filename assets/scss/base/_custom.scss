@@ -528,7 +528,7 @@
     }
 
     &__content {
-      @apply space-y-16 py-16;
+      @apply space-y-16 py-16 pt-40 md:pt-16;
     }
 
     &__head {
@@ -562,9 +562,15 @@
       figure {
         @apply bg-gray-100;
         img {
-          max-height: 720px !important;
-          height: 720px !important;
           margin: auto !important;
+          max-height: 12rem !important;
+          height: 12rem !important;
+        }
+        @screen md {
+          img {
+            max-height: 720px !important;
+            height: 720px !important;
+          }
         }
       }
     }
