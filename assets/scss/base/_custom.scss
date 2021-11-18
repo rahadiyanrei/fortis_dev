@@ -521,6 +521,9 @@
     &__banner {
       @apply absolute w-full top-0;
       filter: brightness(0.3);
+      .v-responsive__sizer {
+        height: 30rem;
+      }
     }
 
     &__wrapper {
@@ -532,7 +535,7 @@
     }
 
     &__head {
-      @apply text-center md:text-white;
+      @apply text-center text-white;
     }
 
     &__body {
@@ -563,13 +566,17 @@
         @apply bg-gray-100;
         img {
           margin: auto !important;
-          max-height: 12rem !important;
-          height: 12rem !important;
+          max-height: 100% !important;
+          height: 100% !important;
         }
-        @screen md {
+        @screen sm {
           img {
-            max-height: 720px !important;
-            height: 720px !important;
+            min-height: 21rem !important;
+          }
+        }
+        @screen xl {
+          img {
+            min-height: 720px !important;
           }
         }
       }
