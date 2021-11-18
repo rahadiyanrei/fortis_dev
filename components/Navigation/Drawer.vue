@@ -1,7 +1,8 @@
 <template>
   <v-navigation-drawer
     v-model="openDrawer"
-    absolute
+    fixed
+    temporary
     class="nav__menu-mobile"
     width="100%"
   >
