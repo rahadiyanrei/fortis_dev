@@ -160,13 +160,17 @@
           &.v-card {
             &__title {
               @apply uppercase text-lg sm:text-2xl;
+              text-shadow: 0.5px 0.5px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+                -1px 1px 0 #000, 1px 1px 0 #000;
             }
           }
         }
         &-description {
           &.v-card {
             &__text {
-              @apply hidden sm:block opacity-60;
+              @apply hidden sm:block;
+              text-shadow: 0.5px 0.5px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+                -1px 1px 0 #000, 1px 1px 0 #000;
             }
           }
         }

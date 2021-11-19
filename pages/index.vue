@@ -9,6 +9,8 @@
             hide-delimiter-background
             delimiter-icon="mdi-minus"
             height="100%"
+            cycle
+            interval="3500"
           >
             <v-carousel-item v-for="(item, idx) in banners" :key="idx">
               <v-card
@@ -523,7 +525,7 @@ export default {
       {
         title: 'Testing Facilities',
         to: '/about/testing-facilities',
-        description: `Fasilitas pengujian kami mampu untuk menguji durability produk, material, korosi, dan ketahanan cat. Alat pengujian kami tersertifikasi oleh ISOTSxxxxx, xxxx, xxxx untuk memberikan hasil yang akurat. Pengujian dan hasil uji telah terakreditasi baik di dalam maupun luar negeri. Fasilitas uji kami telah diakui oleh beberapa brand otomotif seperti Toyota, Daihatsu, Honda, dll.`,
+        description: `Fasilitas pengujian kami mampu untuk menguji durability produk, material, korosi, dan ketahanan cat. Alat pengujian kami tersertifikasi oleh IATF 16949:2016, ISO 9001:2015, ISO 14001:2015, ISO 45000:2015, JWL, dan PT. Astra Honda Motor untuk memberikan hasil yang akurat. Pengujian dan hasil uji telah terakreditasi baik di dalam maupun luar negeri. Fasilitas uji kami telah diakui oleh beberapa brand otomotif seperti Toyota, Daihatsu, Honda, dll.`,
         imageURL: '/about/testing-facilities/banner.png',
       },
       {
