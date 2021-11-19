@@ -22,7 +22,7 @@
                   <div class="contact__info-item">
                     <span class="contact__info-title">Email</span>
                     <div class="contact__info-value">
-                      fortiswheel.info@pakoakuina.co
+                      fortiswheel.info@pakoakuina.com
                     </div>
                   </div>
                   <div class="contact__info-item">
