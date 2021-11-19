@@ -679,6 +679,13 @@
     &__content {
       @apply py-20 space-y-16 md:space-y-20;
     }
+    &__text {
+      word-break: break-word;
+
+      .note-video-clip {
+        max-width: 100%;
+      }
+    }
     &__footer {
       @apply text-center md:text-left;
     }
