@@ -60,7 +60,7 @@
                   If you have any question regarding our product, don’t hesitate
                   to contact or fill out this form.
                 </div>
-                <v-form ref="form" v-model="valid" lazy-validation>
+                <v-form ref="form" v-model="valid">
                   <v-text-field
                     v-model="form.fullname"
                     :rules="[(v) => !!v || 'Item is required']"
@@ -99,7 +99,7 @@
                   <v-text-field
                     v-model="form.fortisKnowFrom"
                     :rules="[(v) => !!v || 'Item is required']"
-                    label="Dari mana mengenal fortis"
+                    label="Dari mana mengenal Pako Wheels"
                     outlined
                     required
                   ></v-text-field>
@@ -156,7 +156,7 @@
                     class="mr-4"
                     block
                     large
-                    @click="submitForm"
+                    @click="doWhatsapp"
                   >
                     <span class="text-white">Send</span>
                   </v-btn>
@@ -174,7 +174,11 @@
 </template>
 <script>
 export default {
-  async asyncData({ $axios, $config: { baseURL } }) {
+  async asyncData({
+    $axios,
+    $config: { baseURL },
+    $config: { numberSendWhatsapp },
+  }) {
     const country = await $axios
       .$get(`${baseURL}/api/country`)
       .then((res) => res.data)
@@ -182,6 +186,8 @@ export default {
     let socmed = await $axios
       .$get(`${baseURL}/api/social_media`)
       .then((res) => res.data)
+
+    const contactSendWhatsapp = numberSendWhatsapp
 
     socmed = [
       {
@@ -219,7 +225,7 @@ export default {
     //   return data
     // })
 
-    return { country, socmed }
+    return { country, socmed, contactSendWhatsapp }
   },
   data: () => ({
     valid: false,
@@ -248,74 +254,99 @@ export default {
         this.$config.imageURL + this.$config.imagePATH + '/images' + filename
       return data
     },
-    async submitForm() {
-      this.notification.isOpen = false
-      const form = {
-        fullname: this.form.fullname,
-        contactType: this.form.contactType,
-        email: this.form.email,
-        fortisKnowFrom: this.form.fortisKnowFrom,
-        city: this.form.city,
-        province: this.form.province,
-        country: this.form.country,
-        postalCode: this.form.postalCode,
-        comment: this.form.comment,
-      }
-      const body = {
-        From: form.email,
-        To: 'luthfillah.amin@pakoakuina.com',
-        // Cc: 'string',
-        // Bcc: 'string',
-        Subject: 'Test Send Email',
-        // Tag: 'string',
-        HtmlBody: 'Test Email Postmark',
-        TextBody: 'Test Send Email',
-        // ReplyTo: 'string',
-        // TrackOpens: true,
-        // TrackLinks: 'None',
-        // Headers: [
-        //   {
-        //     Name: 'string',
-        //     Value: 'string',
-        //   },
-        // ],
-        // Attachments: [
-        //   {
-        //     Name: 'string',
-        //     Content: 'string',
-        //     ContentType: 'string',
-        //     ContentID: 'string',
-        //   },
-        // ],
-      }
-      const dataHeaders = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-Postmark-Server-Token': '4da461ab-ce9e-4ec3-8c03-c52474f3e5a8',
-      }
-      const valid = this.$refs.form.validate()
+    doWhatsapp() {
+      let message = ''
+      message =
+        `Contact Inquiry Form %0ANama Lengkap : ${this.form.fullname} %0AKontak yang dapat dihubungi: ${this.form.contactType}` +
+        `${
+          this.form.contactType === 'Email'
+            ? `%0AEmail: ${this.form.email}`
+            : `%0ANomer Whatsapp: ${this.form.whatsapp}`
+        }` +
+        ` %0ADari mana mengenal pako : ${this.form.fortisKnowFrom}
+        %0AKota : ${this.form.city} %0AProvinsi : ${this.form.province} %0ANegara : ${this.form.country} %0AKode Pos : ${this.form.postalCode}
+        %0AKomentar : ${this.form.comment}`
+      // if (this.variantSize.size[0] !== '') {
+      //   const size = `,%0AUkuran : ${this.activeSize}`
+      //   message = message + size
+      // }
+      message = message.split(' ').join('%20')
 
-      if (valid) {
-        try {
-          const sendEmail = await this.$axios.$post(
-            this.$config.baseURL + '/api/email',
-            body,
-            { headers: dataHeaders }
-          )
-          if (sendEmail) {
-            this.notification.isOpen = true
-            this.notification.message = 'Thank you, your form has been sent'
-          }
-          console.log(sendEmail)
-        } catch (error) {
-          if (!error.response.status) {
-            this.notification.isOpen = true
-            this.notification.message = error.response.statusText
-          }
-          console.log(error.response)
-        }
-      }
+      const link =
+        'https://api.whatsapp.com/send?phone=' +
+        this.contactSendWhatsapp +
+        '&text=' +
+        message
+      window.open(link)
     },
+    // async submitForm() {
+    //   this.notification.isOpen = false
+    //   const form = {
+    //     fullname: this.form.fullname,
+    //     contactType: this.form.contactType,
+    //     email: this.form.email,
+    //     fortisKnowFrom: this.form.fortisKnowFrom,
+    //     city: this.form.city,
+    //     province: this.form.province,
+    //     country: this.form.country,
+    //     postalCode: this.form.postalCode,
+    //     comment: this.form.comment,
+    //   }
+    //   const body = {
+    //     From: form.email,
+    //     To: 'luthfillah.amin@pakoakuina.com',
+    //     // Cc: 'string',
+    //     // Bcc: 'string',
+    //     Subject: 'Test Send Email',
+    //     // Tag: 'string',
+    //     HtmlBody: 'Test Email Postmark',
+    //     TextBody: 'Test Send Email',
+    //     // ReplyTo: 'string',
+    //     // TrackOpens: true,
+    //     // TrackLinks: 'None',
+    //     // Headers: [
+    //     //   {
+    //     //     Name: 'string',
+    //     //     Value: 'string',
+    //     //   },
+    //     // ],
+    //     // Attachments: [
+    //     //   {
+    //     //     Name: 'string',
+    //     //     Content: 'string',
+    //     //     ContentType: 'string',
+    //     //     ContentID: 'string',
+    //     //   },
+    //     // ],
+    //   }
+    //   const dataHeaders = {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //     'X-Postmark-Server-Token': '4da461ab-ce9e-4ec3-8c03-c52474f3e5a8',
+    //   }
+    //   const valid = this.$refs.form.validate()
+
+    //   if (valid) {
+    //     try {
+    //       const sendEmail = await this.$axios.$post(
+    //         this.$config.baseURL + '/api/email',
+    //         body,
+    //         { headers: dataHeaders }
+    //       )
+    //       if (sendEmail) {
+    //         this.notification.isOpen = true
+    //         this.notification.message = 'Thank you, your form has been sent'
+    //       }
+    //       console.log(sendEmail)
+    //     } catch (error) {
+    //       if (!error.response.status) {
+    //         this.notification.isOpen = true
+    //         this.notification.message = error.response.statusText
+    //       }
+    //       console.log(error.response)
+    //     }
+    //   }
+    // },
   },
 }
 </script>

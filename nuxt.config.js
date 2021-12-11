@@ -81,11 +81,13 @@ export default {
   axios: {
     baseURL: process.env.BASE_URL,
     sendEmailURL: process.env.SEND_EMAIL_URL,
+    numberSendWhatsapp: process.env.NUMBER_SEND_WHATSAPP,
     proxyHeaders: false,
     credentials: false,
   },
   publicRuntimeConfig: {
     baseURL: process.env.BASE_URL,
+    numberSendWhatsapp: process.env.NUMBER_SEND_WHATSAPP,
     imageURL: process.env.IMAGE_URL,
     imagePATH: process.env.IMAGE_PATH,
   },
